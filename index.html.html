@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authority OS — Jp Imperial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #162435;
+    --slate: #2E3E50;
+    --cream: #F5F1EB;
+    --cream-dark: #EDE8E0;
+    --muted: #8A94A0;
+    --rule: #D6D0C8;
+    --white: #FFFFFF;
+    --gold: #B7941F;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 79px,
+      rgba(255,255,255,0.018) 79px,
+      rgba(255,255,255,0.018) 80px
+    );
+    pointer-events: none;
+  }
+
+  .hero-left {
+    padding: 80px 56px 80px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-right {
+    background: var(--navy-mid);
+    border-left: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--cream);
+    opacity: 0.7;
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 28px 0;
+  }
+
+  .hero-diagnosis {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(245,241,235,0.6);
+    max-width: 380px;
+    margin-bottom: 40px;
+  }
+
+  .hero-diagnosis strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream);
+    color: var(--navy);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    width: fit-content;
+  }
+
+  .hero-cta:hover { background: var(--gold); color: var(--white); }
+
+  .hero-cta-arrow {
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+    transition: width 0.2s;
+  }
+
+  .hero-cta:hover .hero-cta-arrow { width: 24px; }
+
+  .hero-cta-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -3px;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentColor;
+    border-top: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  /* right panel */
+  .verdict-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .verdict-line {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+    margin-bottom: 40px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 40px;
+  }
+
+  .stat-cell {
+    background: var(--navy-mid);
+    padding: 20px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 12px;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  .section-problem {
+    background: var(--cream);
+    color: var(--navy);
+    padding: 96px 72px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .problem-card {
+    background: var(--cream);
+    padding: 32px 28px;
+  }
+
+  .problem-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .problem-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .problem-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ── PRODUCT SECTION ── */
+  .section-product {
+    background: var(--navy);
+    padding: 96px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-product::before {
+    content: 'AUTHORITY OS';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.018);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+  }
+
+  .product-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 64px;
+    align-items: start;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .product-tagline {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.55);
+    line-height: 1.8;
+    max-width: 380px;
+  }
+
+  .product-promise {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  /* deliverables */
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 64px;
+  }
+
+  .deliverable {
+    background: var(--navy);
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .deliverable-icon {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .deliverable-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .deliverable-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .deliverable-items li {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .deliverable-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* hard no's */
+  .hard-nos {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hard-nos-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 80px;
+  }
+
+  .hard-nos-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .no-pill {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(138,148,160,0.7);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 5px 12px;
+    text-decoration: line-through;
+    text-decoration-color: rgba(138,148,160,0.3);
+  }
+
+  /* ── BENEFITS ── */
+  .section-benefits {
+    background: var(--navy);
+    padding: 96px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .benefits-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: end;
+    margin-bottom: 64px;
+  }
+
+  .benefits-outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 32px;
+  }
+
+  .benefit-outcome {
+    background: var(--navy);
+    padding: 28px 24px;
+  }
+
+  .benefit-outcome-icon {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .benefit-outcome-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .benefit-outcome-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .benefits-emotional {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .benefit-feel {
+    background: var(--navy-mid);
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .benefit-feel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .benefit-feel-body {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .benefits-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .benefits-divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .benefits-divider-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── VIDEO PLACEHOLDER ── */
+  .section-video {
+    background: var(--cream-dark);
+    padding: 96px 72px;
+    color: var(--navy);
+  }
+
+  .video-wrapper {
+    margin-top: 48px;
+    border: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  .video-placeholder {
+    background: var(--navy);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.015) 20px,
+      rgba(255,255,255,0.015) 21px
+    );
+  }
+
+  .video-play-btn {
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgba(183,148,31,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .video-play-btn::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 16px;
+    border-color: transparent transparent transparent var(--gold);
+    margin-left: 4px;
+  }
+
+  .video-placeholder-label {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 24px;
+    line-height: 1.6;
+  }
+
+  .video-context {
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .video-context-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.7;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .video-context-source {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .video-context-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .section-how {
+    background: var(--cream-dark);
+    padding: 96px 72px;
+    color: var(--navy);
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+  }
+
+  .how-step {
+    background: var(--cream-dark);
+    padding: 36px 28px;
+  }
+
+  .how-step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--rule);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .how-step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .how-step-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ── PROOF ── */
+  .section-proof {
+    background: var(--navy);
+    padding: 96px 72px;
+  }
+
+  .proof-block {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 48px;
+    margin-top: 48px;
+  }
+
+  .proof-numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .proof-stat {
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .proof-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .proof-stat-label {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .proof-story {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+
+  .proof-source {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: 16px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── PRICING ── */
+  .section-pricing {
+    background: var(--cream);
+    color: var(--navy);
+    padding: 96px 72px;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  .pricing-left {
+    padding: 48px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .pricing-product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .pricing-tagline {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .pricing-includes-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .pricing-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .pricing-includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  .pricing-includes li::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
+    margin-top: 10px;
+    flex-shrink: 0;
+  }
+
+  .pricing-right {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--navy);
+  }
+
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .price-period {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 28px;
+  }
+
+  .price-conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .price-condition {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.55);
+    line-height: 1.5;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .price-condition::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .price-cta {
+    display: block;
+    background: var(--cream);
+    color: var(--navy);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .price-cta:hover { background: var(--gold); color: var(--white); }
+
+  .audit-note {
+    margin-top: 20px;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 48px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .footer-brand span {
+    font-style: italic;
+    opacity: 0.5;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 8px;
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+
+  .footer-contact a,
+  .footer-contact p {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .footer-contact a:hover { color: var(--cream); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+  .hero-left > *:nth-child(6) { animation-delay: 0.6s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .benefits-intro { grid-template-columns: 1fr; gap: 24px; }
+    .benefits-outcome-grid { grid-template-columns: 1fr; }
+    .benefits-emotional { grid-template-columns: 1fr 1fr; }
+    .video-wrapper { grid-template-columns: 1fr; }
+    .video-placeholder { min-height: 220px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 64px 32px; }
+    .section-problem, .section-product,
+    .section-how, .section-proof,
+    .section-pricing, .footer { padding: 64px 32px; }
+    .problem-grid, .deliverables { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr; }
+    .product-header { grid-template-columns: 1fr; gap: 32px; }
+    .proof-block { grid-template-columns: 1fr; gap: 32px; }
+    .pricing-card { grid-template-columns: 1fr; }
+    .pricing-right { border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer { flex-direction: column; }
+    .footer-contact { text-align: left; }
+  }
+
+  @media (max-width: 600px) {
+    .problem-grid, .deliverables { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="eyebrow">Authority OS — Jp Imperial</p>
+    <h1 class="hero-title">Your referral<br>googled you.<br><em>Saw nothing.</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-diagnosis">
+      Canadian eXp ICON-track agents don't have a visibility problem.<br>
+      They have a <strong>fractured authority problem.</strong><br><br>
+      High production. Invisible online. Five platforms saying five different things —
+      and a referred lead who quietly moves on before you ever knew they existed.
+    </p>
+    <a href="#pricing" class="hero-cta">
+      See the Authority OS
+      <span class="hero-cta-arrow"></span>
+    </a>
+  </div>
+  <div class="hero-right">
+    <p class="verdict-label">The silent damage</p>
+    <p class="verdict-line">
+      "Even your warmest referral checks the receipt before picking up the phone."
+    </p>
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-num">$500K+</div>
+        <div class="stat-desc">Average luxury commission at risk per lost referral</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">8 sec</div>
+        <div class="stat-desc">Time a referred lead spends deciding if you look credible</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">86</div>
+        <div class="stat-desc">Transactions influenced through rebuilt authority systems</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">4→38</div>
+        <div class="stat-desc">Transactions in 12 months. First ICON award secured.</div>
+      </div>
+    </div>
+    <div class="trust-badges">
+      <span class="badge">ICON-track focused</span>
+      <span class="badge">AI-search optimized</span>
+      <span class="badge">No paid ads</span>
+      <span class="badge">Solo operator</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section-problem">
+  <p class="section-label">The real problem</p>
+  <h2 class="section-title">Fragmented authority is the silent leak draining your referral pipeline.</h2>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <p class="problem-title">You're producing at ICON level. Your digital presence signals mid-tier.</p>
+      <p class="problem-body">The gap between your real-world credibility and what a referred lead finds online is costing you pre-selection. They don't tell you why they went elsewhere. They just do.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <p class="problem-title">Five platforms. Five different stories. Zero coherent authority signal.</p>
+      <p class="problem-body">Your LinkedIn says one thing. Your GBP says another. Instagram is dormant. AI search returns a competitor. A referred lead cross-checks all of it — and sees noise, not trust.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <p class="problem-title">AI is pre-selecting your competition before the conversation starts.</p>
+      <p class="problem-body">Search Generative Experience and AI-powered results synthesize trusted sources. If your content isn't structured as an answer, you don't exist in the results that now influence where buyers start.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="section-product" id="product">
+  <div class="product-header">
+    <div>
+      <p class="eyebrow" style="color:var(--gold);margin-bottom:20px;">The solution</p>
+      <h2 class="product-name">Authority OS</h2>
+      <p class="product-tagline">
+        A done-for-you omni-channel identity system that unifies your digital presence into one coherent authority signal — across every platform a referred lead or AI engine touches.
+      </p>
+    </div>
+    <div>
+      <p class="product-promise">
+        "One voice. One authority signal. Compounding across every surface that determines whether a high-value lead chooses you — or keeps scrolling."
+      </p>
+    </div>
+  </div>
+
+  <div class="deliverables">
+    <div class="deliverable">
+      <div class="deliverable-icon">LinkedIn</div>
+      <p class="deliverable-title">Authority presence & content cadence</p>
+      <ul class="deliverable-items">
+        <li>Profile optimization and headline rewrite</li>
+        <li>2 authority-formatted posts per week</li>
+        <li>Monthly Visibility Brief newsletter</li>
+        <li>Comment positioning on ICP content</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <div class="deliverable-icon">Google Business</div>
+      <p class="deliverable-title">Local search & trust signal momentum</p>
+      <ul class="deliverable-items">
+        <li>GBP optimization and category alignment</li>
+        <li>Weekly post cadence</li>
+        <li>Review velocity strategy</li>
+        <li>High-intent local search positioning</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <div class="deliverable-icon">Omni-channel</div>
+      <p class="deliverable-title">Cross-platform identity coherence</p>
+      <ul class="deliverable-items">
+        <li>Unified bio and messaging across all handles</li>
+        <li>Instagram, Facebook, YouTube alignment</li>
+        <li>Cross-referencing signal architecture</li>
+        <li>One voice, every platform</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <div class="deliverable-icon">AI Search</div>
+      <p class="deliverable-title">SGE & AI-search visibility system</p>
+      <ul class="deliverable-items">
+        <li>Answer-formatted content seeded monthly</li>
+        <li>AI-source positioning strategy</li>
+        <li>SGE discovery loop optimization</li>
+        <li>Monthly authority signal report</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hard-nos">
+    <p class="hard-nos-label">Hard no's</p>
+    <div class="hard-nos-list">
+      <span class="no-pill">Paid ads</span>
+      <span class="no-pill">Cold DM automation</span>
+      <span class="no-pill">Daily posting</span>
+      <span class="no-pill">CRM setup</span>
+      <span class="no-pill">Email marketing</span>
+      <span class="no-pill">Trend chasing</span>
+      <span class="no-pill">Vanity metrics</span>
+      <span class="no-pill">Weekend work</span>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section-benefits">
+  <div class="benefits-intro">
+    <div>
+      <p class="eyebrow" style="color:var(--gold);margin-bottom:20px;">What you gain</p>
+      <h2 class="section-title" style="color:var(--white);margin-bottom:0;">Not just visibility.<br>A presence that<br>works while you close.</h2>
+    </div>
+    <div>
+      <p style="font-size:13px;font-weight:300;color:rgba(245,241,235,0.55);line-height:1.9;">The Authority OS doesn't add work to your plate. It removes the silent leak — the referred leads who ghost, the AI results that show your competitor, the platforms that say nothing consistent about who you are. What replaces all of that is a compounding authority signal that runs in the background while you focus on production.</p>
+    </div>
+  </div>
+
+  <div class="benefits-outcome-grid">
+    <div class="benefit-outcome">
+      <div class="benefit-outcome-icon">Business outcome</div>
+      <p class="benefit-outcome-title">Referrals convert before the first call</p>
+      <p class="benefit-outcome-body">When a referred lead Googles you and finds a coherent, credible, authority-signaling presence across every platform — the decision is made before you pick up the phone.</p>
+    </div>
+    <div class="benefit-outcome">
+      <div class="benefit-outcome-icon">Business outcome</div>
+      <p class="benefit-outcome-title">AI surfaces you as the trusted choice</p>
+      <p class="benefit-outcome-body">Answer-formatted content and cross-platform coherence trains AI search engines to synthesize you as the go-to agent in your market — not your competitor.</p>
+    </div>
+    <div class="benefit-outcome">
+      <div class="benefit-outcome-icon">Business outcome</div>
+      <p class="benefit-outcome-title">Your production finally matches your presence</p>
+      <p class="benefit-outcome-body">The authority gap closes. What a high-value lead finds online now reflects the ICON-track agent you already are. No more silent damage from a profile that undersells your credibility.</p>
+    </div>
+  </div>
+
+  <div class="benefits-divider">
+    <div class="benefits-divider-line"></div>
+    <p class="benefits-divider-label">How it feels</p>
+    <div class="benefits-divider-line"></div>
+  </div>
+
+  <div class="benefits-emotional">
+    <div class="benefit-feel">
+      <p class="benefit-feel-title">Chosen, not chased</p>
+      <p class="benefit-feel-body">High-value leads arrive already convinced. You spend less time proving yourself and more time closing.</p>
+    </div>
+    <div class="benefit-feel">
+      <p class="benefit-feel-title">Confident in every room</p>
+      <p class="benefit-feel-body">When someone Googles you before a listing presentation, you know exactly what they'll find — and it works in your favor.</p>
+    </div>
+    <div class="benefit-feel">
+      <p class="benefit-feel-title">Invisible effort, visible authority</p>
+      <p class="benefit-feel-body">Your presence compounds in the background. No daily posting anxiety. No trend chasing. Just quiet authority building while you focus on production.</p>
+    </div>
+    <div class="benefit-feel">
+      <p class="benefit-feel-title">The market leader signal</p>
+      <p class="benefit-feel-body">ICON-level production deserves ICON-level presence. When both align, you stop competing and start being the obvious choice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SOCIAL PROOF -->
+<section class="section-video">
+  <p class="section-label">In their own words</p>
+  <h2 class="section-title">Justin Havre didn't chase clients to become a multi-ICON agent. He built a presence they couldn't ignore.</h2>
+  <div class="video-wrapper">
+    <div class="video-placeholder">
+      <div class="video-play-btn"></div>
+      <p class="video-placeholder-label">Video pending approval from<br>Grant Wise &amp; Justin Havre</p>
+    </div>
+    <div class="video-context">
+      <p class="video-context-quote">"Structuring my digital presence correctly is the reason I am successful today — everything leads back to me through all the search parameters."</p>
+      <p class="video-context-source">— Justin Havre  ·  Multi-ICON agent  ·  eXp Realty Canada<br>As featured in conversation with Grant Wise</p>
+      <p class="video-context-body">Justin's story is the clearest proof of what the Authority OS is built to do — a digital presence so coherent and well-structured that clients find you through every search parameter, before you ever have to reach out.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-how">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">A monthly workflow that compounds — without adding complexity to your production.</h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-step-num">01</div>
+      <p class="how-step-title">Ghost Town Audit</p>
+      <p class="how-step-body">Before anything is built, I run a fixed-scope diagnostic of your entire digital footprint. Every deliverable in the Authority OS is executed against this map — not a generic template.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">02</div>
+      <p class="how-step-title">Identity Infrastructure Build</p>
+      <p class="how-step-body">Month one is foundation. Every platform unified. One voice, one authority signal, cross-referenced across every surface a referred lead or AI engine encounters.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">03</div>
+      <p class="how-step-body">Month two and beyond — content, GBP, AI-search signals, and cross-platform coherence maintained and compounded monthly. You focus on production. I handle the authority.</p>
+      <p class="how-step-title" style="margin-top:10px;">Compound & Refine</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section-proof">
+  <p class="eyebrow" style="color:var(--gold);">Proof of work</p>
+  <h2 class="section-title" style="color:var(--white);max-width:540px;margin-top:16px;">One ICON-track agent. Ghost town to chosen — in 12 months.</h2>
+  <div class="proof-block">
+    <div class="proof-numbers">
+      <div class="proof-stat">
+        <div class="proof-stat-num">4 → 38</div>
+        <div class="proof-stat-label">Transactions in 12 months. First ICON award.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">28</div>
+        <div class="proof-stat-label">Transactions the following year. Second ICON award.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">40–60%</div>
+        <div class="proof-stat-label">Increase in profile visibility and local search discovery.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">2–3×</div>
+        <div class="proof-stat-label">Growth in referral-driven inbound. Zero paid ads.</div>
+      </div>
+    </div>
+    <div>
+      <p class="proof-story">
+        "A high-production eXp agent with a near-invisible digital footprint. Strong referral network. Weak trust signals everywhere a referred lead actually looked. We rebuilt the entire identity infrastructure — LinkedIn, GBP, cross-platform coherence, AI-search positioning — and let it compound. Within 12 months, the authority gap was closed and production followed."
+      </p>
+      <p class="proof-source">— Canadian eXp Realty  ·  ICON-track agent  ·  Identity withheld by agreement</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pricing" id="pricing">
+  <p class="section-label">Investment</p>
+  <h2 class="section-title">One product. One outcome. Predictable authority that compounds.</h2>
+  <div class="pricing-card">
+    <div class="pricing-left">
+      <p class="pricing-product-name">Authority OS</p>
+      <p class="pricing-tagline">Done-for-you omni-channel authority management for Canadian eXp ICON-track agents.</p>
+      <p class="pricing-includes-label">What's included every month</p>
+      <ul class="pricing-includes">
+        <li>LinkedIn profile maintenance + 2 authority posts per week</li>
+        <li>Monthly Visibility Brief newsletter</li>
+        <li>Google Business Profile optimization + weekly post cadence</li>
+        <li>Cross-platform bio and messaging alignment</li>
+        <li>AI-search answer-formatted content seeded monthly</li>
+        <li>Monthly Authority Signal Report</li>
+        <li>Ghost Town Audit as intake diagnostic (credited toward retainer)</li>
+      </ul>
+    </div>
+    <div class="pricing-right">
+      <div>
+        <div class="price-amount">$2,500</div>
+        <p class="price-period">CAD / month</p>
+        <div class="price-conditions">
+          <p class="price-condition">3-month minimum engagement</p>
+          <p class="price-condition">Maximum 2 clients at any time</p>
+          <p class="price-condition">Begins with Ghost Town Audit — $197 CAD</p>
+          <p class="price-condition">Audit fee credited in full toward retainer</p>
+          <p class="price-condition">No setup fee. No upsell tiers.</p>
+        </div>
+      </div>
+      <div>
+        <a href="mailto:jpbimperial71675@gmail.com" class="price-cta">Book your Ghost Town Audit</a>
+        <p class="audit-note">Start with the audit. No commitment to continue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <p class="footer-brand">Jp Imperial</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
+    <p>+63 917 840 5877</p>
+    <a href="https://linkedin.com/in/jpimperial">linkedin.com/in/jpimperial</a>
+  </div>
+</footer>
+
+</body>
+</html>
