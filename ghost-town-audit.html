@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Town Audit — Jp Imperial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #162435;
+    --slate: #2E3E50;
+    --cream: #F5F1EB;
+    --cream-dark: #EDE8E0;
+    --muted: #8A94A0;
+    --rule: #D6D0C8;
+    --white: #FFFFFF;
+    --gold: #B7941F;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV BAR ── */
+  .topbar {
+    background: var(--navy);
+    padding: 14px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .topbar-link {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+
+  .topbar-link:hover { color: var(--cream); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--cream);
+    padding: 80px 72px 64px;
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--navy);
+    z-index: 10;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 28px 0;
+  }
+
+  .pain-stack {
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pain-line {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--navy);
+    margin: 0;
+  }
+
+  .pain-line.cost {
+    font-size: 14px;
+    color: var(--slate);
+    font-weight: 300;
+  }
+
+  .pain-line.disarm {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--slate);
+    max-width: 580px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--rule);
+  }
+
+  /* ── WHAT I DIAGNOSE ── */
+  .section {
+    padding: 64px 72px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 36px;
+  }
+
+  .diagnose-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 0;
+  }
+
+  .diagnose-item {
+    background: var(--cream);
+    padding: 28px 24px;
+  }
+
+  .diagnose-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .diagnose-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .diagnose-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ── SCOPE STRIP ── */
+  .scope-strip {
+    background: var(--navy);
+    padding: 32px 72px;
+  }
+
+  .scope-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .scope-cell {
+    background: var(--navy);
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .scope-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .scope-label {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── DELIVERABLE ── */
+  .deliverable-section {
+    padding: 64px 72px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .deliverable-card {
+    background: var(--cream-dark);
+    border: 1px solid var(--rule);
+    padding: 36px;
+  }
+
+  .deliverable-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .deliverable-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+
+  .deliverable-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .deliverable-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .deliverable-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  .deliverable-items li::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
+    margin-top: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    background: var(--navy);
+    padding: 64px 72px;
+  }
+
+  .pricing-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .pricing-left {}
+
+  .price-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .price-period {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .price-conditions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .price-condition {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.55);
+    line-height: 1.5;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .price-condition::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .pricing-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pricing-promise {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.7;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+
+  .price-cta {
+    display: block;
+    background: var(--cream);
+    color: var(--navy);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 28px;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .price-cta:hover { background: var(--gold); color: var(--white); }
+
+  .price-note {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    text-align: center;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── RETAINER BRIDGE ── */
+  .bridge-section {
+    padding: 64px 72px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .bridge-card {
+    border: 1px solid var(--rule);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .bridge-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .bridge-body {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.8;
+  }
+
+  .bridge-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bridge-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  .bridge-item::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
+    margin-top: 9px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: right;
+  }
+
+  .footer-contact a,
+  .footer-contact p {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .footer-contact a:hover { color: var(--cream); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .topbar { padding: 14px 32px; }
+    .hero, .section, .deliverable-section,
+    .bridge-section { padding: 56px 32px; }
+    .scope-strip { padding: 32px; }
+    .pricing-section { padding: 56px 32px; }
+    .footer { padding: 36px 32px; footer-contact { text-align: left; } }
+    .diagnose-grid { grid-template-columns: 1fr; }
+    .scope-inner { grid-template-columns: 1fr; }
+    .pricing-inner { grid-template-columns: 1fr; gap: 32px; }
+    .bridge-card { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  @media (max-width: 500px) {
+    .hero-title { font-size: 36px; }
+    .footer { flex-direction: column; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <span class="topbar-brand">Jp Imperial</span>
+  <a href="https://jpbimperial71675-cyber.github.io/jpimperial" class="topbar-link">
+    View Authority OS →
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">Ghost Town Audit — Entry Offer</p>
+  <h1 class="hero-title">Your referral<br>googled you.<br><em>Saw nothing.</em></h1>
+  <div class="hero-rule"></div>
+  <div class="pain-stack">
+    <p class="pain-line">Your referral googled you. Saw nothing. And called someone else.</p>
+    <p class="pain-line cost">That's a $500,000+ commission that evaporated before you even knew the lead existed.</p>
+    <p class="pain-line disarm">Even your warmest referral checks the receipt before picking up the phone.</p>
+  </div>
+  <p class="hero-sub">The Ghost Town Audit is a fixed-scope authority diagnostic that shows you exactly where your digital presence is losing trust — and what to fix first to stop hemorrhaging high-value referrals to agents who simply look the part.</p>
+</div>
+
+<!-- WHAT I DIAGNOSE -->
+<div class="section">
+  <p class="section-label">What I diagnose</p>
+  <h2 class="section-title">Four areas. One clear picture of where your authority is leaking.</h2>
+  <div class="diagnose-grid">
+    <div class="diagnose-item">
+      <p class="diagnose-num">01 — LinkedIn Authority</p>
+      <p class="diagnose-title">Does your profile signal ICON-track or invisible?</p>
+      <p class="diagnose-body">Headline, about section, content signal strength — assessed against what a referred luxury lead actually sees in 8 seconds.</p>
+    </div>
+    <div class="diagnose-item">
+      <p class="diagnose-num">02 — Google Business Profile</p>
+      <p class="diagnose-title">Are you winning or losing local AI-search?</p>
+      <p class="diagnose-body">Completeness, review velocity, post frequency, and whether you appear when a buyer searches for the best agent in your market.</p>
+    </div>
+    <div class="diagnose-item">
+      <p class="diagnose-num">03 — Authority Gap</p>
+      <p class="diagnose-title">What's the delta between your production and your perception?</p>
+      <p class="diagnose-body">The gap between your real-world credibility and what a referred lead finds when they research you. This is where commissions silently evaporate.</p>
+    </div>
+    <div class="diagnose-item">
+      <p class="diagnose-num">04 — AI-Search Footprint</p>
+      <p class="diagnose-title">Is AI choosing you or your competitor?</p>
+      <p class="diagnose-body">Whether SGE and AI-powered results surface you as a trusted source in your market — or hand that visibility to someone else entirely.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCOPE STRIP -->
+<div class="scope-strip">
+  <div class="scope-inner">
+    <div class="scope-cell">
+      <p class="scope-value">Fixed scope</p>
+      <p class="scope-label">No add-ons, no surprises</p>
+    </div>
+    <div class="scope-cell">
+      <p class="scope-value">48-hr delivery</p>
+      <p class="scope-label">From onboarding to report</p>
+    </div>
+    <div class="scope-cell">
+      <p class="scope-value">Async</p>
+      <p class="scope-label">No calls required to start</p>
+    </div>
+  </div>
+</div>
+
+<!-- DELIVERABLE -->
+<div class="deliverable-section">
+  <p class="section-label">What you receive</p>
+  <div class="deliverable-card">
+    <p class="deliverable-label">Your deliverable</p>
+    <h3 class="deliverable-title">The Authority Gap Report</h3>
+    <p class="deliverable-body">A clear, written diagnosis — 3 to 5 pages — ranked by revenue impact. Not a generic checklist. A specific map of where your digital presence is costing you deals and the three highest-leverage moves to fix it first.</p>
+    <ul class="deliverable-items">
+      <li>Where you're losing trust before the first conversation</li>
+      <li>What's suppressing your AI-search and local visibility</li>
+      <li>Your three priority fixes, ranked by revenue impact</li>
+      <li>A clear path forward — with or without continued engagement</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section">
+  <div class="pricing-inner">
+    <div class="pricing-left">
+      <p class="price-eyebrow">Investment</p>
+      <p class="price-amount">$197</p>
+      <p class="price-period">CAD — one time</p>
+      <div class="price-conditions">
+        <p class="price-condition">No call needed to start</p>
+        <p class="price-condition">48-hour turnaround from onboarding</p>
+        <p class="price-condition">No upsell pressure after delivery</p>
+        <p class="price-condition">Fee credited in full toward Authority OS retainer</p>
+      </div>
+    </div>
+    <div class="pricing-right">
+      <p class="pricing-promise">"The referred lead doesn't tell you why they called someone else. They just do. This audit shows you exactly why — before it happens again."</p>
+      <a href="https://wise.com/pay/me/josephpaulI" class="price-cta">Book your Ghost Town Audit — $197 CAD</a>
+      <p class="price-note">Payment via Wise. Onboarding questions sent within 24 hours of payment.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RETAINER BRIDGE -->
+<div class="bridge-section">
+  <p class="section-label">What comes next</p>
+  <div class="bridge-card">
+    <div>
+      <h3 class="bridge-title">The audit is the beginning, not the end.</h3>
+      <p class="bridge-body">If the report reveals an authority gap worth closing — and it will — the Authority OS retainer is how we close it. Done-for-you, every month, compounding over time. The $197 audit fee is credited in full toward the first month.</p>
+    </div>
+    <div class="bridge-detail">
+      <div class="bridge-item">Authority OS retainer from $2,500 CAD per month</div>
+      <div class="bridge-item">3-month minimum — authority compounds, it doesn't happen overnight</div>
+      <div class="bridge-item">Maximum 2 clients at any time — full attention, not a fraction of it</div>
+      <div class="bridge-item">Audit fee credited in full toward month one</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-brand">Jp Imperial</p>
+  <div class="footer-contact">
+    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
+    <p>+63 917 840 5877</p>
+    <a href="https://linkedin.com/in/jpimperial">linkedin.com/in/jpimperial</a>
+  </div>
+</footer>
+
+</body>
+</html>
