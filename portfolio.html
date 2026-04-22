@@ -1,807 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Jp Imperial</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --navy: #0D1B2A;
-    --navy-mid: #162435;
-    --slate: #2E3E50;
-    --cream: #F5F1EB;
-    --cream-dark: #EDE8E0;
-    --muted: #8A94A0;
-    --rule: #D6D0C8;
-    --white: #FFFFFF;
-    --gold: #B7941F;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Instrument Sans', sans-serif;
-    background: var(--cream);
-    color: var(--navy);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  .topbar {
-    background: var(--navy);
-    padding: 14px 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .topbar-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .topbar-links {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .topbar-link {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    transition: color 0.2s;
-  }
-
-  .topbar-link:hover { color: var(--cream); }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 80px 72px 64px;
-    max-width: 960px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .hero::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background: var(--navy);
-    z-index: 10;
-  }
-
-  .eyebrow {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .eyebrow::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: end;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(38px, 5vw, 58px);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--navy);
-    margin-bottom: 16px;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--muted);
-  }
-
-  .hero-rule {
-    width: 48px;
-    height: 2px;
-    background: var(--gold);
-    margin: 20px 0;
-  }
-
-  .hero-sub {
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--slate);
-  }
-
-  .hero-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-  }
-
-  .hero-stat {
-    background: var(--cream);
-    padding: 20px;
-  }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  /* ── SKILLS STRIP ── */
-  .skills-strip {
-    background: var(--navy);
-    padding: 28px 72px;
-  }
-
-  .skills-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .skills-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-right: 8px;
-  }
-
-  .skill-pill {
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--cream);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 5px 12px;
-    letter-spacing: 0.04em;
-  }
-
-  /* ── SECTION ── */
-  .section {
-    padding: 64px 72px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--muted);
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 3vw, 34px);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--navy);
-    margin-bottom: 36px;
-  }
-
-  /* ── CASE STUDY CARD ── */
-  .case-study {
-    border: 1px solid var(--rule);
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-
-  .case-header {
-    background: var(--navy);
-    padding: 28px 32px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .case-eyebrow {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .case-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.3;
-  }
-
-  .case-meta {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.6;
-    text-align: right;
-    white-space: nowrap;
-  }
-
-  .case-body {
-    padding: 28px 32px;
-    background: var(--cream);
-  }
-
-  .case-desc {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--slate);
-    line-height: 1.8;
-    margin-bottom: 24px;
-    max-width: 640px;
-  }
-
-  .case-results {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin-bottom: 24px;
-  }
-
-  .result-cell {
-    background: var(--cream-dark);
-    padding: 16px;
-    text-align: center;
-  }
-
-  .result-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .result-label {
-    font-size: 10px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-
-  .case-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .case-skill {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--slate);
-    background: var(--cream-dark);
-    border: 1px solid var(--rule);
-    padding: 4px 10px;
-    letter-spacing: 0.04em;
-  }
-
-  /* ── AUTHORITY OS SECTION ── */
-  .authority-section {
-    background: var(--navy);
-    padding: 64px 72px;
-  }
-
-  .authority-inner {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .authority-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 36px;
-  }
-
-  .authority-card {
-    background: var(--navy-mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 28px;
-  }
-
-  .authority-card-label {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .authority-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-
-  .authority-card-body {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── METHODOLOGY ── */
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin-top: 36px;
-  }
-
-  .method-card {
-    background: var(--cream);
-    padding: 28px 24px;
-  }
-
-  .method-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--rule);
-    line-height: 1;
-    margin-bottom: 14px;
-  }
-
-  .method-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--navy);
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-
-  .method-body {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--slate);
-    line-height: 1.7;
-  }
-
-  /* ── CTA ── */
-  .cta-section {
-    padding: 64px 72px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .cta-card {
-    border: 1px solid var(--rule);
-    padding: 40px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: center;
-  }
-
-  .cta-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-
-  .cta-body {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--slate);
-    line-height: 1.7;
-  }
-
-  .cta-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-width: 200px;
-  }
-
-  .cta-btn-primary {
-    display: block;
-    background: var(--navy);
-    color: var(--cream);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 14px 20px;
-    text-decoration: none;
-    text-align: center;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
-  .cta-btn-primary:hover { background: var(--gold); }
-
-  .cta-btn-secondary {
-    display: block;
-    background: transparent;
-    color: var(--navy);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 14px 20px;
-    text-decoration: none;
-    text-align: center;
-    border: 1px solid var(--rule);
-    transition: border-color 0.2s, color 0.2s;
-    white-space: nowrap;
-  }
-
-  .cta-btn-secondary:hover { border-color: var(--navy); }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--navy);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 40px 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .footer-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .footer-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-align: right;
-  }
-
-  .footer-contact a,
-  .footer-contact p {
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--muted);
-    text-decoration: none;
-    line-height: 1.6;
-    transition: color 0.2s;
-  }
-
-  .footer-contact a:hover { color: var(--cream); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-grid > * {
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-grid > *:nth-child(1) { animation-delay: 0.15s; }
-  .hero-grid > *:nth-child(2) { animation-delay: 0.3s; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .topbar { padding: 14px 28px; }
-    .hero, .section, .cta-section { padding: 56px 28px; }
-    .skills-strip { padding: 24px 28px; }
-    .authority-section { padding: 56px 28px; }
-    .footer { padding: 36px 28px; flex-direction: column; }
-    .footer-contact { text-align: left; }
-    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    .case-header { grid-template-columns: 1fr; }
-    .case-meta { text-align: left; }
-    .case-results { grid-template-columns: 1fr 1fr; }
-    .authority-grid { grid-template-columns: 1fr; gap: 16px; }
-    .method-grid { grid-template-columns: 1fr; }
-    .cta-card { grid-template-columns: 1fr; gap: 24px; }
-    .cta-buttons { flex-direction: row; }
-  }
-
-  @media (max-width: 500px) {
-    .case-results { grid-template-columns: 1fr 1fr; }
-    .cta-buttons { flex-direction: column; }
-    .topbar-links { gap: 14px; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Jp Imperial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A0F1E;
+      --navy-mid:#0F1628;
+      --navy-lt: #151D35;
+      --cream:   #F5EFE0;
+      --cream-dk:#C8BFA8;
+      --gold:    #C9A84C;
+      --gold-lt: #E2C97A;
+      --gold-dk: #9A7A30;
+      --rule:    rgba(201,168,76,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      background: linear-gradient(to bottom, rgba(10,15,30,0.98) 0%, rgba(10,15,30,0) 100%);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.12em; color: var(--cream); text-decoration: none; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-link { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-dk); text-decoration: none; transition: color 0.3s; }
+    .nav-link:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 3rem 6rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.01em; max-width: 16ch; opacity: 0; animation: fadeUp 1s ease forwards 0.4s; }
+    .hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub { margin-top: 2.5rem; max-width: 52ch; font-size: 1.05rem; color: var(--cream-dk); line-height: 1.8; opacity: 0; animation: fadeUp 1s ease forwards 0.7s; }
+
+    /* STATS BAR */
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .stat-item { padding: 3rem 2rem; border-right: 1px solid var(--rule); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--gold); line-height: 1; letter-spacing: -0.02em; display: block; margin-bottom: 0.5rem; }
+    .stat-desc { font-size: 0.88rem; color: var(--cream-dk); line-height: 1.5; }
+
+    /* SKILLS */
+    .skills-section { padding: 5rem 3rem; border-bottom: 1px solid var(--rule); }
+    .skills-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .skill-tag { padding: 0.5rem 1.2rem; border: 1px solid var(--rule); font-size: 0.88rem; color: var(--cream-dk); letter-spacing: 0.06em; transition: border-color 0.3s, color 0.3s; }
+    .skill-tag:hover { border-color: var(--gold); color: var(--cream); }
+
+    /* RULE */
+    .rule { height: 1px; background: var(--rule); margin: 0 3rem; width: calc(100% - 6rem); }
+
+    /* SECTIONS */
+    section { padding: 7rem 3rem; position: relative; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::after { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold-dk); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1rem; }
+    h2 em { font-style: italic; color: var(--gold-lt); }
+
+    /* CASE STUDIES */
+    .case-study { margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--rule); }
+    .case-study:first-of-type { margin-top: 4rem; }
+    .case-meta { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem; align-items: flex-start; }
+    .case-role { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .case-period { font-size: 0.88rem; color: var(--cream-dk); }
+    .case-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.15; margin-bottom: 0.5rem; }
+    .case-subtitle { font-size: 0.88rem; color: var(--cream-dk); letter-spacing: 0.1em; margin-bottom: 2rem; }
+    .case-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start; }
+    .case-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.85; }
+    .case-stats { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule); }
+    .case-stat { padding: 1.5rem 2rem; border-bottom: 1px solid var(--rule); }
+    .case-stat:last-child { border-bottom: none; }
+    .case-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold); line-height: 1; display: block; margin-bottom: 0.3rem; }
+    .case-stat-label { font-size: 0.88rem; color: var(--cream-dk); line-height: 1.4; }
+    .case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+    .case-tag { padding: 0.3rem 0.9rem; border: 1px solid rgba(201,168,76,0.25); font-size: 0.78rem; color: var(--cream-dk); letter-spacing: 0.06em; }
+
+    /* CURRENT VENTURE */
+    .venture-section { background: var(--navy-mid); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 7rem 3rem; }
+    .venture-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .venture-inner h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; margin-bottom: 1.5rem; line-height: 1.2; }
+    .venture-inner h3 em { font-style: italic; color: var(--gold-lt); }
+    .venture-block { margin-top: 2rem; padding: 2rem; border: 1px solid var(--rule); background: rgba(201,168,76,0.02); }
+    .venture-block-label { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .venture-block-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; }
+    .venture-block-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+
+    /* PHILOSOPHY */
+    .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 4rem; background: var(--rule); border: 1px solid var(--rule); }
+    .phil-card { background: var(--navy); padding: 3rem 2rem; transition: background 0.4s; position: relative; overflow: hidden; }
+    .phil-card:hover { background: var(--navy-lt); }
+    .phil-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt), var(--gold-dk)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+    .phil-card:hover::before { transform: scaleX(1); }
+    .phil-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: rgba(201,168,76,0.1); line-height: 1; margin-bottom: 1rem; display: block; }
+    .phil-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; }
+    .phil-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+
+    /* CTA */
+    .cta-section { padding: 8rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(201,168,76,0.04) 0%, transparent 70%); pointer-events: none; }
+    .cta-section h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem; }
+    .cta-section h3 em { font-style: italic; color: var(--gold-lt); }
+    .cta-section p { font-size: 1rem; color: var(--cream-dk); max-width: 50ch; margin: 0 auto 3rem; line-height: 1.8; }
+    .cta-group { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+    /* BUTTONS */
+    .cta-btn { display: inline-block; padding: 1.1rem 3.5rem; min-height: 52px; background: transparent; border: 1px solid var(--gold); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; position: relative; overflow: hidden; transition: color 0.4s; cursor: pointer; }
+    .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.77,0,0.175,1); z-index: 0; }
+    .cta-btn:hover { color: var(--navy); }
+    .cta-btn:hover::before { transform: scaleX(1); }
+    .cta-btn span { position: relative; z-index: 1; }
+    .cta-btn-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .cta-btn-gold::before { background: var(--gold-lt); }
+    .cta-btn-gold:hover { color: var(--navy); }
+
+    /* FOOTER */
+    footer { padding: 4rem 3rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; border-top: 1px solid var(--rule); }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.08em; color: var(--cream); }
+    .footer-contact { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
+    .footer-contact a { font-size: 0.88rem; color: var(--cream-dk); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; }
+    .footer-contact a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--rule); }
+      .stat-item:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
+      .case-body { grid-template-columns: 1fr; gap: 3rem; }
+      .venture-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .philosophy-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { padding: 9rem 1.5rem 5rem; min-height: 90vh; }
+      section { padding: 4rem 1.5rem; }
+      .skills-section { padding: 3.5rem 1.5rem; }
+      .venture-section { padding: 4rem 1.5rem; }
+      .cta-section { padding: 5rem 1.5rem; }
+      footer { padding: 3rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .footer-contact { text-align: left; }
+      .rule { margin: 0 1.5rem; width: calc(100% - 3rem); }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .stat-item { padding: 2rem 1.5rem; }
+      .stat-item:nth-child(even) { border-right: none; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .cta-group { flex-direction: column; align-items: center; }
+      .cta-btn { display: block; width: 100%; max-width: 320px; text-align: center; }
+      .case-stats { margin-top: 0; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<nav class="topbar">
-  <span class="topbar-brand">Jp Imperial</span>
-  <div class="topbar-links">
-    <a href="https://jpbimperial71675-cyber.github.io/jpimperial" class="topbar-link">Authority OS</a>
-    <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="topbar-link">Ghost Town Audit</a>
-    <a href="https://linkedin.com/in/jpimperial" class="topbar-link" target="_blank">LinkedIn</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <p class="eyebrow">Portfolio — Jp Imperial</p>
-  <div class="hero-grid">
-    <div>
-      <h1 class="hero-title">Visibility systems<br>that turn presence<br>into <em>pipeline.</em></h1>
-      <div class="hero-rule"></div>
-      <p class="hero-sub">Strategic Visibility and Revenue Systems Operator. I design and install the authority infrastructure that turns fragmented digital presence into predictable inbound demand, referrals, and growth. This is the work.</p>
+  <nav>
+    <a href="#" class="nav-logo">Jp Imperial</a>
+    <div class="nav-links">
+      <a href="https://jpbimperial71675-cyber.github.io/jpimperial/" class="nav-link">Authority OS</a>
+      <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="nav-link">Ghost Town Audit</a>
+      <a href="https://linkedin.com/in/jpimperial" class="nav-link" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="stat-num">86</div>
-        <div class="stat-label">Closed transactions influenced over 3 years</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">4→38</div>
-        <div class="stat-label">Transactions in 12 months for one client</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">40–60%</div>
-        <div class="stat-label">Increase in profile and local search visibility</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">2–3×</div>
-        <div class="stat-label">Referral-driven inbound growth, zero paid ads</div>
-      </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Portfolio — Jp Imperial</div>
+    <h1>Visibility systems that turn presence into <em>pipeline.</em></h1>
+    <p class="hero-sub">Strategic Visibility and Revenue Systems Operator. I design and install the authority infrastructure that turns fragmented digital presence into predictable inbound demand, referrals, and growth. This is the work.</p>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <span class="stat-num">86</span>
+      <p class="stat-desc">Closed transactions influenced over 3 years</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">4→38</span>
+      <p class="stat-desc">Transactions in 12 months for one client</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">40–60%</span>
+      <p class="stat-desc">Increase in profile and local search visibility</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">2–3×</span>
+      <p class="stat-desc">Referral-driven inbound growth, zero paid ads</p>
     </div>
   </div>
-</div>
 
-<!-- SKILLS STRIP -->
-<div class="skills-strip">
-  <div class="skills-inner">
-    <span class="skills-label">Core skills</span>
-    <span class="skill-pill">LinkedIn Authority</span>
-    <span class="skill-pill">Content Strategy</span>
-    <span class="skill-pill">Google Business Profile</span>
-    <span class="skill-pill">AI Search / SGE</span>
-    <span class="skill-pill">GTM Strategy</span>
-    <span class="skill-pill">Brand Positioning</span>
-    <span class="skill-pill">Social Media Management</span>
-    <span class="skill-pill">Authority Systems</span>
-    <span class="skill-pill">Visibility Infrastructure</span>
+  <!-- SKILLS -->
+  <div class="skills-section reveal">
+    <div class="skills-label">Core skills</div>
+    <div class="skills-wrap">
+      <span class="skill-tag">LinkedIn Authority</span>
+      <span class="skill-tag">Content Strategy</span>
+      <span class="skill-tag">Google Business Profile</span>
+      <span class="skill-tag">AI Search / SGE</span>
+      <span class="skill-tag">GTM Strategy</span>
+      <span class="skill-tag">Brand Positioning</span>
+      <span class="skill-tag">Social Media Management</span>
+      <span class="skill-tag">Authority Systems</span>
+      <span class="skill-tag">Visibility Infrastructure</span>
+    </div>
   </div>
-</div>
 
-<!-- CASE STUDIES -->
-<div class="section">
-  <p class="section-label">Case studies</p>
-  <h2 class="section-title">Work that moved the needle.</h2>
+  <div class="rule"></div>
 
-  <!-- Case Study 1 — Alpine Legacy -->
-  <div class="case-study">
-    <div class="case-header">
-      <div>
-        <p class="case-eyebrow">Freelance Marketing Director · Dec 2022 – Nov 2025</p>
-        <h3 class="case-title">Alpine Legacy — eXp Realty, Colorado USA</h3>
-      </div>
+  <!-- CASE STUDIES -->
+  <section>
+    <div class="section-label">Case studies</div>
+    <h2>Work that <em>moved the needle.</em></h2>
+
+    <div class="case-study reveal">
       <div class="case-meta">
-        Real Estate · Luxury<br>
-        eXp Realty Brokerage<br>
-        3-year engagement
+        <div>
+          <div class="case-role">Freelance Marketing Director</div>
+          <div class="case-period">Dec 2022 – Nov 2025</div>
+        </div>
+      </div>
+      <div class="case-title">Alpine Legacy — eXp Realty, Colorado USA</div>
+      <div class="case-subtitle">Real Estate · Luxury · eXp Realty Brokerage · 3-year engagement</div>
+      <div class="case-body">
+        <div>
+          <p class="case-desc">Owned the full digital growth function for a high-performance real estate brand operating in a competitive Colorado luxury market. Inherited a brand with strong production and a near-invisible digital presence. Built the authority infrastructure from scratch — LinkedIn, Google Business Profile, content strategy, AI-search positioning — and scaled the brand to ICON-level production within 12 months.</p>
+          <div class="case-tags">
+            <span class="case-tag">LinkedIn Strategy</span>
+            <span class="case-tag">Content Creation</span>
+            <span class="case-tag">GBP Optimization</span>
+            <span class="case-tag">Brand Positioning</span>
+            <span class="case-tag">AI Search Visibility</span>
+            <span class="case-tag">GTM Alignment</span>
+            <span class="case-tag">Team Leadership</span>
+            <span class="case-tag">Performance Reporting</span>
+          </div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-num">4→38</span>
+            <span class="case-stat-label">Transactions in 12 months. First ICON award.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">28</span>
+            <span class="case-stat-label">Transactions the following year. Second ICON.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">40–60%</span>
+            <span class="case-stat-label">Increase in profile visibility and local search discovery.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">+25%</span>
+            <span class="case-stat-label">Lead generation increase through channel alignment.</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="case-body">
-      <p class="case-desc">Owned the full digital growth function for a high-performance real estate brand operating in a competitive Colorado luxury market. Inherited a brand with strong production and a near-invisible digital presence. Built the authority infrastructure from scratch — LinkedIn, Google Business Profile, content strategy, AI-search positioning — and scaled the brand to ICON-level production within 12 months.</p>
-      <div class="case-results">
-        <div class="result-cell">
-          <div class="result-num">4→38</div>
-          <div class="result-label">Transactions in 12 months. First ICON award.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">28</div>
-          <div class="result-label">Transactions the following year. Second ICON.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">40–60%</div>
-          <div class="result-label">Increase in profile visibility and local search discovery.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">+25%</div>
-          <div class="result-label">Lead generation increase through channel alignment.</div>
-        </div>
-      </div>
-      <div class="case-skills">
-        <span class="case-skill">LinkedIn Strategy</span>
-        <span class="case-skill">Content Creation</span>
-        <span class="case-skill">GBP Optimization</span>
-        <span class="case-skill">Brand Positioning</span>
-        <span class="case-skill">AI Search Visibility</span>
-        <span class="case-skill">GTM Alignment</span>
-        <span class="case-skill">Team Leadership</span>
-        <span class="case-skill">Performance Reporting</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- Case Study 2 — Rubicon X Media -->
-  <div class="case-study">
-    <div class="case-header">
-      <div>
-        <p class="case-eyebrow">Managing Owner · Lead Strategist · Aug 2020 – Present</p>
-        <h3 class="case-title">Rubicon X Media — Boutique Growth Consultancy</h3>
-      </div>
+    <div class="case-study reveal">
       <div class="case-meta">
-        Multi-industry · Remote<br>
-        Founder-led brands<br>
-        Ongoing
-      </div>
-    </div>
-    <div class="case-body">
-      <p class="case-desc">Built and led a boutique growth consultancy focused on authority-driven demand generation for service businesses, consultants, and founder-led brands. Designed end-to-end visibility systems aligning brand positioning, search, content, and distribution to buyer intent. Acted as fractional Head of Growth for multiple clients — owning strategy, execution oversight, and performance accountability.</p>
-      <div class="case-results">
-        <div class="result-cell">
-          <div class="result-num">86</div>
-          <div class="result-label">Closed transactions influenced over 3 years.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">+10%</div>
-          <div class="result-label">Average client market share increase through GTM refinement.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">2–3×</div>
-          <div class="result-label">Referral-driven inbound growth without paid ads.</div>
-        </div>
-        <div class="result-cell">
-          <div class="result-num">6-fig</div>
-          <div class="result-label">Revenue outcomes generated by shifting from content volume to authority.</div>
+        <div>
+          <div class="case-role">Managing Owner · Lead Strategist</div>
+          <div class="case-period">Aug 2020 – Present</div>
         </div>
       </div>
-      <div class="case-skills">
-        <span class="case-skill">GTM Strategy</span>
-        <span class="case-skill">Authority Systems</span>
-        <span class="case-skill">Demand Generation</span>
-        <span class="case-skill">Fractional CMO</span>
-        <span class="case-skill">Content Strategy</span>
-        <span class="case-skill">Brand Positioning</span>
-        <span class="case-skill">Inbound Pipeline</span>
-        <span class="case-skill">Social Media Management</span>
+      <div class="case-title">Rubicon X Media — Boutique Growth Consultancy</div>
+      <div class="case-subtitle">Multi-industry · Remote · Founder-led brands · Ongoing</div>
+      <div class="case-body">
+        <div>
+          <p class="case-desc">Built and led a boutique growth consultancy focused on authority-driven demand generation for service businesses, consultants, and founder-led brands. Designed end-to-end visibility systems aligning brand positioning, search, content, and distribution to buyer intent. Acted as fractional Head of Growth for multiple clients — owning strategy, execution oversight, and performance accountability.</p>
+          <div class="case-tags">
+            <span class="case-tag">GTM Strategy</span>
+            <span class="case-tag">Authority Systems</span>
+            <span class="case-tag">Demand Generation</span>
+            <span class="case-tag">Fractional CMO</span>
+            <span class="case-tag">Content Strategy</span>
+            <span class="case-tag">Brand Positioning</span>
+            <span class="case-tag">Inbound Pipeline</span>
+            <span class="case-tag">Social Media Management</span>
+          </div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-num">86</span>
+            <span class="case-stat-label">Closed transactions influenced over 3 years.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">+10%</span>
+            <span class="case-stat-label">Average client market share increase through GTM refinement.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">2–3×</span>
+            <span class="case-stat-label">Referral-driven inbound growth without paid ads.</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-num">6-fig</span>
+            <span class="case-stat-label">Revenue outcomes generated by shifting from content volume to authority.</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- AUTHORITY OS -->
-<div class="authority-section">
-  <div class="authority-inner">
-    <p class="eyebrow" style="color:var(--gold);">Current venture</p>
-    <h2 class="section-title" style="color:var(--white);margin-top:16px;margin-bottom:8px;">Authority OS</h2>
-    <p style="font-size:13px;font-weight:300;color:rgba(245,241,235,0.55);line-height:1.8;max-width:560px;">A done-for-you omni-channel identity system for Canadian eXp ICON-track agents. Built on the same methodology that took one agent from 4 to 38 transactions in 12 months.</p>
-    <div class="authority-grid">
-      <div class="authority-card">
-        <p class="authority-card-label">The problem it solves</p>
-        <h4 class="authority-card-title">Fractured authority costs ICON-track agents referrals they never knew existed.</h4>
-        <p class="authority-card-body">Canadian eXp agents don't have a visibility problem. They have a fractured authority problem. High production, invisible online, five platforms saying five different things.</p>
+  <div class="rule"></div>
+
+  <!-- CURRENT VENTURE -->
+  <section class="venture-section">
+    <div class="section-label">Current venture</div>
+    <div class="venture-inner">
+      <div>
+        <h3>Authority OS</h3>
+        <p style="font-size:1rem;color:var(--cream-dk);line-height:1.85;margin-bottom:2rem;">A done-for-you omni-channel identity system for Canadian eXp ICON-track agents. Built on the same methodology that took one agent from 4 to 38 transactions in 12 months.</p>
+        <a href="https://jpbimperial71675-cyber.github.io/jpimperial/" class="cta-btn"><span>View Authority OS →</span></a>
       </div>
-      <div class="authority-card">
-        <p class="authority-card-label">The system</p>
-        <h4 class="authority-card-title">One voice. One authority signal. Compounding across every surface that matters.</h4>
-        <p class="authority-card-body">LinkedIn authority, Google Business Profile optimization, cross-platform coherence, and AI-search positioning — done-for-you, every month, at $2,500 CAD/month.</p>
+      <div>
+        <div class="venture-block">
+          <div class="venture-block-label">The problem it solves</div>
+          <div class="venture-block-title">Fractured authority costs ICON-track agents referrals they never knew existed.</div>
+          <p class="venture-block-desc">Canadian eXp agents don't have a visibility problem. They have a fractured authority problem. High production, invisible online, five platforms saying five different things.</p>
+        </div>
+        <div class="venture-block" style="margin-top:1px;">
+          <div class="venture-block-label">The system</div>
+          <div class="venture-block-title">One voice. One authority signal. Compounding across every surface that matters.</div>
+          <p class="venture-block-desc">LinkedIn authority, Google Business Profile optimization, cross-platform coherence, and AI-search positioning — done-for-you, every month, at $2,500 CAD/month.</p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- METHODOLOGY -->
-<div class="section">
-  <p class="section-label">How I work</p>
-  <h2 class="section-title">Operator-led. Systems-first. No trend chasing.</h2>
-  <div class="method-grid">
-    <div class="method-card">
-      <div class="method-num">01</div>
-      <p class="method-title">Authority over attention</p>
-      <p class="method-body">I don't chase viral moments or optimize for likes. Every strategy is built around compounding credibility that makes clients the obvious choice before the first conversation starts.</p>
-    </div>
-    <div class="method-card">
-      <div class="method-num">02</div>
-      <p class="method-title">Systems over campaigns</p>
-      <p class="method-body">Campaigns spike and fade. Systems compound. I design infrastructure that increases in value over time — reducing dependency on the founder and creating predictable inbound demand.</p>
-    </div>
-    <div class="method-card">
-      <div class="method-num">03</div>
-      <p class="method-title">Leverage over labor</p>
-      <p class="method-body">I think like an operator, not a channel specialist. Every decision is filtered through one question — does this create leverage, or does it just create activity?</p>
-    </div>
-  </div>
-</div>
+  <div class="rule"></div>
 
-<!-- CTA -->
-<div class="cta-section">
-  <div class="cta-card">
-    <div>
-      <h3 class="cta-title">Let's work together.</h3>
-      <p class="cta-body">Whether you're looking for a strategic marketing partner for your team or an authority system for your real estate brand — the starting point is a conversation.</p>
+  <!-- HOW I WORK -->
+  <section>
+    <div class="section-label">How I work</div>
+    <h2>Operator-led. <em>Systems-first.</em><br>No trend chasing.</h2>
+    <div class="philosophy-grid reveal">
+      <div class="phil-card">
+        <span class="phil-num">01</span>
+        <div class="phil-title">Authority over attention</div>
+        <p class="phil-desc">I don't chase viral moments or optimize for likes. Every strategy is built around compounding credibility that makes clients the obvious choice before the first conversation starts.</p>
+      </div>
+      <div class="phil-card">
+        <span class="phil-num">02</span>
+        <div class="phil-title">Systems over campaigns</div>
+        <p class="phil-desc">Campaigns spike and fade. Systems compound. I design infrastructure that increases in value over time — reducing dependency on the founder and creating predictable inbound demand.</p>
+      </div>
+      <div class="phil-card">
+        <span class="phil-num">03</span>
+        <div class="phil-title">Leverage over labor</div>
+        <p class="phil-desc">I think like an operator, not a channel specialist. Every decision is filtered through one question — does this create leverage, or does it just create activity?</p>
+      </div>
     </div>
-    <div class="cta-buttons">
-      <a href="mailto:jpbimperial71675@gmail.com" class="cta-btn-primary">Get in touch</a>
-      <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="cta-btn-secondary">Ghost Town Audit</a>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h3>Let's <em>work together.</em></h3>
+    <p>Whether you're looking for a strategic marketing partner for your team or an authority system for your real estate brand — the starting point is a conversation.</p>
+    <div class="cta-group">
+      <a href="mailto:jpbimperial71675@gmail.com" class="cta-btn cta-btn-gold"><span>Get in touch</span></a>
+      <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="cta-btn"><span>Ghost Town Audit</span></a>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <p class="footer-brand">Jp Imperial</p>
-  <div class="footer-contact">
-    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
-    <p>+63 917 840 5877</p>
-    <a href="https://linkedin.com/in/jpimperial">linkedin.com/in/jpimperial</a>
-  </div>
-</footer>
+  <footer>
+    <div class="footer-brand">Jp Imperial</div>
+    <div class="footer-contact">
+      <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
+      <a href="tel:+639178405877">+63 917 840 5877</a>
+      <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">linkedin.com/in/jpimperial</a>
+    </div>
+  </footer>
 
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
