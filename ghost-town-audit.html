@@ -1,610 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ghost Town Audit — Jp Imperial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Town Audit — Jp Imperial</title>
+<meta name="description" content="A fixed-scope authority diagnostic for Canadian eXp ICON-track agents. Find exactly where your digital presence is costing you referrals — before it happens again.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --navy:    #0A0F1E;
-      --navy-mid:#0F1628;
-      --navy-lt: #151D35;
-      --cream:   #F5EFE0;
-      --cream-dk:#C8BFA8;
-      --gold:    #C9A84C;
-      --gold-lt: #E2C97A;
-      --gold-dk: #9A7A30;
-      --rule:    rgba(201,168,76,0.25);
-    }
+  :root {
+    --ink: #0a0a0a;
+    --ink-soft: #111111;
+    --paper: #f5f0e8;
+    --paper-dim: #ede8de;
+    --gold: #c9a84c;
+    --gold-dim: #7a6232;
+    --gold-pale: rgba(201,168,76,0.12);
+    --cream: #f5f0e8;
+    --cream-60: rgba(245,240,232,0.6);
+    --cream-40: rgba(245,240,232,0.4);
+    --cream-20: rgba(245,240,232,0.2);
+    --cream-08: rgba(245,240,232,0.08);
+    --cream-05: rgba(245,240,232,0.05);
+    --muted: rgba(245,240,232,0.5);
+    --dim: rgba(245,240,232,0.3);
+    --red: #c0392b;
+    --green: #2e7d32;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
 
-    html { scroll-behavior: smooth; }
+  html {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    body {
-      background: var(--navy);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 17px;
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
+  /* ─── NAVIGATION ─────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 5rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+  .nav-link {
+    font-size: 0.75rem; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--cream); }
+  .nav-cta {
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    border: none; padding: 0.65rem 1.6rem; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--cream); }
 
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.4rem 3rem;
-      background: linear-gradient(to bottom, rgba(10,15,30,0.98) 0%, rgba(10,15,30,0) 100%);
-    }
+  /* ─── HERO ──────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10rem 5rem 6rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 55% 50% at 85% 45%, rgba(201,168,76,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 55% at 15% 85%, rgba(192,57,43,0.05) 0%, transparent 60%),
+      linear-gradient(160deg, #0a0a0a 0%, #0d0d0b 100%);
+  }
+  .hero-grain {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat; background-size: 200px 200px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 1060px; }
 
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      color: var(--cream);
-      text-decoration: none;
-      text-transform: uppercase;
-    }
+  .eyebrow {
+    font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2.2rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+  .eyebrow::before {
+    content: ''; display: block;
+    width: 2.5rem; height: 1px; background: var(--gold); flex-shrink: 0;
+  }
 
-    .nav-link {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--cream-dk);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .nav-link:hover { color: var(--gold); }
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7.5vw, 7rem);
+    font-weight: 900; line-height: 0.98; letter-spacing: -0.02em;
+    color: var(--cream); margin-bottom: 0;
+    opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold); }
+  .hero-h1 .struck {
+    position: relative;
+    color: rgba(245,240,232,0.28);
+    text-decoration: line-through;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 4px;
+  }
+  .hero-h1 .line { display: block; }
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10rem 3rem 6rem;
-      position: relative;
-      overflow: hidden;
-    }
+  .hero-body {
+    font-size: 1.1rem; font-weight: 300;
+    color: rgba(245,240,232,0.6);
+    max-width: 540px; margin: 3rem 0 4rem;
+    line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
+  }
+  .hero-body strong { color: var(--cream); font-weight: 500; }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -20%; right: -10%;
-      width: 60vw; height: 60vw;
-      background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
+  .hero-actions {
+    display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.48s ease forwards;
+  }
+  .btn-primary {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    padding: 1.1rem 3rem; text-decoration: none;
+    display: inline-block; border: 1px solid var(--gold);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn-primary:hover { background: var(--cream); border-color: var(--cream); }
+  .btn-ghost {
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none;
+    border-bottom: 1px solid rgba(245,240,232,0.18);
+    padding-bottom: 3px; transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--cream); border-color: var(--cream-40); }
 
-    .hero-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.2s;
-    }
+  .hero-stats {
+    display: flex; gap: 0;
+    margin-top: 6rem; padding-top: 3rem;
+    border-top: 1px solid var(--cream-08);
+    opacity: 0; animation: fadeUp 0.7s 0.6s ease forwards;
+  }
+  .hero-stat { padding-right: 3.5rem; }
+  .hero-stat + .hero-stat {
+    padding-left: 3.5rem;
+    border-left: 1px solid var(--cream-08);
+  }
+  .stat-num {
+    font-family: var(--serif); font-size: 2.6rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; font-weight: 400;
+    color: var(--dim); letter-spacing: 0.08em;
+    margin-top: 0.4rem; text-transform: uppercase;
+  }
 
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem, 7vw, 6.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      max-width: 14ch;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.4s;
-    }
-    .hero h1 em { font-style: italic; color: var(--gold-lt); }
+  /* ─── SECTION BASE ───────────────────────── */
+  .section {
+    padding: 8rem 5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-full {
+    padding: 8rem 5rem;
+  }
+  .section-full .inner { max-width: 1100px; margin: 0 auto; }
 
-    .hero-sub {
-      margin-top: 2.5rem;
-      max-width: 46ch;
-      font-size: 1.05rem;
-      color: var(--cream-dk);
-      line-height: 1.8;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.7s;
-    }
+  .section-label {
+    font-family: var(--sans); font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--gold); flex-shrink: 0;
+  }
 
-    .hero-stat {
-      margin-top: 3.5rem;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 1s;
-    }
+  .section-h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.8vw, 3rem);
+    font-weight: 700; color: var(--cream);
+    line-height: 1.12; margin-bottom: 1rem;
+  }
+  .section-h2 em { font-style: italic; color: var(--gold); }
+  .section-h2-dark {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3.8vw, 3rem);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.12; margin-bottom: 1rem;
+  }
+  .section-h2-dark em { font-style: italic; color: var(--gold-dim); }
 
-    .hero-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 300;
-      color: var(--gold);
-      letter-spacing: -0.02em;
-      animation: pulse 3s ease-in-out 2s 1;
-    }
+  .section-intro {
+    font-size: 0.98rem; color: rgba(245,240,232,0.5);
+    max-width: 480px; margin-bottom: 4.5rem; line-height: 1.75;
+  }
+  .section-intro-dark {
+    font-size: 0.98rem; color: rgba(10,10,10,0.55);
+    max-width: 520px; margin-bottom: 4.5rem; line-height: 1.75;
+  }
 
-    .hero-stat-label {
-      font-size: 0.88rem;
-      letter-spacing: 0.08em;
-      color: var(--cream-dk);
-      text-transform: uppercase;
-      max-width: 22ch;
-      line-height: 1.5;
-    }
+  /* ─── SCENARIO SECTION (paper bg) ───────── */
+  .scenario-section {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .scenario-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(0,0,0,0.08);
+    margin-top: 0;
+  }
+  .scenario-card { background: var(--paper-dim); padding: 3.5rem; }
+  .scenario-card.before { border-left: 3px solid var(--red); }
+  .scenario-card.after { border-left: 3px solid var(--green); }
+  .sc-marker {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .sc-marker::before { content: ''; width: 0.6rem; height: 0.6rem; border-radius: 50%; flex-shrink: 0; }
+  .sc-marker.bad { color: var(--red); }
+  .sc-marker.bad::before { background: var(--red); }
+  .sc-marker.good { color: var(--green); }
+  .sc-marker.good::before { background: var(--green); }
+  .sc-body {
+    font-size: 1rem; line-height: 1.82; color: #3d3830;
+  }
+  .sc-body strong { color: var(--ink); font-weight: 500; }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 3rem; left: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 1.6s;
-    }
-    .hero-scroll span {
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cream-dk);
-    }
-    .scroll-line { width: 40px; height: 1px; background: var(--rule); position: relative; overflow: hidden; }
-    .scroll-line::after {
-      content: '';
-      position: absolute;
-      left: -100%; top: 0;
-      width: 100%; height: 100%;
-      background: var(--gold);
-      animation: scanline 2s ease-in-out 1.8s infinite;
-    }
+  /* ─── AUDIT AREAS ────────────────────────── */
+  .audit-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--cream-08);
+    margin-bottom: 5rem;
+  }
+  .audit-cell {
+    background: var(--ink); padding: 2.8rem;
+    border-top: 1px solid var(--cream-08);
+    transition: background 0.25s;
+  }
+  .audit-cell:hover { background: #0f0f0f; }
+  .ac-num {
+    font-family: var(--serif); font-size: 0.85rem;
+    font-style: italic; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .ac-title {
+    font-size: 0.98rem; font-weight: 500;
+    color: var(--cream); margin-bottom: 0.8rem;
+  }
+  .ac-body {
+    font-size: 0.86rem; line-height: 1.72;
+    color: rgba(245,240,232,0.45);
+  }
 
-    .rule { height: 1px; background: var(--rule); margin: 0 3rem; width: calc(100% - 6rem); }
+  /* ─── REPORT BLOCK ───────────────────────── */
+  .report-block {
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 3.5rem; background: rgba(201,168,76,0.03);
+  }
+  .rb-eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .rb-title {
+    font-family: var(--serif); font-size: 1.7rem;
+    font-weight: 700; color: var(--cream); margin-bottom: 2rem;
+  }
+  .rb-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 3rem;
+  }
+  .rb-item {
+    font-size: 0.88rem; color: var(--cream-60);
+    display: flex; align-items: baseline; gap: 0.7rem;
+    line-height: 1.55;
+  }
+  .rb-item::before { content: '—'; color: var(--gold); flex-shrink: 0; }
 
-    section { padding: 7rem 3rem; position: relative; }
+  /* ─── QUOTE BREAK ────────────────────────── */
+  .quote-section {
+    background: #050505;
+    border-top: 1px solid var(--cream-05);
+    border-bottom: 1px solid var(--cream-05);
+  }
+  .quote-inner {
+    max-width: 820px; margin: 0 auto;
+    padding: 7rem 5rem; text-align: center;
+  }
+  .quote-mark {
+    font-family: var(--serif); font-size: 5rem;
+    color: var(--gold); line-height: 0.6;
+    margin-bottom: 2rem; opacity: 0.4;
+  }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.8vw, 2rem);
+    font-style: italic; font-weight: 700;
+    color: var(--cream); line-height: 1.45;
+    margin-bottom: 2.5rem;
+  }
+  .quote-text em { color: var(--gold); }
+  .quote-attr {
+    font-size: 0.75rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--dim);
+  }
 
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .section-label::after { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold-dk); }
+  /* ─── PRICING ────────────────────────────── */
+  .pricing-section { background: var(--ink); }
+  .price-card {
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 4.5rem; max-width: 660px;
+    background: rgba(201,168,76,0.025);
+  }
+  .price-eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .price-row {
+    display: flex; align-items: baseline;
+    gap: 0.4rem; margin-bottom: 0.6rem;
+  }
+  .price-currency {
+    font-family: var(--serif); font-size: 1.8rem;
+    color: var(--gold); align-self: flex-start; margin-top: 0.9rem;
+  }
+  .price-amount {
+    font-family: var(--serif); font-size: 5rem;
+    font-weight: 900; color: var(--cream); line-height: 1;
+  }
+  .price-period {
+    font-size: 0.85rem; color: var(--dim);
+    align-self: flex-end; margin-bottom: 0.8rem;
+  }
+  .price-desc {
+    font-size: 0.9rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 3rem;
+    border-top: 1px solid var(--cream-08);
+    padding-top: 1.8rem; margin-top: 0.5rem;
+  }
+  .price-specs {
+    display: flex; gap: 3rem; margin-bottom: 3.5rem; flex-wrap: wrap;
+  }
+  .spec-item {}
+  .spec-label {
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 0.3rem;
+  }
+  .spec-val { font-size: 0.92rem; font-weight: 500; color: var(--cream); }
+  .price-btn {
+    display: block; width: 100%; text-align: center;
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    padding: 1.3rem; text-decoration: none;
+    border: 1px solid var(--gold);
+    transition: background 0.2s, border-color 0.2s; margin-bottom: 1.2rem;
+  }
+  .price-btn:hover { background: var(--cream); border-color: var(--cream); }
+  .price-fine {
+    font-size: 0.78rem; color: var(--dim);
+    text-align: center; line-height: 1.6;
+  }
+  .retainer-bridge {
+    margin-top: 4rem; padding-top: 3.5rem;
+    border-top: 1px solid var(--cream-08);
+  }
+  .rb-bridge-title {
+    font-family: var(--serif); font-size: 1.25rem;
+    font-weight: 700; color: var(--cream); margin-bottom: 1rem;
+  }
+  .rb-bridge-body {
+    font-size: 0.9rem; color: var(--muted);
+    line-height: 1.72; max-width: 500px;
+  }
+  .rb-bridge-body a { color: var(--gold); text-decoration: none; }
+  .rb-bridge-body a:hover { text-decoration: underline; }
+  .retainer-specs {
+    display: flex; gap: 2.5rem; margin-top: 1.8rem; flex-wrap: wrap;
+  }
+  .rs-item {
+    font-size: 0.82rem; color: rgba(245,240,232,0.38);
+  }
+  .rs-item strong { color: var(--muted); font-weight: 500; }
 
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 300;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-    }
-    h2 em { font-style: italic; color: var(--gold-lt); }
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    background: #050505; color: var(--dim);
+    padding: 3.5rem 5rem;
+    border-top: 1px solid rgba(245,240,232,0.04);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--serif); font-size: 1rem;
+    color: rgba(245,240,232,0.4); text-decoration: none;
+  }
+  .footer-links {
+    display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;
+  }
+  .footer-links a {
+    font-size: 0.78rem; color: var(--dim);
+    text-decoration: none; letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    width: 100%; font-size: 0.72rem;
+    color: rgba(245,240,232,0.18);
+    letter-spacing: 0.06em;
+    border-top: 1px solid rgba(245,240,232,0.04);
+    padding-top: 1.5rem; margin-top: 0.5rem;
+  }
 
-    .diag-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      margin-top: 4rem;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-    }
+  /* ─── ANIMATIONS ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-    .diag-card {
-      background: var(--navy);
-      padding: 2.5rem 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.4s;
-    }
-    .diag-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt), var(--gold-dk));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s ease;
-    }
-    .diag-card:hover { background: var(--navy-lt); }
-    .diag-card:hover::before { transform: scaleX(1); }
+  /* ─── SCROLL REVEAL ──────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .diag-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: rgba(201,168,76,0.12);
-      line-height: 1;
-      margin-bottom: 1rem;
-      display: block;
-      letter-spacing: -0.03em;
-    }
-    .diag-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 0.4rem;
-    }
-    .diag-sub {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    .diag-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
-
-    .deliverable {
-      background: var(--navy-mid);
-      border: 1px solid var(--rule);
-      position: relative;
-      overflow: hidden;
-    }
-    .deliverable::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .deliverable-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .deliverable h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-    .deliverable h3 em { font-style: italic; color: var(--gold-lt); }
-    .deliverable p { font-size: 1rem; color: var(--cream-dk); line-height: 1.8; margin-bottom: 2rem; }
-
-    .report-list { list-style: none; margin-top: 1rem; }
-    .report-list li {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 1rem;
-      color: var(--cream-dk);
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      line-height: 1.65;
-    }
-    .report-list li::before { content: '→'; color: var(--gold); font-size: 0.88rem; margin-top: 0.15rem; flex-shrink: 0; }
-
-    .specs { display: flex; flex-direction: column; gap: 1.5rem; }
-    .spec-item { display: flex; flex-direction: column; gap: 0.3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
-    .spec-label { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
-    .spec-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--cream); }
-    .spec-note { font-size: 0.88rem; color: var(--cream-dk); line-height: 1.6; }
-
-    .pullquote { max-width: 700px; margin: 0 auto; padding: 5rem 3rem; text-align: center; }
-    .pullquote blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--cream-dk);
-      line-height: 1.6;
-      position: relative;
-    }
-    .pullquote blockquote::before {
-      content: '"';
-      font-size: 6rem;
-      color: rgba(201,168,76,0.15);
-      position: absolute;
-      top: -2rem; left: -1rem;
-      font-style: normal;
-      line-height: 1;
-    }
-
-    .investment {
-      text-align: center;
-      padding: 8rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .investment::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .price-display { display: flex; align-items: flex-start; justify-content: center; gap: 0.5rem; margin: 2.5rem 0; }
-    .price-currency { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold); margin-top: 0.8rem; }
-    .price-amount { font-family: 'Cormorant Garamond', serif; font-size: clamp(5rem, 12vw, 9rem); font-weight: 300; color: var(--cream); line-height: 1; letter-spacing: -0.03em; }
-    .price-suffix { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--cream-dk); align-self: flex-end; margin-bottom: 1rem; }
-    .price-note { font-size: 0.88rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 3rem; }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 1.1rem 3.5rem;
-      min-height: 52px;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: color 0.4s;
-      cursor: pointer;
-    }
-    .cta-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-      z-index: 0;
-    }
-    .cta-btn:hover { color: var(--navy); }
-    .cta-btn:hover::before { transform: scaleX(1); }
-    .cta-btn span { position: relative; z-index: 1; }
-    .cta-btn-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
-    .cta-btn-gold::before { background: var(--gold-lt); }
-    .cta-btn-gold:hover { color: var(--navy); }
-
-    .cta-terms { margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
-    .cta-terms span { font-size: 0.88rem; color: var(--cream-dk); display: flex; align-items: center; gap: 0.5rem; }
-    .cta-terms span::before { content: '—'; color: var(--gold-dk); }
-
-    .next-section { padding: 6rem 3rem; background: var(--navy-mid); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .next-inner { max-width: 900px; }
-    .next-inner h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; margin-bottom: 1.5rem; line-height: 1.2; }
-    .next-inner h3 em { font-style: italic; color: var(--gold-lt); }
-    .next-inner p { color: var(--cream-dk); font-size: 1rem; line-height: 1.8; max-width: 60ch; margin-bottom: 3rem; }
-
-    .next-specs { display: flex; flex-wrap: wrap; gap: 2.5rem; margin-top: 2rem; }
-    .next-spec { display: flex; flex-direction: column; gap: 0.3rem; }
-    .next-spec .lbl { font-size: 0.75rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
-    .next-spec .val { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); }
-
-    footer { padding: 4rem 3rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; border-top: 1px solid var(--rule); }
-    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.08em; color: var(--cream); }
-    .footer-contact { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
-    .footer-contact a { font-size: 0.88rem; color: var(--cream-dk); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; }
-    .footer-contact a:hover { color: var(--gold); }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes pulse { 0%, 100% { text-shadow: none; } 50% { text-shadow: 0 0 40px rgba(201,168,76,0.5); } }
-    @keyframes scanline { 0% { left: -100%; } 100% { left: 100%; } }
-
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      .deliverable-inner { grid-template-columns: 1fr; gap: 3rem; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .hero { padding: 9rem 1.5rem 5rem; min-height: 90vh; }
-      .hero-scroll { left: 1.5rem; }
-      section { padding: 4rem 1.5rem; }
-      .deliverable { padding: 4rem 1.5rem; }
-      .investment { padding: 5rem 1.5rem; }
-      .next-section { padding: 4rem 1.5rem; }
-      .pullquote { padding: 3.5rem 1.5rem; }
-      footer { padding: 3rem 1.5rem; flex-direction: column; align-items: flex-start; }
-      .footer-contact { text-align: left; }
-      .rule { margin: 0 1.5rem; width: calc(100% - 3rem); }
-      .diag-grid { grid-template-columns: 1fr; }
-      .cta-btn { display: block; width: 100%; text-align: center; padding: 1.2rem 2rem; }
-      .next-specs { gap: 1.8rem; }
-      .pullquote blockquote::before { display: none; }
-      .cta-terms { align-items: flex-start; }
-    }
-  </style>
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-right .nav-link { display: none; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .section { padding: 5rem 1.5rem; }
+    .section-full { padding: 5rem 1.5rem; }
+    .section-full .inner { padding: 0; }
+    .scenario-cards { grid-template-columns: 1fr; }
+    .audit-grid { grid-template-columns: 1fr; }
+    .rb-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 2rem; }
+    .hero-stat + .hero-stat { border-left: none; padding-left: 0; }
+    .price-card { padding: 2.5rem 1.5rem; }
+    .quote-inner { padding: 5rem 1.5rem; }
+    footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="https://jpbimperial71675-cyber.github.io/jpimperial/" class="nav-logo">Jp Imperial</a>
-    <a href="https://jpbimperial71675-cyber.github.io/jpimperial/" class="nav-link">View Authority OS →</a>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Jp Imperial</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">Authority OS</a>
+    <a href="https://wise.com/pay/r/-8cUr6WhT0kVEEo" class="nav-cta">Book Audit — $197 CAD</a>
+  </div>
+</nav>
 
-  <section class="hero">
-    <div class="hero-label">Ghost Town Audit — Entry Offer</div>
-    <h1>Your referral<br>googled you.<br><em>Saw nothing.</em></h1>
-    <p class="hero-sub">Your referral googled you. Saw nothing. And called someone else. That's a commission that evaporated before you even knew the lead existed. Even your warmest referral checks the receipt before picking up the phone.</p>
-    <div class="hero-stat">
-      <span class="hero-stat-num">$500K+</span>
-      <span class="hero-stat-label">average commission<br>at risk per lost referral</span>
+<!-- ═══════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Ghost Town Audit — Entry Offer</div>
+    <h1 class="hero-h1">
+      <span class="line">You earned ICON.</span>
+      <span class="line">Your profile <span class="struck">didn't.</span></span>
+      <span class="line"><em>Now you're losing.</em></span>
+    </h1>
+    <p class="hero-body">
+      A referred lead googled you last week. Spent 8 seconds on your profile.
+      Saw nothing that matched what they'd heard about you.<br><br>
+      <strong>They called someone else. You never knew.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="https://wise.com/pay/r/-8cUr6WhT0kVEEo" class="btn-primary">Find exactly where you're losing — $197 CAD</a>
+      <a href="#audit" class="btn-ghost">See what the audit covers</a>
     </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section>
-    <div class="section-label">The diagnostic</div>
-    <h2>Four areas. One clear picture<br>of where your <em>authority is leaking.</em></h2>
-    <div class="diag-grid reveal">
-      <div class="diag-card">
-        <span class="diag-num">01</span>
-        <div class="diag-title">LinkedIn Authority</div>
-        <div class="diag-sub">Does your profile signal ICON-track or invisible?</div>
-        <p class="diag-desc">Headline, about section, content signal strength — assessed against what a referred luxury lead actually sees in 8 seconds.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num">$500K+</div>
+        <div class="stat-label">Commission per lost referral</div>
       </div>
-      <div class="diag-card">
-        <span class="diag-num">02</span>
-        <div class="diag-title">Google Business Profile</div>
-        <div class="diag-sub">Are you winning or losing local AI-search?</div>
-        <p class="diag-desc">Completeness, review velocity, post frequency, and whether you appear when a buyer searches for the best agent in your market.</p>
+      <div class="hero-stat">
+        <div class="stat-num">8 sec</div>
+        <div class="stat-label">Before they decide to move on</div>
       </div>
-      <div class="diag-card">
-        <span class="diag-num">03</span>
-        <div class="diag-title">Authority Gap</div>
-        <div class="diag-sub">What's the delta between production and perception?</div>
-        <p class="diag-desc">The gap between your real-world credibility and what a referred lead finds when they research you. This is where commissions silently evaporate.</p>
-      </div>
-      <div class="diag-card">
-        <span class="diag-num">04</span>
-        <div class="diag-title">AI-Search Footprint</div>
-        <div class="diag-sub">Is AI choosing you or your competitor?</div>
-        <p class="diag-desc">Whether SGE and AI-powered results surface you as a trusted source — or hand that visibility to someone else entirely.</p>
+      <div class="hero-stat">
+        <div class="stat-num">48 hr</div>
+        <div class="stat-label">From payment to your report</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="rule"></div>
-
-  <section class="deliverable">
-    <div class="section-label">Your deliverable</div>
-    <div class="deliverable-inner">
-      <div>
-        <h3>The Authority<br><em>Gap Report</em></h3>
-        <p>A clear, written diagnosis — 3 to 5 pages — ranked by revenue impact. Not a generic checklist. A specific map of where your digital presence is costing you deals and the three highest-leverage moves to fix it first.</p>
-        <ul class="report-list">
-          <li>Where you're losing trust before the first conversation</li>
-          <li>What's suppressing your AI-search and local visibility</li>
-          <li>Your three priority fixes, ranked by revenue impact</li>
-          <li>A clear path forward — with or without continued engagement</li>
-        </ul>
+<!-- ═══════════════ SCENARIO ════════════════ -->
+<div class="scenario-section section-full">
+  <div class="inner">
+    <div class="section-label reveal">The moment it costs you</div>
+    <h2 class="section-h2-dark reveal">Your warmest referral<br>still <em>checks the receipt.</em></h2>
+    <p class="section-intro-dark reveal">ICON production. Ghost town presence. There's a gap between who you are and what a referred lead finds — and it's costing you silently.</p>
+    <div class="scenario-cards reveal">
+      <div class="scenario-card before">
+        <div class="sc-marker bad">What's happening right now</div>
+        <p class="sc-body">
+          Your client raves about you at dinner. The guest pulls out their phone and searches
+          your name. They find a LinkedIn untouched for two years, a Google profile with
+          three reviews, and an Instagram that went quiet in 2022. The gap between what they
+          heard and what they see is <strong>just wide enough to plant doubt.</strong>
+          They don't call. You never find out why.
+        </p>
       </div>
-      <div class="specs">
-        <div class="spec-item">
-          <span class="spec-label">Scope</span>
-          <span class="spec-value">Fixed</span>
-          <span class="spec-note">No add-ons, no surprises</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-label">Delivery</span>
-          <span class="spec-value">48 hours</span>
-          <span class="spec-note">From onboarding to report</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-label">Format</span>
-          <span class="spec-value">Async</span>
-          <span class="spec-note">No calls required to start</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-label">Audit credit</span>
-          <span class="spec-value">$197 CAD</span>
-          <span class="spec-note">Applied in full toward Authority OS retainer</span>
-        </div>
+      <div class="scenario-card after">
+        <div class="sc-marker good">What it looks like when it's fixed</div>
+        <p class="sc-body">
+          Same dinner. Same search. They land on a profile that confirms everything your client
+          said — on every platform they check. LinkedIn, Google, search results. The story is
+          coherent. The credibility is instant. <strong>They reach out already convinced.</strong>
+          You spend the first call closing, not proving.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <div class="pullquote reveal">
-    <blockquote>The referred lead doesn't tell you why they called someone else. They just do. This audit shows you exactly why — before it happens again.</blockquote>
+<!-- ═══════════════ AUDIT AREAS ═════════════ -->
+<div class="section" id="audit">
+  <div class="section-label reveal">The diagnostic</div>
+  <h2 class="section-h2 reveal">Four areas. <em>One clear picture</em><br>of where you're bleeding.</h2>
+  <p class="section-intro reveal">Not a generic checklist. A specific map of where your digital presence is costing you deals — before the first conversation starts.</p>
+
+  <div class="audit-grid reveal">
+    <div class="audit-cell">
+      <div class="ac-num">01</div>
+      <div class="ac-title">LinkedIn — First Impressions</div>
+      <p class="ac-body">Does your profile signal ICON-track or invisible? Headline, About section, and content signal strength — assessed against what a referred luxury lead actually sees in 8 seconds of judgment.</p>
+    </div>
+    <div class="audit-cell">
+      <div class="ac-num">02</div>
+      <div class="ac-title">Google Business — Local Authority</div>
+      <p class="ac-body">Are you winning or losing when a buyer searches for the best agent in your market? Completeness, review velocity, post frequency, and local search positioning — all measured.</p>
+    </div>
+    <div class="audit-cell">
+      <div class="ac-num">03</div>
+      <div class="ac-title">Authority Gap — The Real Damage</div>
+      <p class="ac-body">The delta between your real-world credibility and what a referred lead finds when they research you. This is where commissions silently evaporate — and where the audit pays for itself.</p>
+    </div>
+    <div class="audit-cell">
+      <div class="ac-num">04</div>
+      <div class="ac-title">AI-Search Footprint — Future Visibility</div>
+      <p class="ac-body">Is AI surfacing you or your competitor? SGE and AI-powered results are now the first layer of trust a referred lead encounters. If your content isn't structured as an answer, you don't exist there.</p>
+    </div>
   </div>
 
-  <div class="rule"></div>
-
-  <section class="investment">
-    <div class="section-label" style="justify-content:center;">Investment</div>
-    <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);max-width:30ch;margin:0 auto;">One fixed price. <em>One clear map.</em><br>No commitment required.</h2>
-    <div class="price-display">
-      <span class="price-currency">$</span>
-      <span class="price-amount">197</span>
-      <span class="price-suffix">CAD</span>
+  <div class="report-block reveal">
+    <div class="rb-eyebrow">Your deliverable</div>
+    <div class="rb-title">The Authority Gap Report</div>
+    <div class="rb-grid">
+      <div class="rb-item">Where you're losing trust before the first conversation</div>
+      <div class="rb-item">Three priority fixes, ranked by revenue impact</div>
+      <div class="rb-item">What's suppressing your AI-search and local visibility</div>
+      <div class="rb-item">A clear path forward — with or without continued engagement</div>
     </div>
-    <div class="price-note">One time — no call needed to start</div>
-    <a href="https://wise.com/pay/r/-8cUr6WhT0kVEEo" class="cta-btn cta-btn-gold">
-      <span>Book your Ghost Town Audit</span>
-    </a>
-    <div class="cta-terms">
-      <span>Payment via Wise</span>
-      <span>Onboarding questions sent within 24 hours of payment</span>
-      <span>No upsell pressure after delivery</span>
-    </div>
-  </section>
+  </div>
+</div>
 
-  <div class="rule"></div>
+<!-- ═══════════════ QUOTE ════════════════════ -->
+<div class="quote-section">
+  <div class="quote-inner reveal">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">The referred lead doesn't tell you why they called someone else. <em>They just do.</em> This audit tells you exactly why — before it happens again.</p>
+    <div class="quote-attr">Jp Imperial &nbsp;·&nbsp; Authority OS Operator</div>
+  </div>
+</div>
 
-  <section class="next-section">
-    <div class="next-inner">
-      <div class="section-label">What comes next</div>
-      <h3>The audit is the beginning,<br><em>not the end.</em></h3>
-      <p>If the report reveals an authority gap worth closing — and it will — the Authority OS retainer is how we close it. Done-for-you, every month, compounding over time. The $197 audit fee is credited in full toward the first month.</p>
-      <div class="next-specs reveal">
-        <div class="next-spec">
-          <span class="lbl">Retainer from</span>
-          <span class="val">$2,500 CAD / month</span>
+<!-- ═══════════════ PRICING ══════════════════ -->
+<div class="pricing-section section-full">
+  <div class="inner">
+    <div class="section-label reveal">Investment</div>
+    <h2 class="section-h2 reveal">One fixed scope.<br><em>One clear answer.</em> No surprises.</h2>
+    <p class="section-intro reveal" style="margin-bottom: 3.5rem;">Start here. No commitment to continue. If the report reveals nothing worth fixing — which it won't — you're out $197 and 48 hours.</p>
+
+    <div class="price-card reveal">
+      <div class="price-eyebrow">Ghost Town Audit</div>
+      <div class="price-row">
+        <span class="price-currency">$</span>
+        <span class="price-amount">197</span>
+        <span class="price-period">CAD — one time</span>
+      </div>
+      <p class="price-desc">
+        Fixed-scope authority diagnostic. 48-hour turnaround from onboarding.
+        No calls required to start. Audit fee credited in full toward the
+        Authority OS retainer if you choose to continue.
+      </p>
+      <div class="price-specs">
+        <div class="spec-item">
+          <div class="spec-label">Delivery</div>
+          <div class="spec-val">48 hours</div>
         </div>
-        <div class="next-spec">
-          <span class="lbl">Minimum engagement</span>
-          <span class="val">3 months</span>
+        <div class="spec-item">
+          <div class="spec-label">Format</div>
+          <div class="spec-val">Async — no calls needed</div>
         </div>
-        <div class="next-spec">
-          <span class="lbl">Capacity</span>
-          <span class="val">Max 2 clients</span>
+        <div class="spec-item">
+          <div class="spec-label">Output</div>
+          <div class="spec-val">3–5 page report</div>
         </div>
-        <div class="next-spec">
-          <span class="lbl">Audit credit</span>
-          <span class="val">Applied in full</span>
+      </div>
+      <a href="https://wise.com/pay/r/-8cUr6WhT0kVEEo" class="price-btn">Book Your Ghost Town Audit</a>
+      <p class="price-fine">Payment via Wise &nbsp;·&nbsp; Onboarding questions within 24 hours of payment<br>No upsell pressure after delivery</p>
+
+      <div class="retainer-bridge">
+        <div class="rb-bridge-title">If you want to close the gap entirely</div>
+        <p class="rb-bridge-body">
+          The audit is the diagnosis. <a href="index.html">Authority OS</a> is the fix —
+          done-for-you, every month, compounding over time. The $197 audit fee is
+          credited in full toward month one.
+        </p>
+        <div class="retainer-specs">
+          <div class="rs-item"><strong>From $2,500 CAD/month</strong></div>
+          <div class="rs-item"><strong>3-month minimum</strong></div>
+          <div class="rs-item"><strong>Max 2 clients at any time</strong></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <footer>
-    <div class="footer-brand">Jp Imperial</div>
-    <div class="footer-contact">
-      <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
-      <a href="tel:+639178405877">+63 917 840 5877</a>
-      <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">linkedin.com/in/jpimperial</a>
-    </div>
-  </footer>
+<!-- ═══════════════ FOOTER ══════════════════ -->
+<footer>
+  <a href="index.html" class="footer-logo">Jp Imperial</a>
+  <div class="footer-links">
+    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
+    <a href="tel:+639178405877">+63 917 840 5877</a>
+    <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="index.html">Authority OS →</a>
+  </div>
+  <p class="footer-copy">© 2025 Jp Imperial &nbsp;·&nbsp; All rights reserved</p>
+</footer>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+<!-- ═══════════════ SCROLL REVEAL ════════════ -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
