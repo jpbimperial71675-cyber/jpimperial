@@ -1,370 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authority OS — Jp Imperial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authority OS — Jp Imperial</title>
+<meta name="description" content="Done-for-you omni-channel authority management for Canadian eXp ICON-track agents. One coherent presence. Compounding referrals. No complexity added.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --navy:    #0A0F1E;
-      --navy-mid:#0F1628;
-      --navy-lt: #151D35;
-      --cream:   #F5EFE0;
-      --cream-dk:#C8BFA8;
-      --gold:    #C9A84C;
-      --gold-lt: #E2C97A;
-      --gold-dk: #9A7A30;
-      --rule:    rgba(201,168,76,0.25);
-    }
+  :root {
+    --ink: #0a0a0a;
+    --ink-lift: #111111;
+    --ink-panel: #0e0e0c;
+    --paper: #f5f0e8;
+    --paper-dim: #ede8de;
+    --gold: #c9a84c;
+    --gold-dim: #7a6232;
+    --gold-line: rgba(201,168,76,0.3);
+    --cream: #f5f0e8;
+    --cream-70: rgba(245,240,232,0.7);
+    --cream-50: rgba(245,240,232,0.5);
+    --cream-30: rgba(245,240,232,0.3);
+    --cream-12: rgba(245,240,232,0.12);
+    --cream-06: rgba(245,240,232,0.06);
+    --cream-03: rgba(245,240,232,0.03);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
 
-    html { scroll-behavior: smooth; }
+  html {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
 
-    body {
-      background: var(--navy);
-      color: var(--cream);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 17px;
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 5rem;
+    background: rgba(10,10,10,0.93);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.05rem; letter-spacing: 0.05em; color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+  .nav-link { font-size: 0.74rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-30); transition: color 0.2s; }
+  .nav-link:hover { color: var(--cream); }
+  .nav-cta { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 0.65rem 1.6rem; border: 1px solid var(--gold); transition: background 0.2s; }
+  .nav-cta:hover { background: var(--cream); border-color: var(--cream); }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 999; opacity: 0.4;
-    }
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 10rem 5rem 6rem;
+    position: relative; overflow: hidden; gap: 6rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(105deg, #0a0a0a 45%, #0f0e0b 100%);
+  }
+  .hero-rule {
+    position: absolute; top: 0; bottom: 0; left: calc(50% - 0.5px);
+    width: 1px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.15) 20%, rgba(201,168,76,0.28) 50%, rgba(201,168,76,0.15) 80%, transparent 100%);
+    z-index: 1; pointer-events: none;
+  }
+  .hero-grain {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px; pointer-events: none;
+  }
+  .hero-left { position: relative; z-index: 2; }
+  .hero-right { position: relative; z-index: 2; }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 3rem;
-      background: linear-gradient(to bottom, rgba(10,15,30,0.98) 0%, rgba(10,15,30,0) 100%);
-    }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.12em; color: var(--cream); text-decoration: none; text-transform: uppercase; }
-    .nav-link { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-dk); text-decoration: none; transition: color 0.3s; }
-    .nav-link:hover { color: var(--gold); }
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+  .eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); flex-shrink: 0; }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 10rem 3rem 6rem;
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; top: -20%; right: -10%;
-      width: 60vw; height: 60vw;
-      background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.01em; max-width: 16ch; opacity: 0; animation: fadeUp 1s ease forwards 0.4s; }
-    .hero h1 em { font-style: italic; color: var(--gold-lt); }
-    .hero-sub { margin-top: 2.5rem; max-width: 50ch; font-size: 1.05rem; color: var(--cream-dk); line-height: 1.8; opacity: 0; animation: fadeUp 1s ease forwards 0.7s; }
-    .hero-cta { margin-top: 3.5rem; opacity: 0; animation: fadeUp 1s ease forwards 1s; }
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5.6rem);
+    font-weight: 900; line-height: 1.0; letter-spacing: -0.02em; color: var(--cream);
+    opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold); }
+  .hero-h1 .line { display: block; }
 
-    /* STATS BAR */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .stat-item {
-      padding: 3rem 2rem;
-      border-right: 1px solid var(--rule);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--gold); line-height: 1; letter-spacing: -0.02em; display: block; margin-bottom: 0.5rem; }
-    .stat-desc { font-size: 0.88rem; color: var(--cream-dk); line-height: 1.5; }
+  .hero-body {
+    font-size: 1.05rem; font-weight: 300; color: var(--cream-50);
+    max-width: 460px; margin: 3rem 0 4rem; line-height: 1.82;
+    opacity: 0; animation: fadeUp 0.7s 0.32s ease forwards;
+  }
+  .hero-body strong { color: var(--cream); font-weight: 500; }
 
-    /* RULE */
-    .rule { height: 1px; background: var(--rule); margin: 0 3rem; width: calc(100% - 6rem); }
+  .hero-actions {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.44s ease forwards;
+  }
+  .btn-primary {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold); padding: 1.1rem 3rem;
+    border: 1px solid var(--gold); display: inline-block; transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-primary:hover { background: var(--cream); border-color: var(--cream); }
+  .btn-sub { font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.6rem; }
+  .btn-sub::before { content: ''; width: 1.2rem; height: 1px; background: var(--cream-30); }
 
-    /* SECTIONS */
-    section { padding: 7rem 3rem; position: relative; }
+  /* HERO STAT TOWER */
+  .stat-tower { border: 1px solid var(--cream-06); background: rgba(201,168,76,0.025); opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
+  .stat-tower-header { padding: 1.8rem 2.5rem; border-bottom: 1px solid var(--cream-06); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); }
+  .stat-cell { background: var(--ink); padding: 2.5rem; transition: background 0.2s; }
+  .stat-cell:hover { background: var(--ink-lift); }
+  .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+  .stat-label { font-size: 0.72rem; color: var(--cream-30); letter-spacing: 0.06em; line-height: 1.4; }
+  .stat-tower-footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--cream-06); font-size: 0.75rem; color: var(--cream-30); font-style: italic; font-family: var(--serif); line-height: 1.5; }
 
-    .section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem; }
-    .section-label::after { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold-dk); }
+  /* SECTION SYSTEM */
+  .s { padding: 8rem 5rem; max-width: 1100px; margin: 0 auto; }
+  .s-full { padding: 8rem 0; }
+  .s-full .inner { max-width: 1100px; margin: 0 auto; padding: 0 5rem; }
+  .s-paper { background: var(--paper); color: var(--ink); }
+  .s-panel { background: var(--ink-panel); }
 
-    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1rem; }
-    h2 em { font-style: italic; color: var(--gold-lt); }
+  .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .label::before { content: ''; width: 2rem; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .label-dark { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .label-dark::before { content: ''; width: 2rem; height: 1px; background: var(--gold-dim); flex-shrink: 0; }
 
-    /* PROBLEM SECTION */
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; margin-top: 4rem; background: var(--rule); border: 1px solid var(--rule); }
-    .problem-card { background: var(--navy); padding: 3rem 2rem; position: relative; overflow: hidden; transition: background 0.4s; }
-    .problem-card:hover { background: var(--navy-lt); }
-    .problem-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt), var(--gold-dk)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
-    .problem-card:hover::before { transform: scaleX(1); }
-    .problem-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(201,168,76,0.1); line-height: 1; margin-bottom: 1.5rem; display: block; }
-    .problem-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
-    .problem-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+  .h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 700; color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+  .h2 em { font-style: italic; color: var(--gold); }
+  .h2-dark { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 1rem; }
+  .h2-dark em { font-style: italic; color: var(--gold-dim); }
 
-    /* SOLUTION / SERVICE PILLARS */
-    .solution-intro { max-width: 60ch; margin-bottom: 5rem; }
-    .solution-intro p { font-size: 1.1rem; color: var(--cream-dk); line-height: 1.8; margin-top: 1rem; }
-    .solution-intro .pullline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-style: italic; color: var(--cream); border-left: 2px solid var(--gold); padding-left: 1.5rem; margin: 2.5rem 0; line-height: 1.5; }
+  .intro { font-size: 0.97rem; color: var(--cream-50); max-width: 480px; margin-bottom: 4.5rem; line-height: 1.78; }
+  .intro-dark { font-size: 0.97rem; color: rgba(10,10,10,0.55); max-width: 520px; margin-bottom: 4.5rem; line-height: 1.78; }
 
-    .pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
-    .pillar-card { background: var(--navy-mid); padding: 2.5rem 2rem; transition: background 0.4s; }
-    .pillar-card:hover { background: var(--navy-lt); }
-    .pillar-platform { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
-    .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--cream); margin-bottom: 1rem; line-height: 1.2; }
-    .pillar-list { list-style: none; }
-    .pillar-list li { font-size: 1rem; color: var(--cream-dk); padding: 0.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.1); line-height: 1.6; display: flex; gap: 0.75rem; align-items: flex-start; }
-    .pillar-list li::before { content: '—'; color: var(--gold-dk); flex-shrink: 0; margin-top: 0.05rem; }
-    .pillar-list li:last-child { border-bottom: none; }
+  /* PROBLEM COLUMNS */
+  .problem-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cream-06); }
+  .problem-col { background: var(--ink); padding: 3rem; border-top: 2px solid transparent; transition: border-color 0.3s, background 0.2s; }
+  .problem-col:hover { border-top-color: var(--gold); background: var(--ink-lift); }
+  .pc-num { font-family: var(--serif); font-size: 3rem; font-weight: 900; color: var(--cream-12); line-height: 1; margin-bottom: 1.8rem; }
+  .pc-title { font-size: 0.95rem; font-weight: 500; color: var(--cream); margin-bottom: 1rem; line-height: 1.4; }
+  .pc-body { font-size: 0.86rem; line-height: 1.75; color: rgba(245,240,232,0.42); }
 
-    /* HARD NOs */
-    .hardnos { background: var(--navy-mid); border: 1px solid var(--rule); position: relative; }
-    .hardnos::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .hardnos-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .hardnos h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
-    .hardnos h3 em { font-style: italic; color: var(--gold-lt); }
-    .hardnos p { font-size: 1rem; color: var(--cream-dk); line-height: 1.8; }
-    .hardno-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .hardno-tag { padding: 0.5rem 1.1rem; border: 1px solid rgba(201,168,76,0.3); font-size: 0.88rem; color: var(--cream-dk); letter-spacing: 0.05em; position: relative; overflow: hidden; }
-    .hardno-tag::before { content: '✗ '; color: rgba(201,168,76,0.5); font-size: 0.75rem; }
+  /* SYSTEM GRID */
+  .system-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--cream-06); margin-bottom: 4rem; }
+  .system-cell { background: var(--ink-panel); padding: 2.8rem 2.2rem; border-bottom: 2px solid transparent; transition: border-color 0.3s, background 0.2s; }
+  .system-cell:hover { border-bottom-color: var(--gold); background: var(--ink); }
+  .sc-icon { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cream-06); }
+  .sc-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 1.2rem; line-height: 1.2; }
+  .sc-list { list-style: none; }
+  .sc-list li { font-size: 0.82rem; color: rgba(245,240,232,0.42); padding: 0.45rem 0; border-bottom: 1px solid var(--cream-06); line-height: 1.45; }
+  .sc-list li:last-child { border-bottom: none; }
 
-    /* OUTCOMES */
-    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
-    .outcome-card { padding: 2.5rem 0; border-top: 1px solid var(--rule); }
-    .outcome-tag { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .outcome-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; line-height: 1.3; }
-    .outcome-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+  /* HARD NO'S */
+  .nopes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(0,0,0,0.08); margin-top: 3rem; }
+  .nope-cell { background: var(--paper-dim); padding: 2rem 1.8rem; display: flex; align-items: center; gap: 1rem; }
+  .nope-x { width: 1.6rem; height: 1.6rem; flex-shrink: 0; border: 1px solid rgba(192,57,43,0.4); color: rgba(192,57,43,0.6); font-size: 0.75rem; display: flex; align-items: center; justify-content: center; }
+  .nope-label { font-size: 0.86rem; color: rgba(10,10,10,0.55); }
+  .nopes-why { margin-top: 3rem; padding: 2.5rem; border: 1px solid rgba(0,0,0,0.08); background: var(--paper); font-size: 0.9rem; color: rgba(10,10,10,0.5); line-height: 1.75; font-style: italic; font-family: var(--serif); }
 
-    /* HOW IT FEELS */
-    .feel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin-top: 4rem; background: var(--rule); border: 1px solid var(--rule); }
-    .feel-card { background: var(--navy); padding: 2.5rem 2rem; }
-    .feel-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; }
-    .feel-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+  /* OUTCOMES */
+  .outcomes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); }
+  .outcome-cell { background: var(--ink); padding: 3rem; border-left: 2px solid transparent; transition: border-color 0.3s; }
+  .outcome-cell:hover { border-left-color: var(--gold); }
+  .oc-tag { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  .oc-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 0.9rem; }
+  .oc-body { font-size: 0.88rem; line-height: 1.75; color: rgba(245,240,232,0.45); }
 
-    /* HOW IT WORKS */
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
-    .step { padding-top: 2rem; border-top: 2px solid var(--rule); position: relative; }
-    .step::before { content: ''; position: absolute; top: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.6s ease; }
-    .step:hover::before { width: 100%; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(201,168,76,0.2); line-height: 1; margin-bottom: 1rem; }
-    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--cream); margin-bottom: 0.75rem; }
-    .step-desc { font-size: 1rem; color: var(--cream-dk); line-height: 1.75; }
+  /* PROCESS */
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,0,0,0.08); }
+  .process-step { background: var(--paper-dim); padding: 3.5rem 3rem; }
+  .ps-num { font-family: var(--serif); font-size: 5rem; font-weight: 900; color: rgba(122,98,50,0.15); line-height: 1; margin-bottom: 1.5rem; }
+  .ps-title { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 1rem; }
+  .ps-body { font-size: 0.88rem; line-height: 1.75; color: rgba(10,10,10,0.52); }
 
-    /* PROOF */
-    .proof-section { background: var(--navy-mid); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .proof-stats { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 4rem; }
-    .proof-stat { flex: 1; min-width: 160px; padding: 2.5rem 2rem; border-right: 1px solid var(--rule); }
-    .proof-stat:last-child { border-right: none; }
-    .proof-stat-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; color: var(--gold); line-height: 1; letter-spacing: -0.02em; display: block; margin-bottom: 0.4rem; }
-    .proof-stat-label { font-size: 0.88rem; color: var(--cream-dk); line-height: 1.5; }
-    .proof-testimonial { border: 1px solid var(--rule); padding: 3rem; background: rgba(201,168,76,0.03); position: relative; }
-    .proof-testimonial::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 8rem; color: rgba(201,168,76,0.1); position: absolute; top: -1rem; left: 2rem; line-height: 1; }
-    .proof-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: var(--cream-dk); line-height: 1.7; margin-bottom: 1.5rem; position: relative; }
-    .proof-attr { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dk); }
+  /* PROOF */
+  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); height: fit-content; }
+  .proof-stat { background: var(--ink-panel); padding: 2.5rem; transition: background 0.2s; }
+  .proof-stat:hover { background: var(--ink); }
+  .ps-big { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+  .ps-desc { font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.04em; line-height: 1.5; text-transform: uppercase; }
+  .pn-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+  .pn-body { font-size: 0.95rem; line-height: 1.82; color: var(--cream-50); margin-bottom: 2rem; }
+  .pn-body strong { color: var(--cream); font-weight: 500; }
+  .pn-attr { padding-top: 1.8rem; border-top: 1px solid var(--cream-06); font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.08em; font-style: italic; font-family: var(--serif); }
 
-    /* INVESTMENT */
-    .investment-section { padding: 7rem 3rem; }
-    .investment-card { border: 1px solid var(--rule); background: var(--navy-mid); position: relative; overflow: hidden; max-width: 800px; }
-    .investment-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .investment-header { padding: 3.5rem; border-bottom: 1px solid var(--rule); }
-    .investment-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; margin-bottom: 0.5rem; }
-    .investment-sub { font-size: 1rem; color: var(--cream-dk); max-width: 50ch; line-height: 1.7; }
-    .investment-body { padding: 3.5rem; }
-    .investment-includes { margin-bottom: 3rem; }
-    .investment-includes-label { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-    .includes-list { list-style: none; }
-    .includes-list li { font-size: 1rem; color: var(--cream-dk); padding: 0.75rem 0; border-bottom: 1px solid rgba(201,168,76,0.1); display: flex; gap: 0.75rem; line-height: 1.6; }
-    .includes-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 0.1rem; }
-    .includes-list li:last-child { border-bottom: none; }
-    .investment-price { display: flex; align-items: flex-start; gap: 0.4rem; margin: 2.5rem 0 0.5rem; }
-    .price-currency { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); margin-top: 0.6rem; }
-    .price-amount { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 5.5rem); font-weight: 300; color: var(--cream); line-height: 1; letter-spacing: -0.03em; }
-    .price-suffix { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--cream-dk); align-self: flex-end; margin-bottom: 0.6rem; }
-    .investment-terms { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.5rem; }
-    .investment-terms span { font-size: 0.88rem; color: var(--cream-dk); display: flex; align-items: center; gap: 0.5rem; }
-    .investment-terms span::before { content: '—'; color: var(--gold-dk); }
+  /* PRICING */
+  .pricing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); align-items: start; }
+  .price-main { background: var(--ink); padding: 4rem; border-top: 2px solid var(--gold); }
+  .price-sidebar { background: var(--ink); padding: 4rem; }
+  .price-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+  .price-number-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.5rem; }
+  .price-cur { font-family: var(--serif); font-size: 1.6rem; color: var(--gold); align-self: flex-start; margin-top: 0.8rem; }
+  .price-big { font-family: var(--serif); font-size: 5.5rem; font-weight: 900; color: var(--cream); line-height: 1; }
+  .price-cadence { font-size: 0.85rem; color: var(--cream-30); align-self: flex-end; margin-bottom: 0.8rem; }
+  .price-divider { height: 1px; background: var(--cream-06); margin: 2rem 0; }
+  .price-includes { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-30); margin-bottom: 1.5rem; }
+  .includes-list { list-style: none; margin-bottom: 3rem; }
+  .includes-list li { font-size: 0.88rem; color: var(--cream-50); padding: 0.6rem 0; border-bottom: 1px solid var(--cream-06); display: flex; align-items: baseline; gap: 0.8rem; line-height: 1.5; }
+  .includes-list li:last-child { border-bottom: none; }
+  .includes-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+  .btn-block { display: block; width: 100%; text-align: center; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 1.3rem; border: 1px solid var(--gold); transition: background 0.2s, border-color 0.2s; margin-bottom: 1rem; }
+  .btn-block:hover { background: var(--cream); border-color: var(--cream); }
+  .btn-block-ghost { display: block; width: 100%; text-align: center; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-50); background: transparent; padding: 1.1rem; border: 1px solid var(--cream-12); transition: border-color 0.2s, color 0.2s; margin-bottom: 2rem; }
+  .btn-block-ghost:hover { border-color: var(--cream-30); color: var(--cream); }
+  .price-fine { font-size: 0.76rem; color: var(--cream-30); line-height: 1.65; }
+  .price-fine p { margin-bottom: 0.4rem; }
+  .sidebar-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-30); margin-bottom: 1.5rem; }
+  .spec-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--cream-06); gap: 1rem; }
+  .spec-row:first-child { border-top: 1px solid var(--cream-06); }
+  .spec-key { font-size: 0.8rem; color: var(--cream-30); }
+  .spec-val { font-size: 0.82rem; font-weight: 500; color: var(--cream-70); text-align: right; }
+  .sidebar-audit-card { border: 1px solid var(--gold-line); padding: 2rem; background: rgba(201,168,76,0.03); margin: 2.5rem 0; }
+  .sac-eyebrow { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .sac-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.8rem; }
+  .sac-body { font-size: 0.85rem; color: var(--cream-50); line-height: 1.68; margin-bottom: 1.5rem; }
+  .sac-price { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--gold); margin-bottom: 0.3rem; }
+  .sac-note { font-size: 0.74rem; color: var(--cream-30); }
 
-    /* CTA BTN */
-    .cta-btn { display: inline-block; padding: 1.1rem 3.5rem; min-height: 52px; background: transparent; border: 1px solid var(--gold); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; position: relative; overflow: hidden; transition: color 0.4s; cursor: pointer; }
-    .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.77,0,0.175,1); z-index: 0; }
-    .cta-btn:hover { color: var(--navy); }
-    .cta-btn:hover::before { transform: scaleX(1); }
-    .cta-btn span { position: relative; z-index: 1; }
-    .cta-btn-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
-    .cta-btn-gold::before { background: var(--gold-lt); }
-    .cta-btn-gold:hover { color: var(--navy); }
+  /* FOOTER */
+  footer { background: #050505; color: var(--cream-30); padding: 3.5rem 5rem; border-top: 1px solid rgba(245,240,232,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: var(--serif); font-size: 1rem; color: rgba(245,240,232,0.35); }
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.77rem; color: var(--cream-30); letter-spacing: 0.06em; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { width: 100%; font-size: 0.7rem; color: rgba(245,240,232,0.16); letter-spacing: 0.06em; border-top: 1px solid rgba(245,240,232,0.04); padding-top: 1.5rem; margin-top: 0.5rem; }
 
-    /* FOOTER */
-    footer { padding: 4rem 3rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; border-top: 1px solid var(--rule); }
-    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.08em; color: var(--cream); }
-    .footer-contact { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
-    .footer-contact a { font-size: 0.88rem; color: var(--cream-dk); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; }
-    .footer-contact a:hover { color: var(--gold); }
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes scanline { 0% { left: -100%; } 100% { left: 100%; } }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid var(--rule); }
-      .stat-item:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
-      .problem-grid { grid-template-columns: 1fr; }
-      .outcomes-grid { grid-template-columns: 1fr 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .hardnos-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-
-    @media (max-width: 768px) {
-      .pillars-grid { grid-template-columns: 1fr; }
-      .feel-grid { grid-template-columns: 1fr; }
-      .outcomes-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .hero { padding: 9rem 1.5rem 5rem; min-height: 90vh; }
-      section { padding: 4rem 1.5rem; }
-      .hardnos { padding: 4rem 1.5rem; }
-      .proof-section { padding: 4rem 1.5rem; }
-      .investment-section { padding: 4rem 1.5rem; }
-      footer { padding: 3rem 1.5rem; flex-direction: column; align-items: flex-start; }
-      .footer-contact { text-align: left; }
-      .rule { margin: 0 1.5rem; width: calc(100% - 3rem); }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 2rem 1.5rem; }
-      .stat-item:nth-child(even) { border-right: none; }
-      .steps { grid-template-columns: 1fr; }
-      .proof-stats { flex-direction: column; }
-      .proof-stat { border-right: none; border-bottom: 1px solid var(--rule); }
-      .proof-stat:last-child { border-bottom: none; }
-      .investment-header { padding: 2rem 1.5rem; }
-      .investment-body { padding: 2rem 1.5rem; }
-      .cta-btn { display: block; width: 100%; text-align: center; padding: 1.2rem 2rem; }
-      .proof-testimonial { padding: 2rem 1.5rem; }
-    }
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-right .nav-link { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
+    .hero-rule { display: none; }
+    .s { padding: 5rem 1.5rem; }
+    .s-full .inner { padding: 0 1.5rem; }
+    .problem-cols { grid-template-columns: 1fr; }
+    .system-grid { grid-template-columns: 1fr 1fr; }
+    .nopes-grid { grid-template-columns: 1fr 1fr; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .proof-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .pricing-layout { grid-template-columns: 1fr; }
+    footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .system-grid { grid-template-columns: 1fr; }
+    .proof-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="#" class="nav-logo">Jp Imperial</a>
-    <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="nav-link">Ghost Town Audit →</a>
-  </nav>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Jp Imperial</span>
+  <div class="nav-right">
+    <a href="ghost-town-audit.html" class="nav-link">Ghost Town Audit</a>
+    <a href="ghost-town-audit.html" class="nav-cta">Start with the Audit — $197</a>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-eyebrow">Authority OS — Canadian eXp ICON-Track Agents</div>
-    <h1>Your referral googled you. <em>Saw nothing.</em></h1>
-    <p class="hero-sub">Canadian eXp ICON-track agents don't have a visibility problem. They have a fractured authority problem. High production. Invisible online. Five platforms saying five different things — and a referred lead who quietly moves on before you ever knew they existed.</p>
-    <div class="hero-cta">
-      <a href="#pricing" class="cta-btn cta-btn-gold"><span>See the Authority OS</span></a>
-    </div>
-  </section>
-
-  <!-- STATS BAR -->
-  <div class="stats-bar reveal">
-    <div class="stat-item">
-      <span class="stat-num">$500K+</span>
-      <p class="stat-desc">Average luxury commission at risk per lost referral</p>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">8 sec</span>
-      <p class="stat-desc">Time a referred lead spends deciding if you look credible</p>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">86</span>
-      <p class="stat-desc">Transactions influenced through rebuilt authority systems</p>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">4→38</span>
-      <p class="stat-desc">Transactions in 12 months. First ICON award secured.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rule"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-left">
+    <div class="eyebrow">Authority OS — Canadian eXp ICON-Track</div>
+    <h1 class="hero-h1">
+      <span class="line">Your referrals</span>
+      <span class="line">arrive <em>already</em></span>
+      <span class="line">convinced.</span>
+    </h1>
+    <p class="hero-body">
+      You've earned ICON. Now your digital presence needs to say the same thing —
+      in every place a referred lead looks, at exactly the moment they're deciding
+      whether to call you or someone else.<br><br>
+      <strong>Authority OS closes that gap. Every month. Without adding complexity to your week.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="ghost-town-audit.html" class="btn-primary">Start with the Ghost Town Audit — $197 CAD</a>
+      <span class="btn-sub">No commitment to continue after the audit</span>
     </div>
   </div>
-
-  <div class="rule"></div>
-
-  <!-- THE PROBLEM -->
-  <section>
-    <div class="section-label">The real problem</div>
-    <h2>Fragmented authority is the silent leak<br>draining your <em>referral pipeline.</em></h2>
-    <div class="problem-grid reveal">
-      <div class="problem-card">
-        <span class="problem-num">01</span>
-        <div class="problem-title">You're producing at ICON level. Your digital presence signals mid-tier.</div>
-        <p class="problem-desc">The gap between your real-world credibility and what a referred lead finds online is costing you pre-selection. They don't tell you why they went elsewhere. They just do.</p>
+  <div class="hero-right">
+    <div class="stat-tower">
+      <div class="stat-tower-header">Authority OS — Proof of Work</div>
+      <div class="stat-row">
+        <div class="stat-cell">
+          <div class="stat-num">4→38</div>
+          <div class="stat-label">Transactions in 12 months<br>First ICON award</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">28</div>
+          <div class="stat-label">Transactions year two<br>Second ICON award</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2–3×</div>
+          <div class="stat-label">Growth in referral-driven inbound<br>Zero paid ads</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">$500K+</div>
+          <div class="stat-label">Average commission at risk per silent referral loss</div>
+        </div>
       </div>
-      <div class="problem-card">
-        <span class="problem-num">02</span>
-        <div class="problem-title">Five platforms. Five different stories. Zero coherent authority signal.</div>
-        <p class="problem-desc">Your LinkedIn says one thing. Your GBP says another. Instagram is dormant. AI search returns a competitor. A referred lead cross-checks all of it — and sees noise, not trust.</p>
-      </div>
-      <div class="problem-card">
-        <span class="problem-num">03</span>
-        <div class="problem-title">AI is pre-selecting your competition before the conversation starts.</div>
-        <p class="problem-desc">Search Generative Experience and AI-powered results synthesize trusted sources. If your content isn't structured as an answer, you don't exist in the results that now influence where buyers start.</p>
-      </div>
+      <div class="stat-tower-footer">"The authority gap closes. What they find online finally matches who you are."</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="rule"></div>
-
-  <!-- THE SOLUTION -->
-  <section>
-    <div class="section-label">The solution</div>
-    <div class="solution-intro">
-      <h2>Authority OS</h2>
-      <p>A done-for-you omni-channel identity system that unifies your digital presence into one coherent authority signal — across every platform a referred lead or AI engine touches.</p>
-      <div class="pullline">"One voice. One authority signal. Compounding across every surface that determines whether a high-value lead chooses you — or keeps scrolling."</div>
+<!-- PROBLEM -->
+<div class="s">
+  <div class="label reveal">The real problem</div>
+  <h2 class="h2 reveal">You're not <em>invisible.</em><br>You're incoherent.</h2>
+  <p class="intro reveal">ICON production. Fragmented presence. Three ways this gap is costing you — none of them show up in your CRM.</p>
+  <div class="problem-cols reveal">
+    <div class="problem-col">
+      <div class="pc-num">01</div>
+      <div class="pc-title">You're producing at ICON level. Your digital presence signals mid-tier.</div>
+      <p class="pc-body">The gap between your real-world credibility and what a referred lead finds online is costing you pre-selection. They don't tell you why they went elsewhere. They just do.</p>
     </div>
-    <div class="pillars-grid reveal">
-      <div class="pillar-card">
-        <div class="pillar-platform">LinkedIn</div>
-        <div class="pillar-title">Authority presence &amp; content cadence</div>
-        <ul class="pillar-list">
+    <div class="problem-col">
+      <div class="pc-num">02</div>
+      <div class="pc-title">Five platforms. Five different stories. Zero coherent authority signal.</div>
+      <p class="pc-body">Your LinkedIn says one thing. Your GBP says another. Instagram is dormant. AI search returns a competitor. A referred lead cross-checks all of it — and sees noise, not trust.</p>
+    </div>
+    <div class="problem-col">
+      <div class="pc-num">03</div>
+      <div class="pc-title">AI is pre-selecting your competition before the conversation starts.</div>
+      <p class="pc-body">Search Generative Experience now synthesizes trusted sources into instant answers. If your content isn't structured as an answer, you don't exist in the results that influence where buyers begin.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SYSTEM -->
+<div class="s-full s-panel">
+  <div class="inner">
+    <div class="label reveal">The solution</div>
+    <h2 class="h2 reveal">Four pillars. <em>One coherent<br>authority signal.</em></h2>
+    <p class="intro reveal">Done-for-you, every month. Every platform a referred lead or AI engine touches — unified under one voice.</p>
+    <div class="system-grid reveal">
+      <div class="system-cell">
+        <div class="sc-icon">LinkedIn</div>
+        <div class="sc-title">Authority Presence & Content Cadence</div>
+        <ul class="sc-list">
           <li>Profile optimization and headline rewrite</li>
           <li>2 authority-formatted posts per week</li>
           <li>Monthly Visibility Brief newsletter</li>
           <li>Comment positioning on ICP content</li>
         </ul>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-platform">Google Business</div>
-        <div class="pillar-title">Local search &amp; trust signal momentum</div>
-        <ul class="pillar-list">
+      <div class="system-cell">
+        <div class="sc-icon">Google Business</div>
+        <div class="sc-title">Local Search & Trust Signal Momentum</div>
+        <ul class="sc-list">
           <li>GBP optimization and category alignment</li>
           <li>Weekly post cadence</li>
           <li>Review velocity strategy</li>
           <li>High-intent local search positioning</li>
         </ul>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-platform">Omni-channel</div>
-        <div class="pillar-title">Cross-platform identity coherence</div>
-        <ul class="pillar-list">
+      <div class="system-cell">
+        <div class="sc-icon">Omni-channel</div>
+        <div class="sc-title">Cross-Platform Identity Coherence</div>
+        <ul class="sc-list">
           <li>Unified bio and messaging across all handles</li>
           <li>Instagram, Facebook, YouTube alignment</li>
           <li>Cross-referencing signal architecture</li>
           <li>One voice, every platform</li>
         </ul>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-platform">AI Search</div>
-        <div class="pillar-title">SGE &amp; AI-search visibility system</div>
-        <ul class="pillar-list">
+      <div class="system-cell">
+        <div class="sc-icon">AI Search</div>
+        <div class="sc-title">SGE & AI-Search Visibility System</div>
+        <ul class="sc-list">
           <li>Answer-formatted content seeded monthly</li>
           <li>AI-source positioning strategy</li>
           <li>SGE discovery loop optimization</li>
@@ -372,200 +404,194 @@
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <div class="rule"></div>
+<!-- HARD NO'S -->
+<div class="s-full s-paper">
+  <div class="inner">
+    <div class="label-dark reveal">Hard No's</div>
+    <h2 class="h2-dark reveal">What this system<br><em>will never do.</em></h2>
+    <p class="intro-dark reveal">Authority compounds through consistency and coherence — not volume, noise, or trend-chasing. These aren't limitations. They are the strategy.</p>
+    <div class="nopes-grid reveal">
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Paid ads</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Cold DM automation</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Daily posting</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">CRM setup</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Email marketing</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Trend chasing</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Vanity metrics</span></div>
+      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Weekend work</span></div>
+    </div>
+    <p class="nopes-why reveal">"I don't build campaigns. I build the infrastructure that makes your referral network work harder than it already does — quietly, coherently, without asking for your weekends."</p>
+  </div>
+</div>
 
-  <!-- HARD NOs -->
-  <section class="hardnos">
-    <div class="section-label">Hard no's</div>
-    <div class="hardnos-inner">
-      <div>
-        <h3>What this system<br><em>will never do.</em></h3>
-        <p>Authority compounds through consistency and coherence — not volume, noise, or trend-chasing. These are not limitations. They are the strategy.</p>
+<!-- OUTCOMES -->
+<div class="s">
+  <div class="label reveal">What you gain</div>
+  <h2 class="h2 reveal">Not just visibility.<br>A presence that <em>works while you close.</em></h2>
+  <p class="intro reveal">Three business outcomes — and one identity shift that makes all of them possible.</p>
+  <div class="outcomes-grid reveal">
+    <div class="outcome-cell">
+      <div class="oc-tag">Business Outcome</div>
+      <div class="oc-title">Referrals convert before the first call</div>
+      <p class="oc-body">When a referred lead Googles you and finds a coherent, credible, authority-signaling presence across every platform — the decision is made before you pick up the phone. You spend the call closing, not proving.</p>
+    </div>
+    <div class="outcome-cell">
+      <div class="oc-tag">Business Outcome</div>
+      <div class="oc-title">AI surfaces you as the trusted choice</div>
+      <p class="oc-body">Answer-formatted content and cross-platform coherence trains AI search engines to synthesize you as the go-to agent in your market. When a buyer asks AI who to call, your name comes up. Not your competitor's.</p>
+    </div>
+    <div class="outcome-cell">
+      <div class="oc-tag">Business Outcome</div>
+      <div class="oc-title">Your production finally matches your presence</div>
+      <p class="oc-body">The authority gap closes. What a high-value lead finds online now reflects the ICON-track agent you already are. No more silent damage from a profile that undersells your credibility.</p>
+    </div>
+    <div class="outcome-cell">
+      <div class="oc-tag">Identity Shift</div>
+      <div class="oc-title">Chosen, not chased</div>
+      <p class="oc-body">ICON-level production deserves ICON-level presence. When both align, you stop competing for attention and start being the obvious choice — in every room, on every screen, at every moment a referred lead decides who to call.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="s-full s-paper">
+  <div class="inner">
+    <div class="label-dark reveal">How it works</div>
+    <h2 class="h2-dark reveal">A monthly workflow that compounds<br><em>— without adding complexity.</em></h2>
+    <p class="intro-dark reveal">Three phases. You focus on production. I handle the authority infrastructure.</p>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="ps-num">01</div>
+        <div class="ps-title">Ghost Town Audit — The Diagnostic</div>
+        <p class="ps-body">Before anything is built, I run a fixed-scope diagnostic of your entire digital footprint. LinkedIn, GBP, AI-search visibility, cross-platform coherence — all mapped. Every deliverable in Authority OS is executed against this map, not a generic template.</p>
       </div>
-      <div>
-        <div class="hardno-list">
-          <span class="hardno-tag">Paid ads</span>
-          <span class="hardno-tag">Cold DM automation</span>
-          <span class="hardno-tag">Daily posting</span>
-          <span class="hardno-tag">CRM setup</span>
-          <span class="hardno-tag">Email marketing</span>
-          <span class="hardno-tag">Trend chasing</span>
-          <span class="hardno-tag">Vanity metrics</span>
-          <span class="hardno-tag">Weekend work</span>
+      <div class="process-step">
+        <div class="ps-num">02</div>
+        <div class="ps-title">Identity Infrastructure Build — Month One</div>
+        <p class="ps-body">Month one is foundation. Every platform unified under one voice and one authority signal. Cross-referenced across every surface a referred lead or AI engine encounters. This is the infrastructure that everything else compounds on top of.</p>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">03</div>
+        <div class="ps-title">Compound & Refine — Month Two Onward</div>
+        <p class="ps-body">Content, GBP, AI-search signals, and cross-platform coherence — maintained and compounded every month. Authority isn't a one-time project. It's a signal that grows with consistent, coherent pressure. You close. I compound.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROOF -->
+<div class="s">
+  <div class="label reveal">Proof of work</div>
+  <h2 class="h2 reveal">One agent. Ghost town to<br><em>chosen — in 12 months.</em></h2>
+  <div class="proof-grid reveal" style="margin-top: 4rem;">
+    <div class="proof-stats">
+      <div class="proof-stat">
+        <div class="ps-big">4→38</div>
+        <div class="ps-desc">Transactions in 12 months.<br>First ICON award.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-big">28</div>
+        <div class="ps-desc">Transactions year two.<br>Second ICON award.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-big">40–60%</div>
+        <div class="ps-desc">Increase in profile visibility &amp; local search discovery.</div>
+      </div>
+      <div class="proof-stat">
+        <div class="ps-big">2–3×</div>
+        <div class="ps-desc">Growth in referral-driven inbound.<br>Zero paid ads.</div>
+      </div>
+    </div>
+    <div>
+      <div class="pn-eyebrow">The case study</div>
+      <p class="pn-body">A high-production eXp agent with a near-invisible digital footprint. Strong referral network offline. Weak trust signals everywhere a referred lead actually looked — LinkedIn untouched, GBP thin, no coherent cross-platform signal.</p>
+      <p class="pn-body">We rebuilt the entire identity infrastructure from the audit up — LinkedIn, GBP, cross-platform coherence, AI-search positioning — and let it compound. <strong>Within 12 months, the authority gap was closed and production followed.</strong> First ICON. Then second.</p>
+      <p class="pn-body">No paid ads. No cold outreach campaign. Just a presence that finally matched the agent behind it.</p>
+      <div class="pn-attr">Canadian eXp Realty · ICON-track agent · Identity withheld by agreement</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="s-full s-panel" id="pricing">
+  <div class="inner">
+    <div class="label reveal">Investment</div>
+    <h2 class="h2 reveal">One product. One outcome.<br><em>Predictable authority that compounds.</em></h2>
+    <p class="intro reveal" style="margin-bottom: 3.5rem;">Maximum two clients at any time. This is not a volume service. It's a precision engagement.</p>
+    <div class="pricing-layout reveal">
+      <div class="price-main">
+        <div class="price-eyebrow">Authority OS — Monthly Retainer</div>
+        <div class="price-number-row">
+          <span class="price-cur">$</span>
+          <span class="price-big">2,500</span>
+          <span class="price-cadence">CAD / month</span>
+        </div>
+        <div class="price-divider"></div>
+        <div class="price-includes">What's included every month</div>
+        <ul class="includes-list">
+          <li>LinkedIn profile maintenance + 2 authority posts per week</li>
+          <li>Monthly Visibility Brief newsletter</li>
+          <li>Google Business Profile optimization + weekly post cadence</li>
+          <li>Cross-platform bio and messaging alignment</li>
+          <li>AI-search answer-formatted content seeded monthly</li>
+          <li>Monthly Authority Signal Report</li>
+          <li>Ghost Town Audit as intake diagnostic (fee credited toward month one)</li>
+        </ul>
+        <a href="ghost-town-audit.html" class="btn-block">Start with the Ghost Town Audit</a>
+        <a href="mailto:jpbimperial71675@gmail.com" class="btn-block-ghost">Ask a question first</a>
+        <div class="price-fine">
+          <p>Audit fee of $197 CAD credited in full toward month one</p>
+          <p>No setup fee. No upsell tiers. No lock-in beyond 3-month minimum.</p>
+        </div>
+      </div>
+      <div class="price-sidebar">
+        <div class="sidebar-label">Engagement terms</div>
+        <div style="margin-bottom: 3rem;">
+          <div class="spec-row"><span class="spec-key">Minimum term</span><span class="spec-val">3 months</span></div>
+          <div class="spec-row"><span class="spec-key">Maximum clients</span><span class="spec-val">2 at any time</span></div>
+          <div class="spec-row"><span class="spec-key">Month 4+ rate</span><span class="spec-val">$1,800 CAD/month</span></div>
+          <div class="spec-row"><span class="spec-key">Founding Member rate</span><span class="spec-val">$1,500 CAD month one</span></div>
+          <div class="spec-row"><span class="spec-key">Payment</span><span class="spec-val">Via Wise (CAD)</span></div>
+          <div class="spec-row"><span class="spec-key">Onboarding</span><span class="spec-val">Begins with audit</span></div>
+          <div class="spec-row"><span class="spec-key">Weekend work</span><span class="spec-val">Never</span></div>
+        </div>
+        <div class="sidebar-audit-card">
+          <div class="sac-eyebrow">Start here</div>
+          <div class="sac-title">Ghost Town Audit</div>
+          <p class="sac-body">The audit is the first step — not a sales call. A fixed-scope diagnostic of your entire digital footprint. You get a 3–5 page Authority Gap Report within 48 hours. No commitment to continue.</p>
+          <div class="sac-price">$197 CAD</div>
+          <div class="sac-note">Credited in full toward Authority OS month one</div>
+        </div>
+        <a href="ghost-town-audit.html" class="btn-block">Book your Ghost Town Audit →</a>
+        <div class="price-fine" style="text-align:center;">
+          <p>Questions first: <a href="mailto:jpbimperial71675@gmail.com" style="color:var(--gold);">jpbimperial71675@gmail.com</a></p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <div class="rule"></div>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Jp Imperial</span>
+  <div class="footer-links">
+    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
+    <a href="tel:+639178405877">+63 917 840 5877</a>
+    <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="ghost-town-audit.html">Ghost Town Audit →</a>
+  </div>
+  <p class="footer-copy">© 2025 Jp Imperial &nbsp;·&nbsp; All rights reserved</p>
+</footer>
 
-  <!-- OUTCOMES -->
-  <section>
-    <div class="section-label">What you gain</div>
-    <h2>Not just visibility. A presence that<br><em>works while you close.</em></h2>
-    <div class="outcomes-grid reveal">
-      <div class="outcome-card">
-        <div class="outcome-tag">Business outcome</div>
-        <div class="outcome-title">Referrals convert before the first call</div>
-        <p class="outcome-desc">When a referred lead Googles you and finds a coherent, credible, authority-signaling presence across every platform — the decision is made before you pick up the phone.</p>
-      </div>
-      <div class="outcome-card">
-        <div class="outcome-tag">Business outcome</div>
-        <div class="outcome-title">AI surfaces you as the trusted choice</div>
-        <p class="outcome-desc">Answer-formatted content and cross-platform coherence trains AI search engines to synthesize you as the go-to agent in your market — not your competitor.</p>
-      </div>
-      <div class="outcome-card">
-        <div class="outcome-tag">Business outcome</div>
-        <div class="outcome-title">Your production finally matches your presence</div>
-        <p class="outcome-desc">The authority gap closes. What a high-value lead finds online now reflects the ICON-track agent you already are. No more silent damage from a profile that undersells your credibility.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- HOW IT FEELS -->
-  <section>
-    <div class="section-label">How it feels</div>
-    <h2><em>Chosen,</em> not chased.</h2>
-    <div class="feel-grid reveal">
-      <div class="feel-card">
-        <div class="feel-title">Chosen, not chased</div>
-        <p class="feel-desc">High-value leads arrive already convinced. You spend less time proving yourself and more time closing.</p>
-      </div>
-      <div class="feel-card">
-        <div class="feel-title">Confident in every room</div>
-        <p class="feel-desc">When someone Googles you before a listing presentation, you know exactly what they'll find — and it works in your favor.</p>
-      </div>
-      <div class="feel-card">
-        <div class="feel-title">Invisible effort, visible authority</div>
-        <p class="feel-desc">Your presence compounds in the background. No daily posting anxiety. No trend chasing. Just quiet authority building while you focus on production.</p>
-      </div>
-      <div class="feel-card">
-        <div class="feel-title">The market leader signal</div>
-        <p class="feel-desc">ICON-level production deserves ICON-level presence. When both align, you stop competing and start being the obvious choice.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- HOW IT WORKS -->
-  <section>
-    <div class="section-label">How it works</div>
-    <h2>A monthly workflow that compounds —<br><em>without adding complexity.</em></h2>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-title">Ghost Town Audit</div>
-        <p class="step-desc">Before anything is built, I run a fixed-scope diagnostic of your entire digital footprint. Every deliverable in the Authority OS is executed against this map — not a generic template.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-title">Identity Infrastructure Build</div>
-        <p class="step-desc">Month one is foundation. Every platform unified. One voice, one authority signal, cross-referenced across every surface a referred lead or AI engine encounters.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-title">Compound &amp; Refine</div>
-        <p class="step-desc">Month two and beyond — content, GBP, AI-search signals, and cross-platform coherence maintained and compounded monthly. You focus on production. I handle the authority.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- PROOF -->
-  <section class="proof-section">
-    <div class="section-label">Proof of work</div>
-    <h2>One ICON-track agent. Ghost town to chosen<br>— <em>in 12 months.</em></h2>
-    <div class="proof-stats reveal">
-      <div class="proof-stat">
-        <span class="proof-stat-num">4→38</span>
-        <p class="proof-stat-label">Transactions in 12 months. First ICON award.</p>
-      </div>
-      <div class="proof-stat">
-        <span class="proof-stat-num">28</span>
-        <p class="proof-stat-label">Transactions the following year. Second ICON award.</p>
-      </div>
-      <div class="proof-stat">
-        <span class="proof-stat-num">40–60%</span>
-        <p class="proof-stat-label">Increase in profile visibility and local search discovery.</p>
-      </div>
-      <div class="proof-stat">
-        <span class="proof-stat-num">2–3×</span>
-        <p class="proof-stat-label">Growth in referral-driven inbound. Zero paid ads.</p>
-      </div>
-    </div>
-    <div class="proof-testimonial reveal">
-      <p class="proof-quote">A high-production eXp agent with a near-invisible digital footprint. Strong referral network. Weak trust signals everywhere a referred lead actually looked. We rebuilt the entire identity infrastructure — LinkedIn, GBP, cross-platform coherence, AI-search positioning — and let it compound. Within 12 months, the authority gap was closed and production followed.</p>
-      <p class="proof-attr">Canadian eXp Realty · ICON-track agent · Identity withheld by agreement</p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- INVESTMENT -->
-  <section class="investment-section" id="pricing">
-    <div class="section-label">Investment</div>
-    <h2>One product. One outcome.<br><em>Predictable authority that compounds.</em></h2>
-    <div class="investment-card reveal" style="margin-top:3rem;">
-      <div class="investment-header">
-        <div class="investment-title">Authority OS</div>
-        <p class="investment-sub">Done-for-you omni-channel authority management for Canadian eXp ICON-track agents.</p>
-      </div>
-      <div class="investment-body">
-        <div class="investment-includes">
-          <div class="investment-includes-label">What's included every month</div>
-          <ul class="includes-list">
-            <li>LinkedIn profile maintenance + 2 authority posts per week</li>
-            <li>Monthly Visibility Brief newsletter</li>
-            <li>Google Business Profile optimization + weekly post cadence</li>
-            <li>Cross-platform bio and messaging alignment</li>
-            <li>AI-search answer-formatted content seeded monthly</li>
-            <li>Monthly Authority Signal Report</li>
-            <li>Ghost Town Audit as intake diagnostic (credited toward retainer)</li>
-          </ul>
-        </div>
-        <div class="investment-price">
-          <span class="price-currency">$</span>
-          <span class="price-amount">2,500</span>
-          <span class="price-suffix">CAD / month</span>
-        </div>
-        <div class="investment-terms">
-          <span>3-month minimum engagement</span>
-          <span>Maximum 2 clients at any time</span>
-          <span>Begins with Ghost Town Audit — $197 CAD</span>
-          <span>Audit fee credited in full toward retainer</span>
-          <span>No setup fee. No upsell tiers.</span>
-        </div>
-        <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" class="cta-btn cta-btn-gold">
-          <span>Book your Ghost Town Audit</span>
-        </a>
-        <p style="margin-top:1.5rem;font-size:0.88rem;color:var(--cream-dk);">Start with the audit. No commitment to continue.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-brand">Jp Imperial</div>
-    <div class="footer-contact">
-      <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
-      <a href="tel:+639178405877">+63 917 840 5877</a>
-      <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">linkedin.com/in/jpimperial</a>
-    </div>
-  </footer>
-
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+</script>
 </body>
 </html>
