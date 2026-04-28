@@ -68,7 +68,7 @@
     min-height: 100vh;
     display: flex; flex-direction: column;
     justify-content: flex-end;
-    padding: 0 5rem 6rem;
+    padding: 0 5rem 5rem;
     position: relative; overflow: hidden;
   }
   /* Grid lines — the portfolio's visual signature */
@@ -109,7 +109,13 @@
     text-transform: uppercase; color: var(--cream-40);
   }
 
-  .hero-content { position: relative; z-index: 2; max-width: 1100px; width: 100%; }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1100px; width: 100%;
+    /* Keep content anchored in the lower half — never overlaps year bar */
+    max-height: 55vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
 
   /* Big bottom-anchored headline — different from GTA/AOS entirely */
   .hero-kicker {
@@ -123,9 +129,9 @@
 
   .hero-h1 {
     font-family: var(--serif);
-    font-size: clamp(3.5rem, 8vw, 8rem);
-    font-weight: 900; line-height: 0.92;
-    letter-spacing: -0.03em; color: var(--cream);
+    font-size: clamp(2.4rem, 5vw, 5rem);
+    font-weight: 900; line-height: 1.0;
+    letter-spacing: -0.025em; color: var(--cream);
     margin-bottom: 3rem;
     opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards;
   }
@@ -436,9 +442,12 @@
     nav { padding: 1rem 1.5rem; }
     .nav-right .nav-link { display: none; }
     .hero { padding: 0 1.5rem 4rem; }
-    .hero-year-bar { left: 1.5rem; right: 1.5rem; }
-    .hero-lower { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-macro { justify-content: flex-start; }
+    .hero-year-bar { left: 1.5rem; right: 1.5rem; top: 6rem; }
+    .hero-content { max-height: 60vh; }
+    .hero-h1 { font-size: clamp(2rem, 6.5vw, 3.2rem); margin-bottom: 2rem; }
+    .hero-lower { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-macro { justify-content: flex-start; gap: 2rem; }
+    .macro-num { font-size: 2.2rem; }
     .s { padding: 5rem 1.5rem; }
     .s-full .inner { padding: 0 1.5rem; }
     .case-card { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.5rem; }
@@ -453,6 +462,8 @@
     .expertise-grid { grid-template-columns: 1fr; }
     .creds-strip { grid-template-columns: 1fr 1fr; }
     .hero-macro { gap: 1.5rem; }
+    .hero-h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); line-height: 1.05; }
+    .hero-kicker { margin-bottom: 1.2rem; }
   }
 </style>
 </head>
