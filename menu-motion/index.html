@@ -3,180 +3,580 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Menu Boards & UGC Video Ads - Food Court Visibility System</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Menu Motion | Dynamic Animated Menu Boards for Food Stalls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      background: #020617;
+      color: #f1f5f9;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, p, ul { margin-top: 0; }
+    img, video { max-width: 100%; }
+    .container { max-width: 672px; margin: 0 auto; padding: 0 20px; }
+
+    /* ANNOUNCEMENT BAR */
+    .announcement-bar {
+      background: rgba(245, 158, 11, 0.1);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* HERO */
+    .hero { padding: 40px 0 48px; text-align: center; }
+    .promo-badge {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fde68a;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .promo-badge strong { color: #fbbf24; }
+    .hero h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      color: #fbbf24;
+      text-decoration: underline;
+      text-decoration-color: rgba(245, 158, 11, 0.5);
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      margin-bottom: 32px;
+    }
+    .hero-sub strong { color: #fff; }
+
+    .pain-box {
+      background: #0f172a;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 40px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .pain-box strong { display: block; color: #fcd34d; font-size: 18px; margin-bottom: 6px; }
+
+    /* SHOWCASE */
+    .showcase-container {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .showcase-header span:first-child {
+      font-size: 14px;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .showcase-header span:last-child {
+      font-size: 14px;
+      font-weight: 700;
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      padding: 4px 12px;
+      white-space: nowrap;
+    }
+    .showcase-grid { display: grid; gap: 24px; }
+    .showcase-card {
+      background: #020617;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #1e293b;
+    }
+    .showcase-card.before { border-color: rgba(239, 68, 68, 0.3); }
+    .showcase-card.after { border-color: rgba(16, 185, 129, 0.4); }
+    .badge {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .badge.red { color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge.green { color: #34d399; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .media-wrapper {
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #000;
+    }
+    .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
+
+    /* BUTTONS */
+    .btn-viber, .btn-viber-large {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: #10b981;
+      color: #020617;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: background 0.2s;
+    }
+    .btn-viber:hover, .btn-viber-large:hover { background: #34d399; }
+    .cta-subtext { font-size: 14px; color: #94a3b8; margin: 12px 0 0; font-weight: 600; }
+    .cta-subtext strong { color: #cbd5e1; }
+
+    /* REALITY */
+    .reality {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid #1e293b;
+      border-bottom: 1px solid #1e293b;
+      padding: 48px 0;
+    }
+    .reality h2 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.3; }
+    .reality > .container > p { font-size: 16px; color: #cbd5e1; margin-bottom: 32px; line-height: 1.6; }
+    .reality-grid { display: grid; gap: 16px; }
+    .reality-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #020617;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+    }
+    .reality-item .icon { font-size: 24px; line-height: 1.2; flex-shrink: 0; }
+    .reality-item strong { display: block; font-size: 18px; color: #f1f5f9; margin-bottom: 4px; line-height: 1.4; }
+    .reality-item span { display: block; font-size: 16px; color: #94a3b8; line-height: 1.5; }
+
+    /* HOW IT WORKS */
+    .how-it-works { padding: 48px 0; }
+    .how-it-works h2 { font-size: 24px; font-weight: 800; color: #fff; text-align: center; margin-bottom: 32px; line-height: 1.3; }
+    .steps-grid { display: grid; gap: 20px; }
+    .step-card {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 8px 16px;
+      align-items: center;
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800;
+    }
+    .step-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin: 0; line-height: 1.3; }
+    .step-card p { grid-column: 1 / -1; font-size: 16px; color: #cbd5e1; line-height: 1.6; margin: 0; }
+
+    /* UGC */
+    .ugc-section {
+      background: rgba(15, 23, 42, 0.9);
+      border-top: 1px solid #1e293b;
+      border-bottom: 1px solid #1e293b;
+      padding: 48px 0;
+    }
+    .ugc-header { text-align: center; margin-bottom: 32px; }
+    .ugc-header .tag {
+      display: inline-block;
+      font-size: 14px; font-weight: 700;
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 999px;
+      padding: 4px 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ugc-header h2 { font-size: 24px; font-weight: 800; color: #fff; margin: 12px 0 8px; line-height: 1.3; }
+    .ugc-header p { font-size: 16px; color: #cbd5e1; margin: 0; line-height: 1.6; }
+    .ugc-grid { display: grid; gap: 20px; }
+    .ugc-media, .ugc-details {
+      background: #020617;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+    }
+    .ugc-media video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 75vh;
+      border-radius: 12px;
+      background: #000;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .muted-note { font-size: 14px; color: #94a3b8; margin: 12px 0 0; line-height: 1.5; }
+    .ugc-details h3 { font-size: 18px; font-weight: 700; color: #fcd34d; margin-bottom: 12px; }
+    .ugc-details ul { padding-left: 20px; margin: 0; }
+    .ugc-details li { font-size: 16px; color: #94a3b8; margin-bottom: 8px; line-height: 1.5; }
+
+    /* PRICING */
+    .pricing-section { padding: 48px 0; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .section-title p { font-size: 16px; color: #94a3b8; margin: 0; }
+    .package-card {
+      background: #0f172a;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .card-badge {
+      background: #f59e0b;
+      color: #020617;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 12px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .package-header h3 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+    .price-box { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+    .old-price { font-size: 20px; color: #64748b; text-decoration: line-through; }
+    .current-price { font-size: 36px; font-weight: 800; color: #fbbf24; }
+    .term { font-size: 16px; color: #94a3b8; }
+
+    .split-box {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+    .split-box h4 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+    .split-steps { display: grid; gap: 12px; }
+    .split-step strong { display: block; font-size: 16px; color: #fcd34d; line-height: 1.4; }
+    .split-step span { display: block; font-size: 16px; color: #cbd5e1; margin-top: 2px; line-height: 1.5; }
+
+    .deliverables-list {
+      list-style: none;
+      padding: 16px 0 0;
+      margin: 0 0 20px;
+      border-top: 1px solid #1e293b;
+    }
+    .deliverables-list li { font-size: 16px; color: #e2e8f0; margin-bottom: 14px; line-height: 1.5; }
+    .deliverables-list li strong { color: #fff; }
+
+    .card-cta { margin-top: 24px; }
+    .slots-left { display: block; font-size: 14px; color: #fcd34d; text-align: center; margin-top: 12px; line-height: 1.5; }
+
+    /* RETAINER */
+    .retainer-wrapper { margin-top: 40px; }
+    .retainer-wrapper > h3 { font-size: 22px; font-weight: 800; color: #fff; text-align: center; margin-bottom: 8px; line-height: 1.3; }
+    .retainer-wrapper > p { font-size: 16px; color: #94a3b8; text-align: center; margin-bottom: 24px; }
+    .retainer-grid { display: grid; gap: 24px; }
+    .retainer-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .retainer-card.recommended { border-color: rgba(16, 185, 129, 0.5); }
+    .tag-recommended {
+      display: inline-block;
+      background: #10b981;
+      color: #020617;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+    .retainer-card h4 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+    .retainer-price { display: flex; align-items: baseline; gap: 6px; }
+    .retainer-price .price { font-size: 32px; font-weight: 800; color: #34d399; }
+    .retainer-card:not(.recommended) .retainer-price .price { color: #fcd34d; }
+    .retainer-price .unit { font-size: 16px; color: #94a3b8; }
+    .billing-note { font-size: 16px; color: #cbd5e1; margin: 8px 0 16px; }
+    .retainer-card ul { list-style: none; padding: 16px 0 0; margin: 0; border-top: 1px solid #1e293b; }
+    .retainer-card li { font-size: 16px; color: #e2e8f0; margin-bottom: 12px; line-height: 1.5; }
+
+    /* FAQ */
+    .faq-section {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid #1e293b;
+      padding: 48px 0;
+    }
+    .faq-section h2 { font-size: 24px; font-weight: 800; color: #fff; text-align: center; margin-bottom: 24px; }
+    .faq-accordion details {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-accordion summary {
+      padding: 16px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #f1f5f9;
+      line-height: 1.5;
+      list-style: none;
+    }
+    .faq-accordion summary::-webkit-details-marker { display: none; }
+    .faq-accordion details[open] summary { border-bottom: 1px solid #1e293b; }
+    .faq-answer { padding: 16px; }
+    .faq-answer p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 12px; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+    .faq-answer ul { padding-left: 20px; margin: 0; }
+    .faq-answer li { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 10px; }
+    .faq-answer code {
+      background: #1e293b;
+      color: #fcd34d;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    /* FOOTER */
+    .footer { padding: 48px 0; text-align: center; border-top: 1px solid #1e293b; }
+    .warning-box {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 32px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fcd34d;
+      line-height: 1.5;
+    }
+    .footer .btn-viber-large { margin-bottom: 16px; }
+    .viber-number { font-size: 16px; font-weight: 600; color: #cbd5e1; margin: 0 0 4px; }
+    .disclaimer { font-size: 14px; color: #64748b; margin: 0; }
+    .custom-note { font-size: 14px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
+
+    /* LARGER SCREENS */
+    @media (min-width: 640px) {
+      body { font-size: 18px; }
+      .announcement-bar { font-size: 16px; }
+      .hero h1 { font-size: 36px; }
+      .hero-sub { font-size: 20px; }
+      .promo-badge { font-size: 18px; }
+      .pain-box { font-size: 18px; }
+      .pain-box strong { font-size: 20px; }
+      .showcase-header span:first-child { font-size: 16px; }
+      .btn-viber, .btn-viber-large { font-size: 20px; }
+      .cta-subtext, .slots-left, .muted-note { font-size: 16px; }
+      .reality h2, .how-it-works h2, .ugc-header h2, .section-title h2, .faq-section h2 { font-size: 30px; }
+      .reality > .container > p, .ugc-header p, .section-title p, .retainer-wrapper > p { font-size: 18px; }
+      .reality-item strong { font-size: 20px; }
+      .reality-item span, .step-card p, .ugc-details li, .deliverables-list li,
+      .split-step strong, .split-step span, .split-box h4, .retainer-card li, .billing-note,
+      .faq-accordion summary, .faq-answer p, .faq-answer li, .warning-box, .viber-number,
+      .term, .retainer-price .unit { font-size: 18px; }
+      .step-card h3 { font-size: 20px; }
+      .package-header h3 { font-size: 26px; }
+      .card-badge { font-size: 15px; }
+      .retainer-wrapper > h3 { font-size: 26px; }
+      .retainer-card h4 { font-size: 22px; }
+      .disclaimer, .custom-note { font-size: 16px; }
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-slate-950">
+<body>
 
-  <!-- TOP LOCATION BADGE HEADER -->
-  <div class="bg-amber-500/10 border-b border-amber-500/20 text-amber-400 px-4 py-3 text-sm sm:text-base text-center font-bold tracking-wide flex items-center justify-center gap-2">
-    <i class="fa-solid fa-location-dot text-base"></i> 📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS IN METRO MANILA
   </div>
 
   <!-- HERO SECTION -->
-  <header class="px-5 pt-10 pb-12 max-w-2xl mx-auto text-center">
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-5">
-      Gusto Mo Bang <span class="text-amber-400 underline decoration-amber-500/50">Dumami ang Benta</span> ng Stall nyo?
-    </h1>
-    <p class="text-slate-200 text-lg sm:text-xl leading-relaxed mb-8">
-      Updated Animated Menu Boards & Short Video Ads. <span class="text-white font-bold underline decoration-emerald-400">Zero Hardware Upgrade Needed</span> — gamit lang ang sarili niyong TV monitor at USB.
-    </p>
+  <header class="hero">
+    <div class="container">
+      
+      <!-- PILOT PROMO BADGE -->
+      <div class="promo-badge">
+        ⚡ <strong>FOUNDERS PILOT PROMO (OCT 17 – NOV 1):</strong> First 5 Food Stalls Only! Get ₱4,001 OFF + 3-Split Payment terms.
+      </div>
 
-    <!-- PAINFUL TRIGGER QUESTION CARD -->
-    <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-5 text-left mb-10 shadow-2xl">
-      <div class="flex items-start gap-4">
-        <i class="fa-solid fa-triangle-exclamation text-amber-400 text-2xl mt-1 shrink-0"></i>
-        <div class="text-base sm:text-lg text-slate-200 leading-relaxed">
-          <strong class="text-amber-300 block mb-1 text-lg font-bold">Tanong para sa Franchise Owner / Manager:</strong>
-          <em>"Ilang gutom na customer ang lumampas sa stall niyo araw-araw dahil di masarap tignan ang menu nyo?"</em>
+      <h1>Gusto Mo Bang <span>Dumami ang Benta</span> ng Stall nyo?</h1>
+      <p class="hero-sub">
+        Upgrade your stall’s visual impact with dynamic animated menu loops & motion graphics. 
+        <strong>Plug-and-play gamit lang ang kasalukuyang TV monitor at USB niyo.</strong>
+      </p>
+
+      <!-- PAIN QUESTION BOX -->
+      <div class="pain-box">
+        <strong>Tanong para sa Franchise Owner / Manager:</strong>
+        <em>"Ilang gutom na customer ang lumampas sa stall niyo araw-araw dahil hindi nakakatakam tignan ang menu nyo?"</em>
+      </div>
+
+      <!-- VISUAL SHOWCASE (BEFORE VS AFTER) -->
+      <div class="showcase-container">
+        <div class="showcase-header">
+          <span>Visual Upgrade Showcase</span>
+          <span>HD Output</span>
+        </div>
+
+        <div class="showcase-grid">
+          <!-- BEFORE STATIC -->
+          <div class="showcase-card before">
+            <span class="badge red">❌ DATI: Static Display / Paper Stickers</span>
+            <div class="media-wrapper">
+              <img src="/jpimperial/menu-motion/assets/static-menu.png" alt="Static Menu Board" loading="lazy">
+            </div>
+          </div>
+
+          <!-- AFTER ANIMATED -->
+          <div class="showcase-card after">
+            <span class="badge green">✨ BAGO: Live Animated Menu Board</span>
+            <div class="media-wrapper">
+              <video autoplay loop muted playsinline>
+                <source src="/jpimperial/menu-motion/assets/animated-menu.mp4" type="video/mp4">
+                Your browser does not support video playback.
+              </video>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- PRIMARY CTA -->
+      <div class="hero-cta-box">
+        <a href="https://viber.click/639178405877" class="btn-viber">
+          💬 Chat on Viber to Book Free Demo Preview
+        </a>
+        <p class="cta-subtext">Direct Viber Line: <strong>+63 917 840 5877</strong> • Zero pressure demo preview.</p>
+      </div>
+
     </div>
-
-    <!-- VERTICALLY STACKED DEMO SHOWCASE -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 text-left shadow-2xl mb-10">
-      <div class="flex justify-between items-center mb-4">
-        <span class="text-sm sm:text-base font-bold text-slate-300 tracking-wider uppercase">Visual Upgrade Showcase</span>
-        <span class="text-sm bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">HD Output</span>
-      </div>
-
-      <!-- STACKED MEDIA LAYOUT -->
-      <div class="space-y-6">
-        <!-- Static Menu (Before) -->
-        <div class="bg-slate-950 rounded-xl p-4 border border-red-500/30">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-sm font-bold text-red-400 bg-red-500/10 border border-red-500/30 px-2.5 py-1 rounded">❌ DATI: Static Display / Paper Stickers</span>
-          </div>
-          <div class="rounded-lg overflow-hidden border border-slate-800">
-            <img src="/jpimperial/menu-motion/assets/static-menu.png" alt="Static Menu Board" class="w-full h-auto object-cover rounded-lg" loading="lazy">
-          </div>
-        </div>
-
-        <!-- Animated Menu (After) -->
-        <div class="bg-slate-950 rounded-xl p-4 border border-emerald-500/40 shadow-lg">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-sm font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded">✨ BAGO: Live HD Animated Menu Board</span>
-          </div>
-          <div class="rounded-lg overflow-hidden border border-amber-500/30 bg-black">
-            <video class="w-full h-auto rounded-lg" autoplay loop muted playsinline>
-              <source src="/jpimperial/menu-motion/assets/animated-menu.mp4" type="video/mp4">
-              Your browser does not support video playback.
-            </video>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PRIMARY CTA BUTTON -->
-    <a href="viber://chat?number=%2B639178405877" class="block w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-5 px-6 rounded-2xl text-center shadow-xl transition duration-200 text-lg sm:text-xl flex items-center justify-center gap-3">
-      <i class="fa-brands fa-viber text-2xl"></i>
-      Chat on Viber for Free Demo Preview
-    </a>
-    <p class="text-sm sm:text-base text-slate-400 mt-3 font-medium">Direct Viber Line: +63 917 840 5877 • Zero pressure preview.</p>
   </header>
 
-  <!-- PROBLEM / AGITATION SECTION -->
-  <section class="bg-slate-900/80 border-y border-slate-800 px-5 py-12">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">Ang Reality sa Food Court: 15 Seconds Lang ang Desisyon ng Buyer.</h2>
-      <p class="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed">Tuwing lunch break at hapunan, mabilis maglakad ang mga customer. High-impact visuals ang humahatak ng gutom.</p>
+  <!-- THE REALITY SECTION -->
+  <section class="reality">
+    <div class="container">
+      <h2>Ang Reality sa Food Court: 3 to 7 Seconds Lang ang Desisyon ng Buyer.</h2>
+      <p>Tuwing lunch break at hapunan, mabilis maglakad ang mga customer. High-impact visuals ang humahatak ng gutom.</p>
 
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-          <i class="fa-solid fa-xmark text-red-400 text-xl mt-1 shrink-0"></i>
+      <div class="reality-grid">
+        <div class="reality-item">
+          <div class="icon">📄</div>
           <div>
-            <strong class="text-slate-100 block text-lg sm:text-xl mb-1">Bagong presyo sa papel na nakadikit sa TV screen</strong>
-            <span class="text-slate-400 text-base sm:text-lg">Mukhang hindi na-maintain at binabawasan ang tiwala ng customer sa linis at kalidad ng pagkain.</span>
+            <strong>Bagong presyo sa papel na nakadikit sa TV screen</strong>
+            <span>Mukhang hindi na-maintain at binabawasan ang tiwala ng customer sa linis at kalidad ng pagkain.</span>
           </div>
         </div>
 
-        <div class="flex items-start gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-          <i class="fa-solid fa-xmark text-red-400 text-xl mt-1 shrink-0"></i>
+        <div class="reality-item">
+          <div class="icon">🖼️</div>
           <div>
-            <strong class="text-slate-100 block text-lg sm:text-xl mb-1">Static at malabo na picture</strong>
-            <span class="text-slate-400 text-base sm:text-lg">Hindi nakakatakam; napag-iiwanan kumpara sa katabing stall na may gumagalaw na screen.</span>
+            <strong>Static at malabo na picture</strong>
+            <span>Hindi nakakatakam; napag-iiwanan kumpara sa katabing stall na may gumagalaw na screen.</span>
           </div>
         </div>
 
-        <div class="flex items-start gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
-          <i class="fa-solid fa-xmark text-red-400 text-xl mt-1 shrink-0"></i>
+        <div class="reality-item">
+          <div class="icon">💸</div>
           <div>
-            <strong class="text-slate-100 block text-lg sm:text-xl mb-1">Mahal na Digital Media Agencies</strong>
-            <span class="text-slate-400 text-base sm:text-lg">Singil agad ng ₱35,000+ sa hardware at monthly software fee para lang magpalit ng presyo.</span>
+            <strong>Mahal na Digital Media Agencies</strong>
+            <span>Singil agad ng ₱35,000+ sa hardware at monthly software fee para lang magpalit ng presyo.</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- VALUE PILLARS / HOW IT WORKS -->
-  <section class="px-5 py-12 max-w-2xl mx-auto">
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-8 text-center">Paano Ito Gumagana Sa Stall Niyo?</h2>
+  <!-- HOW IT WORKS SECTION -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2>Paano Ito Gumagana Sa Stall Niyo?</h2>
 
-    <div class="space-y-5">
-      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-        <div class="flex items-center gap-4 mb-2">
-          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-base font-extrabold shrink-0">1</div>
-          <h3 class="text-lg sm:text-xl font-bold text-white">Enhanced Food Motion</h3>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Enhanced Food Motion</h3>
+          <p>Lalagyan natin ng moving steam, sizzling animation, at popping price badges ang mga kuha ninyong ulam.</p>
         </div>
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-          Lalagyan natin ng moving steam, sizzling animation, at popping price badges ang mga kuha ninyong ulam.
-        </p>
-      </div>
 
-      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-        <div class="flex items-center gap-4 mb-2">
-          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-base font-extrabold shrink-0">2</div>
-          <h3 class="text-lg sm:text-xl font-bold text-white">100% Plug-and-Play USB</h3>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>100% Plug-and-Play USB</h3>
+          <p>Naka-saksak lang ang USB sa TV monitor niyo. Walang internet na kailangan, hindi magha-hang o mag-crash.</p>
         </div>
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-          Naka-saksak lang ang USB sa TV monitor niyo. Walang internet na kailangan, hindi magha-hang o mag-crash.
-        </p>
-      </div>
 
-      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-        <div class="flex items-center gap-4 mb-2">
-          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-base font-extrabold shrink-0">3</div>
-          <h3 class="text-lg sm:text-xl font-bold text-white">On-Site Physical USB Swap Service</h3>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>On-Site Physical USB Swap</h3>
+          <p>May bagong presyo o tinanggal na menu item? Kami ang pupunta sa stall niyo sa piling Metro Manila hubs para palitan ang USB file.</p>
         </div>
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-          May bagong presyo o tinanggal na menu item? Kami ang pupunta sa stall niyo sa piling Metro Manila commercial hubs para palitan ang USB file.
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- UGC SHORT VIDEO ADS SECTION (ADD-ON SHOWCASE) -->
-  <section class="bg-slate-900/90 border-y border-slate-800 px-5 py-12">
-    <div class="max-w-2xl mx-auto">
-      <div class="text-center mb-8">
-        <span class="text-sm font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full uppercase tracking-wider">Optional Social Media Add-On</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">UGC Short Video Ads for Social Media</h2>
-        <p class="text-base sm:text-lg text-slate-300 mt-2">Pang-TikTok, Instagram Reels, at Facebook Shorts para dagsain ng foot traffic ang stall niyo.</p>
+  <!-- UGC BONUS SECTION -->
+  <section class="ugc-section">
+    <div class="container">
+      <div class="ugc-header">
+        <span class="tag">Included Free Bonus</span>
+        <h2>10-Second UGC Reel Ad for Social Media</h2>
+        <p>Pang-TikTok, Instagram Reels, at Facebook Shorts para dagsain ng foot traffic ang stall niyo.</p>
       </div>
 
-      <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 shadow-xl">
-        <div class="rounded-xl overflow-hidden border border-amber-500/30 bg-black mb-3">
-          <video class="w-full h-auto rounded-xl" autoplay loop muted playsinline>
+      <div class="ugc-grid">
+        <div class="ugc-media">
+          <video autoplay loop muted playsinline>
             <source src="/jpimperial/menu-motion/assets/ugc-sample.mp4" type="video/mp4">
             Your browser does not support video playback.
           </video>
+          <p class="muted-note"><i>🔊</i> Video muted for preview. Request full samples on Viber.</p>
         </div>
 
-        <!-- MUTED DISCLAIMER -->
-        <p class="text-sm sm:text-base text-slate-400 mb-4 flex items-start gap-2">
-          <i class="fa-solid fa-volume-xmark text-amber-400 mt-1 shrink-0"></i>
-          <span>This video is intentionally muted. To watch more UGC samples, request access and I'll provide the link.</span>
-        </p>
-
-        <div class="text-base sm:text-lg text-slate-300 space-y-2">
-          <p class="font-semibold text-amber-300">📱 Bakit kailangan ng UGC Promo Video?</p>
-          <ul class="list-disc pl-5 space-y-1 text-slate-400">
+        <div class="ugc-details">
+          <h3>📱 Bakit Kasama 'To sa Package Mo?</h3>
+          <ul>
             <li>High-energy vertical format (9:16) na bagay sa FB/IG Reels at TikTok.</li>
             <li>Ipinapakita ang totoong preparation at sarap ng ulam niyo.</li>
             <li>Pwedeng gamiting paid local ad o i-post sa TikTok page ng stall niyo.</li>
@@ -186,79 +586,166 @@
     </div>
   </section>
 
-  <!-- TRANSPARENT PRICING MATRIX -->
-  <section class="px-5 py-12 max-w-2xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Simple, Transparent Rates</h2>
-      <p class="text-base sm:text-lg text-slate-400">Walang hidden fees. Walang nakatagong kontrata.</p>
+  <!-- PRICING & OFFER SECTION -->
+  <section class="pricing-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Simple, Transparent Rates</h2>
+        <p>Walang hidden fees. Walang nakatagong kontrata.</p>
+      </div>
+
+      <!-- MAIN STARTER PACKAGE CARD -->
+      <div class="package-card featured">
+        <div class="card-badge">FOUNDERS PILOT PROMO (OCT 17 – NOV 1) • FIRST 5 FOUNDERS ONLY</div>
+        
+        <div class="package-header">
+          <h3>Stall Authority Launchpad</h3>
+          <div class="price-box">
+            <span class="old-price">₱10,000</span>
+            <span class="current-price">₱5,999</span>
+            <span class="term">/ one-time setup</span>
+          </div>
+        </div>
+
+        <!-- 3-SPLIT PAYMENT BREAKDOWN BOX -->
+        <div class="split-box">
+          <h4>💳 Easy 3-Split Payment Plan (40% - 30% - 30%):</h4>
+          <div class="split-steps">
+            <div class="split-step">
+              <strong>Split 1 (40% Deposit): ₱2,400</strong>
+              <span>Visual Blueprint, Asset Selection & Scripting</span>
+            </div>
+            <div class="split-step">
+              <strong>Split 2 (30% Mid-point): ₱1,800</strong>
+              <span>Motion Graphics, Steam / Sizzle & SFX Production Preview</span>
+            </div>
+            <div class="split-step">
+              <strong>Split 3 (30% Deployment): ₱1,799</strong>
+              <span>On-Site Calibration & Physical USB Installation at stall</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DELIVERABLES LIST -->
+        <ul class="deliverables-list">
+          <li><strong>✨ Animated Menu Loop (Max 20 Seconds):</strong> Specially engineered for fast-paced foot traffic.</li>
+          <li><strong>🔥 Up to 4 Hero Bestseller Dish Highlights:</strong> Deep multi-layer motion graphics with steam, sizzle, dynamic lighting, and popping price badges.</li>
+          <li><strong>📋 Integrated 6-Item Menu Grid:</strong> Clean, high-contrast secondary menu layout for grouped pricing.</li>
+          <li><strong>🔊 Custom SFX Audio Enhancements:</strong> Sizzling sounds and pops to trigger appetite response.</li>
+          <li><strong>🎥 FREE BONUS: One 10-Sec UGC Reel Ad:</strong> Matching vertical video clip for TikTok, Reels, & Shorts.</li>
+          <li><strong>🛠️ On-Site Deployment & USB Installation:</strong> Direct USB installation & aspect-ratio calibration on your stall's TV monitor.</li>
+        </ul>
+
+        <div class="card-cta">
+          <a href="https://viber.click/639178405877" class="btn-viber-large">
+            Book 1-on-1 Viber Demo (Claim ₱5,999 Slot)
+          </a>
+          <span class="slots-left">⚠️ Only 5 slots available at this rate. First come, first served.</span>
+        </div>
+      </div>
+
+      <!-- RETAINER PROTECTION PLAN CARDS -->
+      <div class="retainer-wrapper">
+        <h3>Monthly Protection & Maintenance Plans</h3>
+        <p>Panatilihing updated ang presyo at bagong promos nang walang abala.</p>
+
+        <div class="retainer-grid">
+          
+          <!-- OPTION A: LOCKED-IN -->
+          <div class="retainer-card recommended">
+            <span class="tag-recommended">BEST VALUE</span>
+            <h4>Option A: Locked-in Quarterly Plan</h4>
+            <div class="retainer-price">
+              <span class="price">₱799</span>
+              <span class="unit">/ month</span>
+            </div>
+            <p class="billing-note">Billed quarterly at <strong>₱2,397.00</strong> (Save ₱600/qtr)</p>
+
+            <ul>
+              <li>✅ Unlimited price & item updates</li>
+              <li>✅ <strong>FREE On-Site Physical USB Swap</strong> in selected Metro Manila hubs</li>
+              <li>✅ <strong>Priority 24-48hr emergency replacement</strong> if USB is lost/damaged</li>
+              <li>✅ <strong>FREE Quarterly Seasonal Graphic Refresh</strong> (Holiday/Summer promos)</li>
+            </ul>
+          </div>
+
+          <!-- OPTION B: NON-LOCKED -->
+          <div class="retainer-card">
+            <h4>Option B: Non-Locked Plan</h4>
+            <div class="retainer-price">
+              <span class="price">₱999</span>
+              <span class="unit">/ month</span>
+            </div>
+            <p class="billing-note">Billed quarterly at <strong>₱2,997.00</strong></p>
+
+            <ul>
+              <li>✅ Unlimited price & item updates</li>
+              <li>❌ Digital File Send Only (On-site swap available at ₱500 per visit)</li>
+              <li>⏳ Standard queue (3-5 business days) for updates</li>
+              <li>❌ Paid add-on per seasonal graphic refresh</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
     </div>
+  </section>
 
-    <div class="space-y-6">
-      <!-- SETUP PACKAGE CARD -->
-      <div class="bg-slate-900 border border-amber-500/50 rounded-2xl p-6 relative shadow-2xl">
-        <span class="absolute -top-3.5 right-5 bg-amber-500 text-slate-950 text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider">Starter Package</span>
-        <div class="mb-5">
-          <h3 class="text-xl sm:text-2xl font-bold text-white">Plug-and-Play Motion Setup</h3>
-          <div class="flex items-baseline gap-1 mt-2">
-            <span class="text-3xl font-extrabold text-amber-400">₱2,499</span>
-            <span class="text-sm sm:text-base text-slate-400">/ one-time setup</span>
-          </div>
-        </div>
-        <ul class="text-base sm:text-lg space-y-3 text-slate-200 mb-6 border-t border-slate-800 pt-4">
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400 text-base"></i> HD Animated Loop Video (Up to 6 Dishes)</li>
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400 text-base"></i> AI Steam, Sizzle & Price Badge Enhancements</li>
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400 text-base"></i> Pre-tested directly on your TV USB drive</li>
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400 text-base"></i> 1 FREE price adjustment within first 14 days</li>
-        </ul>
-      </div>
+  <!-- COLLAPSIBLE FAQ ACCORDION SECTION -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
 
-      <!-- RETAINER CARD -->
-      <div class="bg-slate-900 border border-emerald-500/50 rounded-2xl p-6 relative shadow-2xl">
-        <span class="absolute -top-3.5 right-5 bg-emerald-500 text-slate-950 text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider">Monthly Maintenance</span>
-        <div class="mb-5">
-          <h3 class="text-xl sm:text-2xl font-bold text-white">"Menu Keep" Retainer</h3>
-          <div class="flex items-baseline gap-1 mt-2 flex-wrap">
-            <span class="text-3xl font-extrabold text-emerald-400">₱999</span>
-            <span class="text-sm sm:text-base text-slate-400">/ month (Billed Quarterly at ₱2,997)</span>
+      <div class="faq-accordion">
+        
+        <details>
+          <summary><strong>❓ Bakit 20 seconds lang ang max length ng menu loop? Di ba bitin 'yun?</strong></summary>
+          <div class="faq-answer">
+            <p><strong>Hindi bitin—scientifically proven ito for high-foot-traffic food courts.</strong></p>
+            <p>According to retail buying behavior, may 3 to 7 seconds attention span lang ang isang gutom na customer habang naglalakad sa food court. Kapag ginawa nating 60 seconds ang video, kailangan maghintay ng customer nang matagal bago makita ang ulam na gusto nila. Resulta? Lilipat na lang sila sa katabing stall.</p>
+            <p>Ang 20-second loop (4 Hero Highlights + 6 Menu Items) ang golden ratio para maglaway ang customer at mag-order agad sa counter.</p>
           </div>
-        </div>
-        <ul class="text-base sm:text-lg space-y-3 text-slate-200 mb-6 border-t border-slate-800 pt-4">
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-emerald-400 text-base"></i> Up to 2 seasonal menu or price revisions per quarter</li>
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-emerald-400 text-base"></i> On-site physical USB swap in selected Metro Manila hubs</li>
-          <li class="flex items-center gap-3"><i class="fa-solid fa-check text-emerald-400 text-base"></i> Priority support for urgent updates</li>
-        </ul>
-      </div>
+        </details>
 
-      <!-- UGC ADD-ON CARD -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative shadow-xl">
-        <span class="absolute -top-3.5 right-5 bg-slate-800 text-amber-400 border border-amber-500/30 text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider">Optional Add-On</span>
-        <div class="mb-4">
-          <h3 class="text-lg sm:text-xl font-bold text-white">UGC Short Video Ad Clip</h3>
-          <div class="flex items-baseline gap-1 mt-1">
-            <span class="text-2xl font-extrabold text-amber-300">₱1,499</span>
-            <span class="text-sm sm:text-base text-slate-400">/ per video clip</span>
+        <details>
+          <summary><strong>❓ Bakit kailangan ko ng Menu Guard Retainer kung pwede ko namang i-copy lang 'yung file sa USB?</strong></summary>
+          <div class="faq-answer">
+            <p>Mabilis mag-copy ng file, pero may operational risks kung ikaw lang ang gagawa:</p>
+            <ul>
+              <li><strong>TV Codec Errors:</strong> Maling export setting lang mula sa phone o Canva, pwedeng mag-<code>Unsupported Format</code> o mag-black screen ang TV mo sa peak lunch rush.</li>
+              <li><strong>Physical USB Loss:</strong> Sa init at gamit sa stall, na-co-corrupt ang USB. Under our retainer, pinalitan agad namin 'yan nang walang abala sa benta.</li>
+              <li><strong>Margin Protection:</strong> Tumaas ang presyo ng karne o sibuyas? Chat mo lang kami sa Viber para ma-update agad ang price badge bago ka malugi.</li>
+            </ul>
           </div>
-        </div>
-        <p class="text-base sm:text-lg text-slate-300">High-converting 10-second vertical video for FB/IG Reels & TikTok showcasing your best-selling menu items.</p>
+        </details>
+
+        <details>
+          <summary><strong>❓ Paano kung higit sa 10 items ang menu ko o marami kaming branches?</strong></summary>
+          <div class="faq-answer">
+            <p><strong>We offer Custom Setup options!</strong> Kung may multi-screen setup ka, higit sa 10 menu items, o higit sa 3 food stall branches, flexible kami. Chat ka lang direct sa Viber line namin para magawan ka namin ng custom quote na swak sa operational setup mo.</p>
+          </div>
+        </details>
+
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA / FOOTER -->
-  <footer class="px-5 py-12 max-w-2xl mx-auto text-center border-t border-slate-800">
-    <div class="bg-amber-500/10 border border-amber-500/30 p-5 rounded-2xl mb-8">
-      <p class="text-base sm:text-lg text-amber-300 font-bold">
-        ⚠️ Limited slots per commercial area to guarantee rapid physical USB swap service.
-      </p>
+  <!-- FOOTER & FINAL CTA -->
+  <footer class="footer">
+    <div class="container">
+      <div class="warning-box">
+        ⚠️ Limited to 5 slots for the Oct 17 – Nov 1 Founders Cohort to guarantee rapid physical USB swap service.
+      </div>
+
+      <a href="https://viber.click/639178405877" class="btn-viber-large">
+        💬 Chat Direct on Viber to Book Demo
+      </a>
+
+      <p class="viber-number">Direct Viber Line: +63 917 840 5877</p>
+      <p class="disclaimer">Independent Digital Visibility Consulting for Food Stall Operators.</p>
+      <p class="custom-note"><em>*Standard package covers 1 TV display setup up to 20 seconds loop duration. Custom multi-screen or multi-branch setups can be arranged upon request.</em></p>
     </div>
-
-    <a href="viber://chat?number=%2B639178405877" class="block w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-5 px-6 rounded-2xl text-center shadow-xl transition duration-200 text-lg sm:text-xl flex items-center justify-center gap-3 mb-4">
-      <i class="fa-brands fa-viber text-2xl"></i>
-      Chat Direct on Viber for Free Demo
-    </a>
-
-    <p class="text-base sm:text-lg font-semibold text-slate-300 mb-1">Direct Viber Line: +63 917 840 5877</p>
-    <p class="text-sm sm:text-base text-slate-500">Independent Digital Visibility Consulting for Food Stall Operators.</p>
   </footer>
 
 </body>
