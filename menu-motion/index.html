@@ -20,8 +20,19 @@
       -webkit-font-smoothing: antialiased;
     }
     h1, h2, h3, h4, p, ul { margin-top: 0; }
-    img, video { max-width: 100%; }
+    img, video { max-width: 100%; display: block; height: auto; }
     .container { max-width: 672px; margin: 0 auto; padding: 0 20px; }
+
+    /* LOGO HEADER */
+    .site-logo-container {
+      text-align: center;
+      padding: 24px 0 12px;
+    }
+    .site-logo {
+      max-width: 160px;
+      height: auto;
+      margin: 0 auto;
+    }
 
     /* ANNOUNCEMENT BAR */
     .announcement-bar {
@@ -36,7 +47,7 @@
     }
 
     /* HERO */
-    .hero { padding: 40px 0 48px; text-align: center; }
+    .hero { padding: 32px 0 48px; text-align: center; }
     .promo-badge {
       background: #fff5f5;
       border: 1px solid #fecaca;
@@ -193,28 +204,22 @@
     /* HOW IT WORKS */
     .how-it-works { padding: 48px 0; }
     .how-it-works h2 { font-size: 24px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 32px; line-height: 1.3; }
-    .steps-grid { display: grid; gap: 20px; }
+    .steps-grid { display: grid; gap: 24px; }
     .step-card {
-      display: grid;
-      grid-template-columns: 36px 1fr;
-      gap: 8px 16px;
-      align-items: center;
       background: #ffffff;
       padding: 20px;
       border-radius: 16px;
       border: 1px solid #cbd5e1;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    .step-num {
-      width: 36px; height: 36px;
+    .step-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 12px 0 6px; line-height: 1.3; }
+    .step-card p { font-size: 16px; color: #475569; line-height: 1.6; margin: 0; }
+    .step-img-wrapper {
       border-radius: 12px;
-      background: #fef2f2;
-      color: #dc2626;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 800;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+      background: #000;
     }
-    .step-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 0; line-height: 1.3; }
-    .step-card p { grid-column: 1 / -1; font-size: 16px; color: #475569; line-height: 1.6; margin: 0; }
 
     /* UGC */
     .ugc-section {
@@ -438,6 +443,13 @@
     📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS IN METRO MANILA
   </div>
 
+  <!-- SITE LOGO HEADER -->
+  <div class="site-logo-container">
+    <div class="container">
+      <img src="/jpimperial/menu-motion/assets/Menu Motion Food Emblem.png" alt="Menu Motion Logo" class="site-logo" loading="lazy">
+    </div>
+  </div>
+
   <!-- HERO SECTION -->
   <header class="hero">
     <div class="container">
@@ -471,7 +483,7 @@
           <div class="showcase-card before">
             <span class="badge red">❌ BEFORE: Static 2-D Menu Board</span>
             <div class="media-wrapper">
-              <img src="/jpimperial/menu-motion/assets/static-menu.png" alt="Static Menu Board" loading="lazy">
+              <img src="/jpimperial/menu-motion/assets/2-D Static Menu Board.png" alt="Static Menu Board" loading="lazy">
             </div>
           </div>
 
@@ -480,7 +492,7 @@
             <span class="badge green">✨ AFTER: Live Animated Menu Loop</span>
             <div class="media-wrapper">
               <video autoplay loop muted playsinline>
-                <source src="/jpimperial/menu-motion/assets/pork-adobo.mp4" type="video/mp4">
+                <source src="/jpimperial/menu-motion/assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
                 Your browser does not support video playback.
               </video>
             </div>
@@ -539,21 +551,30 @@
       <h2>How It Works At Your Stall</h2>
 
       <div class="steps-grid">
+        <!-- STEP 1 -->
         <div class="step-card">
-          <div class="step-num">1</div>
-          <h3>Enhanced Food Motion</h3>
+          <div class="step-img-wrapper">
+            <img src="/jpimperial/menu-motion/assets/Enhanced Food Motion Feast.png" alt="Enhanced Food Motion" loading="lazy">
+          </div>
+          <h3>1. Enhanced Food Motion</h3>
           <p>We add rising steam, sizzling action, and popping price badges to your actual bestseller dish photos.</p>
         </div>
 
+        <!-- STEP 2 -->
         <div class="step-card">
-          <div class="step-num">2</div>
-          <h3>100% Plug-and-Play USB</h3>
+          <div class="step-img-wrapper">
+            <img src="/jpimperial/menu-motion/assets/100% Plug-and-Play USB TV Menu.png" alt="100% Plug-and-Play USB" loading="lazy">
+          </div>
+          <h3>2. 100% Plug-and-Play USB</h3>
           <p>Your custom video plays directly from a USB stick plugged into your TV monitor. No internet connection required, and zero risk of crashing.</p>
         </div>
 
+        <!-- STEP 3 -->
         <div class="step-card">
-          <div class="step-num">3</div>
-          <h3>On-Site Physical USB Swap</h3>
+          <div class="step-img-wrapper">
+            <img src="/jpimperial/menu-motion/assets/On-Site USB Installation and Calibration.png" alt="On-Site USB Installation and Calibration" loading="lazy">
+          </div>
+          <h3>3. On-Site Physical USB Swap</h3>
           <p>Need a price update or menu change? We handle the physical USB swap on-site at selected Metro Manila hubs.</p>
         </div>
       </div>
