@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; }
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', Arial, sans-serif;
@@ -18,10 +18,11 @@
       font-size: 16px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
     h1, h2, h3, h4, p, ul { margin-top: 0; }
     img, video { max-width: 100%; display: block; height: auto; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; width: 100%; }
 
     /* ANNOUNCEMENT BAR */
     .announcement-bar {
@@ -51,6 +52,8 @@
       padding: 16px 20px;
       max-width: 1100px;
       margin: 0 auto;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .site-logo {
       max-width: 140px;
@@ -58,14 +61,15 @@
     }
     .nav-tabs {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       list-style: none;
       margin: 0;
       padding: 0;
+      flex-wrap: wrap;
     }
     .nav-tabs a {
       text-decoration: none;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #475569;
       transition: color 0.2s;
@@ -168,7 +172,7 @@
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
 
-    /* SECTION 2: GOOGLE SITES PREVIEW LEAD CAPTURE */
+    /* SECTION 2: STREAMLINED PREVIEW SECTION (NO FORMS, DIRECT CHANNELS) */
     .lead-section {
       background: #ffffff;
       border-top: 1px solid #cbd5e1;
@@ -178,7 +182,7 @@
       box-shadow: inset 0 2px 12px rgba(0,0,0,0.02);
     }
     .lead-box {
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
       text-align: center;
     }
@@ -211,66 +215,58 @@
       margin-bottom: 24px;
       line-height: 1.6;
     }
-    .lead-form {
+    .preview-action-card {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
       border-radius: 16px;
-      padding: 24px;
-      text-align: left;
+      padding: 28px 20px;
+      text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
+    .preview-action-card p {
+      font-size: 17px;
       color: #0f172a;
-      margin-bottom: 6px;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 16px;
-      font-family: inherit;
-      background: #ffffff;
-      color: #0f172a;
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-    .form-hint {
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 4px;
-    }
-    .btn-submit {
-      display: block;
-      width: 100%;
-      background: #047857;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 18px;
-      padding: 16px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.2s;
-      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.2);
-    }
-    .btn-submit:hover { background: #065f46; }
 
-    /* SEPARATE CHAT BUTTONS */
+    /* MULTI-CHANNEL BUTTON GRID */
+    .multi-channel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .multi-channel-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .btn-channel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-channel:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-viber { background: #7360f2; color: #ffffff; }
+    .btn-whatsapp { background: #25d366; color: #ffffff; }
+    .btn-email { background: #0f172a; color: #ffffff; }
+
+    /* SEPARATE CHAT BUTTONS (HERO) */
     .chat-buttons-container {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 12px;
       margin-top: 24px;
     }
     @media (min-width: 640px) {
@@ -278,24 +274,6 @@
         grid-template-columns: 1fr 1fr;
       }
     }
-    .btn-viber, .btn-whatsapp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: opacity 0.2s;
-    }
-    .btn-viber { background: #7360f2; color: #ffffff; }
-    .btn-viber:hover { opacity: 0.9; }
-    .btn-whatsapp { background: #25d366; color: #ffffff; }
-    .btn-whatsapp:hover { opacity: 0.9; }
 
     /* REALITY SECTION (VISUAL 3-SECOND RULE CARDS) */
     .reality {
@@ -637,7 +615,7 @@
     📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS IN METRO MANILA
   </div>
 
-  <!-- SITE HEADER WITH DESKTOP TABS -->
+  <!-- SITE HEADER WITH RESPONSIVE NAVIGATION -->
   <header class="site-header">
     <div class="header-container">
       <img src="/jpimperial/menu-motion/assets/Menu Motion Food Emblem.png" alt="Menu Motion Logo" class="site-logo" loading="lazy">
@@ -661,8 +639,8 @@
         <div>
           <h1>Turn Passersby into Buyers With <span>Dynamic Animated Menu Loops</span></h1>
           <p class="hero-sub">
-            Upgrade your stall's visual impact with multi-layer motion graphics. 
-            <strong>Plug-and-play using your existing TV monitor and a standard USB drive.</strong> No internet connection required.
+            Make your stall impossible to walk past. Upgrade your static TV screen into a high-converting motion menu in 24 hours. 
+            <strong>Plug-and-play using your existing TV monitor and a standard USB drive.</strong> No internet connection required. Zero tech skills needed.
           </p>
 
           <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
@@ -670,13 +648,13 @@
             <em style="color: #475569; font-size: 15px;">"How many hungry customers walk past your stall every day because static printed menus fail to capture their attention?"</em>
           </div>
 
-          <!-- SEPARATE CHAT BUTTONS WITH PRE-CONFIGURED MESSAGES -->
+          <!-- DUAL CHANNEL CHAT BUTTONS -->
           <div class="chat-buttons-container">
-            <a href="https://viber.click/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-viber" target="_blank">
-              💬 Chat on Viber (Pre-filled Text)
+            <a href="https://viber.click/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-channel btn-viber" target="_blank">
+              💬 Chat on Viber
             </a>
-            <a href="https://wa.me/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-whatsapp" target="_blank">
-              🟢 Chat on WhatsApp (Pre-filled Text)
+            <a href="https://wa.me/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-channel btn-whatsapp" target="_blank">
+              🟢 Chat on WhatsApp
             </a>
           </div>
         </div>
@@ -716,41 +694,31 @@
     </div>
   </header>
 
-  <!-- SECTION 2: INTERACTIVE PARTICIPATIVE CTA (GOOGLE SITES PREVIEW LEAD CAPTURE) -->
+  <!-- SECTION 2: STREAMLINED PREVIEW SECTION (NO FORMS, DIRECT CHANNELS) -->
   <section id="preview" class="lead-section">
     <div class="container">
       <div class="lead-box">
         <span class="zero-obl">Zero Obligation • 100% Free</span>
-        <h2>GET A FREE CUSTOM GOOGLE SITES PREVIEW</h2>
+        <h2>SEE YOUR BESTSELLER IN MOTION</h2>
         <p>
-          Want to see what your bestseller dish looks like in motion? Upload your menu or food photo below. 
-          We will custom-build your menu preview and send a personalized Google Sites link directly to your phone or laptop.
+          Want to see what your #1 bestseller dish looks like with professional motion graphics, steam, and sizzling sound effects before spending a single peso? 
+          No forms to fill out. Just snap a quick photo of your bestseller dish on your phone and send it directly to our team.
         </p>
 
-        <form class="lead-form" action="https://formspree.io/f/your-form-id" method="POST" enctype="multipart/form-data">
-          
-          <div class="form-group">
-            <label for="phone">Mobile Number / Viber / WhatsApp ID *</label>
-            <input type="text" id="phone" name="phone" placeholder="e.g. +63 917 123 4567" required>
-            <div class="form-hint">Primary channel where we will send your custom Google Sites preview link.</div>
+        <div class="preview-action-card">
+          <p>Choose your preferred channel to send your dish photo:</p>
+          <div class="multi-channel-grid">
+            <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20see%20my%20bestseller%20in%20motion.%20Here%20is%20my%20dish%20photo!" class="btn-channel btn-viber" target="_blank">
+              💬 Viber
+            </a>
+            <a href="https://wa.me/639178405877?text=Hi!%20I%20want%20to%20see%20my%20bestseller%20in%20motion.%20Here%20is%20my%20dish%20photo!" class="btn-channel btn-whatsapp" target="_blank">
+              🟢 WhatsApp
+            </a>
+            <a href="mailto:jpbimperial71675@gmail.com?subject=Menu%20Motion%20-%20Free%20Preview%20Request&body=Hi!%20I%20want%20to%20see%20my%20bestseller%20in%20motion.%20Attached%20is%20my%20dish%20photo!" class="btn-channel btn-email" target="_blank">
+              ✉️ Email
+            </a>
           </div>
-
-          <div class="form-group">
-            <label for="email">Email Address (Optional)</label>
-            <input type="email" id="email" name="email" placeholder="e.g. manager@foodstall.com">
-            <div class="form-hint">For non-mobile users or desktop review.</div>
-          </div>
-
-          <div class="form-group">
-            <label for="menu_file">Upload Bestseller Dish Photo or Current Menu *</label>
-            <input type="file" id="menu_file" name="menu_file" required style="padding: 10px; background: #fff;">
-            <div class="form-hint">Accepted formats: JPG, PNG, PDF.</div>
-          </div>
-
-          <button type="submit" class="btn-submit">
-            🚀 GET MY PERSONALIZED GOOGLE SITES PREVIEW
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -924,21 +892,31 @@
           <li><strong>🛠️ On-Site Deployment & USB Installation:</strong> Direct USB installation & aspect-ratio calibration on your stall's TV monitor.</li>
         </ul>
 
+        <!-- MULTI-CHANNEL BOOKING CTAS -->
         <div class="card-cta">
-          <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-contact-large" target="_blank">
-            Book 1-on-1 Demo (Claim Founders Rate)
-          </a>
+          <p style="font-weight: 700; color: #0f172a; margin-bottom: 12px;">Choose your preferred channel to claim your Founders Rate:</p>
+          <div class="multi-channel-grid">
+            <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-viber" target="_blank">
+              💬 Viber
+            </a>
+            <a href="https://wa.me/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-whatsapp" target="_blank">
+              🟢 WhatsApp
+            </a>
+            <a href="mailto:jpbimperial71675@gmail.com?subject=Claiming%20Founders%20Rate%20-%20Menu%20Motion&body=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-email" target="_blank">
+              ✉️ Email
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- RETAINER PROTECTION PLAN CARDS -->
+      <!-- RETAINER PLANS -->
       <div class="retainer-wrapper">
         <h3>Monthly Protection & Maintenance Plans</h3>
         <p>Keep your pricing and seasonal promotions updated without operational friction.</p>
 
         <div class="retainer-grid">
           
-          <!-- OPTION A: LOCKED-IN -->
+          <!-- OPTION A -->
           <div class="retainer-card recommended">
             <span class="tag-recommended">BEST VALUE</span>
             <h4>Option A: Locked-in Quarterly Plan</h4>
@@ -947,7 +925,6 @@
               <span class="unit">/ month</span>
             </div>
             <p class="billing-note">Billed quarterly at <strong>₱2,397.00</strong> (Save ₱600/qtr)</p>
-
             <ul>
               <li>✅ Unlimited price & item updates</li>
               <li>✅ <strong>FREE On-Site Physical USB Swap</strong> in selected Metro Manila hubs</li>
@@ -956,7 +933,7 @@
             </ul>
           </div>
 
-          <!-- OPTION B: NON-LOCKED -->
+          <!-- OPTION B -->
           <div class="retainer-card">
             <h4>Option B: Non-Locked Plan</h4>
             <div class="retainer-price">
@@ -964,7 +941,6 @@
               <span class="unit">/ month</span>
             </div>
             <p class="billing-note">Billed quarterly at <strong>₱2,997.00</strong></p>
-
             <ul>
               <li>✅ Unlimited price & item updates</li>
               <li>❌ Digital File Send Only (On-site swap available at ₱500 per visit)</li>
@@ -979,7 +955,7 @@
     </div>
   </section>
 
-  <!-- COLLAPSIBLE FAQ ACCORDION SECTION -->
+  <!-- FAQ SECTION -->
   <section class="faq-section">
     <div class="container">
       <h2>Frequently Asked Questions</h2>
@@ -987,7 +963,7 @@
       <div class="faq-accordion">
         
         <details>
-          <summary><strong>❓ Why is the menu loop capped at 20 seconds? Isn't that too short?</strong></summary>
+          <summary>❓ Why is the menu loop capped at 20 seconds? Isn't that too short?</summary>
           <div class="faq-answer">
             <p><strong>It is not too short—it is scientifically proven for high-foot-traffic food courts.</strong></p>
             <p>According to retail buying behavior, hungry customers walking past a food stall have an attention span of only 3 to 7 seconds. If a video runs for 60 seconds, customers have to wait too long to see what they want, causing them to walk away to a neighboring stall.</p>
@@ -996,19 +972,19 @@
         </details>
 
         <details>
-          <summary><strong>❓ Why do I need a Menu Guard Retainer if I can just copy the file to a USB myself?</strong></summary>
+          <summary>❓ Why do I need a Menu Guard Retainer if I can just copy the file to a USB myself?</summary>
           <div class="faq-answer">
             <p>Copying a file sounds simple, but managing it yourself introduces severe operational risks:</p>
             <ul>
               <li><strong>TV Codec Errors:</strong> A minor wrong export setting from a phone or editing tool can trigger an <code>Unsupported Format</code> warning or black screen on your TV right during peak lunch rush.</li>
               <li><strong>Physical USB Loss:</strong> Due to continuous heat and operation in food stalls, USB drives corrupt. Under our retainer, we replace them immediately with zero business disruption.</li>
-              <li><strong>Margin Protection:</strong> Meat or ingredient prices change? Simply message us on Viber or WhatsApp to update your price badges before profit margins are squeezed.</li>
+              <li><strong>Margin Protection:</strong> Meat or ingredient prices change? Simply message us to update your price badges before profit margins are squeezed.</li>
             </ul>
           </div>
         </details>
 
         <details>
-          <summary><strong>❓ What if my menu has more than 10 items or I operate multiple branches?</strong></summary>
+          <summary>❓ What if my menu has more than 10 items or I operate multiple branches?</summary>
           <div class="faq-answer">
             <p><strong>We offer Custom Setup options!</strong> If you run a multi-screen display setup, feature more than 10 menu items, or operate across multiple food stall branches, we provide flexible arrangements. Simply message our direct messaging lines for a customized quote tailored to your exact setup.</p>
           </div>
@@ -1018,16 +994,28 @@
     </div>
   </section>
 
-  <!-- FOOTER & FINAL CTA -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-content">
-      <a href="https://viber.click/639178405877?text=Hi!%2520I%2520want%2520to%2520book%2520a%2520demo%2520for%2520my%2520food%2520stall." class="btn-contact-large" target="_blank">
-        💬 Chat Direct on Viber & WhatsApp to Book Demo
-      </a>
+    <div class="container">
+      <div class="footer-content">
+        
+        <p style="font-weight: 700; color: #0f172a; margin-bottom: 14px;">Ready to upgrade your stall? Connect with us directly:</p>
+        <div class="multi-channel-grid" style="margin-bottom: 24px;">
+          <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-viber" target="_blank">
+            💬 Viber
+          </a>
+          <a href="https://wa.me/639178405877?text=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-whatsapp" target="_blank">
+            🟢 WhatsApp
+          </a>
+          <a href="mailto:jpbimperial71675@gmail.com?subject=Book%20Demo%20-%20Menu%20Motion&body=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-email" target="_blank">
+            ✉️ Email
+          </a>
+        </div>
 
-      <p class="contact-info">Direct Viber & WhatsApp Line: +63 917 840 5877</p>
-      <p class="disclaimer">Independent Digital Visibility Consulting for Food Stall Operators.</p>
-      <p class="custom-note"><em>*Standard package covers 1 TV display setup up to 20 seconds loop duration. Custom multi-screen or multi-branch setups can be arranged upon request.</em></p>
+        <p class="contact-info">Direct Messaging Lines: +63 917 840 5877</p>
+        <p class="disclaimer">Independent Digital Visibility Consulting for Food Stall Operators.</p>
+        <p class="custom-note"><em>*Standard package covers 1 TV display setup up to 20 seconds loop duration. Custom multi-screen or multi-branch setups can be arranged upon request.</em></p>
+      </div>
     </div>
   </footer>
 
