@@ -13,8 +13,8 @@
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-      background: #f8fafc;
-      color: #334155;
+      background: #fcfbfa; /* Warm culinary cream tone to reduce glare */
+      color: #1e1b18; /* Rich charcoal espresso text */
       font-size: 16px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
@@ -36,7 +36,7 @@
       letter-spacing: 0.02em;
     }
 
-    /* HEADER & DESKTOP NAVIGATION */
+    /* HEADER & RESPONSIVE NAVIGATION (FIXED MOBILE LOGO CENTERING) */
     .site-header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -55,6 +55,15 @@
       flex-wrap: wrap;
       gap: 12px;
     }
+    @media (max-width: 767px) {
+      .header-container {
+        justify-content: center;
+        text-align: center;
+      }
+      .site-logo {
+        margin: 0 auto 4px auto;
+      }
+    }
     .site-logo {
       max-width: 140px;
       height: auto;
@@ -66,6 +75,7 @@
       margin: 0;
       padding: 0;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .nav-tabs a {
       text-decoration: none;
@@ -78,7 +88,7 @@
       color: #dc2626;
     }
 
-    /* HERO SECTION - RESPONSIVE GRID */
+    /* HERO SECTION */
     .hero { padding: 48px 0; }
     .hero-grid {
       display: grid;
@@ -96,7 +106,7 @@
       font-size: 32px;
       font-weight: 800;
       line-height: 1.2;
-      color: #0f172a;
+      color: #1e1b18;
       margin-bottom: 16px;
     }
     .hero h1 span {
@@ -110,7 +120,7 @@
       color: #475569;
       margin-bottom: 24px;
     }
-    .hero-sub strong { color: #0f172a; }
+    .hero-sub strong { color: #1e1b18; }
 
     /* SHOWCASE */
     .showcase-container {
@@ -146,7 +156,7 @@
     }
     .showcase-grid-inner { display: grid; gap: 16px; }
     .showcase-card {
-      background: #f8fafc;
+      background: #fcfbfa;
       border-radius: 12px;
       padding: 12px;
       border: 1px solid #e2e8f0;
@@ -172,7 +182,7 @@
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
 
-    /* SECTION 2: STREAMLINED PREVIEW SECTION (NO FORMS, DIRECT CHANNELS) */
+    /* SECTION 2: STREAMLINED PREVIEW SECTION */
     .lead-section {
       background: #ffffff;
       border-top: 1px solid #cbd5e1;
@@ -189,12 +199,9 @@
     .lead-box h2 {
       font-size: 26px;
       font-weight: 800;
-      color: #0f172a;
+      color: #1e1b18;
       margin-bottom: 12px;
       line-height: 1.3;
-    }
-    .lead-box h2 span {
-      color: #dc2626;
     }
     .lead-box .zero-obl {
       display: inline-block;
@@ -216,7 +223,7 @@
       line-height: 1.6;
     }
     .preview-action-card {
-      background: #f8fafc;
+      background: #fcfbfa;
       border: 1px solid #cbd5e1;
       border-radius: 16px;
       padding: 28px 20px;
@@ -225,7 +232,7 @@
     }
     .preview-action-card p {
       font-size: 17px;
-      color: #0f172a;
+      color: #1e1b18;
       font-weight: 600;
       margin-bottom: 20px;
     }
@@ -260,9 +267,9 @@
     .btn-channel:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-viber { background: #7360f2; color: #ffffff; }
     .btn-whatsapp { background: #25d366; color: #ffffff; }
-    .btn-email { background: #0f172a; color: #ffffff; }
+    .btn-email { background: #1e1b18; color: #ffffff; }
 
-    /* SEPARATE CHAT BUTTONS (HERO) */
+    /* DUAL CHAT BUTTON GRID (HERO) */
     .chat-buttons-container {
       display: grid;
       grid-template-columns: 1fr;
@@ -275,14 +282,14 @@
       }
     }
 
-    /* REALITY SECTION (VISUAL 3-SECOND RULE CARDS) */
+    /* REALITY SECTION */
     .reality {
-      background: #ffffff;
+      background: #fcfbfa;
       border-top: 1px solid #e2e8f0;
       border-bottom: 1px solid #e2e8f0;
       padding: 48px 0;
     }
-    .reality h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 12px; line-height: 1.3; text-align: center; }
+    .reality h2 { font-size: 24px; font-weight: 800; color: #1e1b18; margin-bottom: 12px; line-height: 1.3; text-align: center; }
     .reality > .container > p { font-size: 16px; color: #475569; margin-bottom: 32px; line-height: 1.6; text-align: center; }
     .reality-grid {
       display: grid;
@@ -295,7 +302,7 @@
       }
     }
     .reality-card {
-      background: #f8fafc;
+      background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 16px;
       overflow: hidden;
@@ -320,7 +327,7 @@
     .reality-card-content strong {
       display: block;
       font-size: 17px;
-      color: #0f172a;
+      color: #1e1b18;
       margin-bottom: 8px;
       line-height: 1.4;
     }
@@ -333,7 +340,7 @@
 
     /* HOW IT WORKS */
     .how-it-works { padding: 48px 0; }
-    .how-it-works h2 { font-size: 24px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 32px; line-height: 1.3; }
+    .how-it-works h2 { font-size: 24px; font-weight: 800; color: #1e1b18; text-align: center; margin-bottom: 32px; line-height: 1.3; }
     .steps-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -351,7 +358,7 @@
       border: 1px solid #cbd5e1;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    .step-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 12px 0 6px; line-height: 1.3; }
+    .step-card h3 { font-size: 18px; font-weight: 700; color: #1e1b18; margin: 12px 0 6px; line-height: 1.3; }
     .step-card p { font-size: 15px; color: #475569; line-height: 1.6; margin: 0; }
     .step-img-wrapper {
       border-radius: 12px;
@@ -381,7 +388,7 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .ugc-header h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin: 12px 0 8px; line-height: 1.3; }
+    .ugc-header h2 { font-size: 24px; font-weight: 800; color: #1e1b18; margin: 12px 0 8px; line-height: 1.3; }
     .ugc-header p { font-size: 16px; color: #475569; margin: 0; line-height: 1.6; }
     .ugc-grid {
       display: grid;
@@ -395,7 +402,7 @@
       }
     }
     .ugc-media, .ugc-details {
-      background: #f8fafc;
+      background: #fcfbfa;
       padding: 20px;
       border-radius: 16px;
       border: 1px solid #e2e8f0;
@@ -410,14 +417,14 @@
       border: 1px solid #cbd5e1;
     }
     .muted-note { font-size: 13px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
-    .ugc-details h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+    .ugc-details h3 { font-size: 18px; font-weight: 700; color: #1e1b18; margin-bottom: 12px; }
     .ugc-details ul { padding-left: 20px; margin: 0; }
     .ugc-details li { font-size: 15px; color: #475569; margin-bottom: 8px; line-height: 1.5; }
 
     /* PRICING */
     .pricing-section { padding: 48px 0; }
     .section-title { text-align: center; margin-bottom: 40px; }
-    .section-title h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .section-title h2 { font-size: 24px; font-weight: 800; color: #1e1b18; margin-bottom: 8px; }
     .section-title p { font-size: 16px; color: #64748b; margin: 0; }
     .package-card {
       background: #ffffff;
@@ -442,7 +449,7 @@
       margin-bottom: 20px;
       display: inline-block;
     }
-    .package-header h3 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .package-header h3 { font-size: 24px; font-weight: 700; color: #1e1b18; margin-bottom: 8px; line-height: 1.3; }
     .price-box { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .old-price { font-size: 18px; color: #94a3b8; text-decoration: line-through; }
     .current-price { font-size: 34px; font-weight: 800; color: #dc2626; }
@@ -466,13 +473,13 @@
     }
 
     .split-box {
-      background: #f8fafc;
+      background: #fcfbfa;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 16px;
       margin: 20px 0;
     }
-    .split-box h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
+    .split-box h4 { font-size: 15px; font-weight: 700; color: #1e1b18; margin-bottom: 12px; line-height: 1.4; }
     .split-steps { display: grid; gap: 12px; }
     @media (min-width: 640px) {
       .split-steps { grid-template-columns: repeat(3, 1fr); }
@@ -487,32 +494,13 @@
       border-top: 1px solid #e2e8f0;
     }
     .deliverables-list li { font-size: 15px; color: #475569; margin-bottom: 12px; line-height: 1.5; }
-    .deliverables-list li strong { color: #0f172a; }
+    .deliverables-list li strong { color: #1e1b18; }
 
     .card-cta { margin-top: 24px; text-align: center; }
-    .btn-contact-large {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      background: #dc2626;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 18px;
-      line-height: 1.3;
-      text-align: center;
-      text-decoration: none;
-      padding: 18px 24px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.2);
-      transition: background 0.2s;
-    }
-    .btn-contact-large:hover { background: #b91c1c; }
 
     /* RETAINER */
     .retainer-wrapper { margin-top: 48px; max-width: 800px; margin-left: auto; margin-right: auto; }
-    .retainer-wrapper > h3 { font-size: 22px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 8px; line-height: 1.3; }
+    .retainer-wrapper > h3 { font-size: 22px; font-weight: 800; color: #1e1b18; text-align: center; margin-bottom: 8px; line-height: 1.3; }
     .retainer-wrapper > p { font-size: 16px; color: #64748b; text-align: center; margin-bottom: 24px; }
     .retainer-grid {
       display: grid;
@@ -542,10 +530,10 @@
       margin-bottom: 12px;
       letter-spacing: 0.05em;
     }
-    .retainer-card h4 { font-size: 19px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .retainer-card h4 { font-size: 19px; font-weight: 700; color: #1e1b18; margin-bottom: 8px; line-height: 1.3; }
     .retainer-price { display: flex; align-items: baseline; gap: 6px; }
     .retainer-price .price { font-size: 30px; font-weight: 800; color: #047857; }
-    .retainer-card:not(.recommended) .retainer-price .price { color: #0f172a; }
+    .retainer-card:not(.recommended) .retainer-price .price { color: #1e1b18; }
     .retainer-price .unit { font-size: 15px; color: #64748b; }
     .billing-note { font-size: 15px; color: #475569; margin: 8px 0 16px; }
     .retainer-card ul { list-style: none; padding: 16px 0 0; margin: 0; border-top: 1px solid #e2e8f0; }
@@ -557,10 +545,10 @@
       border-top: 1px solid #e2e8f0;
       padding: 48px 0;
     }
-    .faq-section h2 { font-size: 24px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 24px; }
+    .faq-section h2 { font-size: 24px; font-weight: 800; color: #1e1b18; text-align: center; margin-bottom: 24px; }
     .faq-accordion { max-width: 800px; margin: 0 auto; }
     .faq-accordion details {
-      background: #f8fafc;
+      background: #fcfbfa;
       border: 1px solid #cbd5e1;
       border-radius: 12px;
       margin-bottom: 12px;
@@ -570,7 +558,7 @@
       padding: 16px;
       cursor: pointer;
       font-size: 16px;
-      color: #0f172a;
+      color: #1e1b18;
       line-height: 1.5;
       list-style: none;
       font-weight: 700;
@@ -591,9 +579,8 @@
     }
 
     /* FOOTER */
-    .footer { padding: 48px 0; text-align: center; border-top: 1px solid #e2e8f0; background: #f8fafc; }
+    .footer { padding: 48px 0; text-align: center; border-top: 1px solid #e2e8f0; background: #fcfbfa; }
     .footer-content { max-width: 700px; margin: 0 auto; }
-    .footer .btn-contact-large { margin-bottom: 16px; }
     .contact-info { font-size: 16px; font-weight: 600; color: #475569; margin: 0 0 4px; }
     .disclaimer { font-size: 14px; color: #64748b; margin: 0; }
     .custom-note { font-size: 13px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
@@ -615,7 +602,7 @@
     📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS IN METRO MANILA
   </div>
 
-  <!-- SITE HEADER WITH RESPONSIVE NAVIGATION -->
+  <!-- SITE HEADER WITH CENTERED MOBILE LOGO -->
   <header class="site-header">
     <div class="header-container">
       <img src="/jpimperial/menu-motion/assets/Menu Motion Food Emblem.png" alt="Menu Motion Logo" class="site-logo" loading="lazy">
@@ -648,7 +635,7 @@
             <em style="color: #475569; font-size: 15px;">"How many hungry customers walk past your stall every day because static printed menus fail to capture their attention?"</em>
           </div>
 
-          <!-- DUAL CHANNEL CHAT BUTTONS -->
+          <!-- HERO DUAL CHAT BUTTONS (VIBER & WHATSAPP) -->
           <div class="chat-buttons-container">
             <a href="https://viber.click/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-channel btn-viber" target="_blank">
               💬 Chat on Viber
@@ -694,7 +681,7 @@
     </div>
   </header>
 
-  <!-- SECTION 2: STREAMLINED PREVIEW SECTION (NO FORMS, DIRECT CHANNELS) -->
+  <!-- SECTION 2: STREAMLINED PREVIEW SECTION (ALL 3 CHANNELS) -->
   <section id="preview" class="lead-section">
     <div class="container">
       <div class="lead-box">
@@ -723,7 +710,7 @@
     </div>
   </section>
 
-  <!-- THE REALITY SECTION (VISUAL 3-SECOND RULE CARDS) -->
+  <!-- THE REALITY SECTION -->
   <section id="why-motion" class="reality">
     <div class="container">
       <h2>The 3-Second Rule: Why Static Menus Cost You Daily Sales.</h2>
@@ -894,7 +881,7 @@
 
         <!-- MULTI-CHANNEL BOOKING CTAS -->
         <div class="card-cta">
-          <p style="font-weight: 700; color: #0f172a; margin-bottom: 12px;">Choose your preferred channel to claim your Founders Rate:</p>
+          <p style="font-weight: 700; color: #1e1b18; margin-bottom: 12px;">Choose your preferred channel to claim your Founders Rate:</p>
           <div class="multi-channel-grid">
             <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-viber" target="_blank">
               💬 Viber
@@ -999,7 +986,7 @@
     <div class="container">
       <div class="footer-content">
         
-        <p style="font-weight: 700; color: #0f172a; margin-bottom: 14px;">Ready to upgrade your stall? Connect with us directly:</p>
+        <p style="font-weight: 700; color: #1e1b18; margin-bottom: 14px;">Ready to upgrade your stall? Connect with us directly:</p>
         <div class="multi-channel-grid" style="margin-bottom: 24px;">
           <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-viber" target="_blank">
             💬 Viber
