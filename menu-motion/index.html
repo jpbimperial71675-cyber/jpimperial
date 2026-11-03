@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', Arial, sans-serif;
@@ -21,18 +21,7 @@
     }
     h1, h2, h3, h4, p, ul { margin-top: 0; }
     img, video { max-width: 100%; display: block; height: auto; }
-    .container { max-width: 672px; margin: 0 auto; padding: 0 20px; }
-
-    /* LOGO HEADER */
-    .site-logo-container {
-      text-align: center;
-      padding: 24px 0 12px;
-    }
-    .site-logo {
-      max-width: 160px;
-      height: auto;
-      margin: 0 auto;
-    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
     /* ANNOUNCEMENT BAR */
     .announcement-bar {
@@ -46,14 +35,65 @@
       letter-spacing: 0.02em;
     }
 
-    /* HERO */
-    .hero { padding: 32px 0 48px; text-align: center; }
+    /* HEADER & DESKTOP NAVIGATION */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .site-logo {
+      max-width: 140px;
+      height: auto;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-tabs a {
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: #475569;
+      transition: color 0.2s;
+    }
+    .nav-tabs a:hover {
+      color: #dc2626;
+    }
+
+    /* HERO SECTION - RESPONSIVE GRID */
+    .hero { padding: 48px 0; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (min-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 48px;
+      }
+    }
     .hero h1 {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 800;
       line-height: 1.2;
       color: #0f172a;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .hero h1 span {
       color: #dc2626;
@@ -64,23 +104,9 @@
       font-size: 18px;
       line-height: 1.6;
       color: #475569;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
     .hero-sub strong { color: #0f172a; }
-
-    .pain-box {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: left;
-      margin-bottom: 40px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #475569;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    }
-    .pain-box strong { display: block; color: #dc2626; font-size: 18px; margin-bottom: 6px; }
 
     /* SHOWCASE */
     .showcase-container {
@@ -88,8 +114,6 @@
       border: 1px solid #cbd5e1;
       border-radius: 16px;
       padding: 20px;
-      text-align: left;
-      margin-bottom: 40px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     }
     .showcase-header {
@@ -100,38 +124,38 @@
       margin-bottom: 16px;
     }
     .showcase-header span:first-child {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #475569;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
     .showcase-header span:last-child {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #047857;
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
       border-radius: 999px;
-      padding: 4px 12px;
+      padding: 2px 10px;
       white-space: nowrap;
     }
-    .showcase-grid { display: grid; gap: 24px; }
+    .showcase-grid-inner { display: grid; gap: 16px; }
     .showcase-card {
       background: #f8fafc;
       border-radius: 12px;
-      padding: 16px;
+      padding: 12px;
       border: 1px solid #e2e8f0;
     }
     .showcase-card.before { border-color: #fca5a5; }
     .showcase-card.after { border-color: #6ee7b7; }
     .badge {
       display: inline-block;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       line-height: 1.4;
     }
     .badge.red { color: #dc2626; background: #fef2f2; border: 1px solid #fecaca; }
@@ -144,56 +168,204 @@
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
 
-    /* BUTTONS */
-    .btn-contact, .btn-contact-large {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+    /* SECTION 2: GOOGLE SITES PREVIEW LEAD CAPTURE */
+    .lead-section {
+      background: #ffffff;
+      border-top: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 56px 0;
+      margin: 40px 0;
+      box-shadow: inset 0 2px 12px rgba(0,0,0,0.02);
+    }
+    .lead-box {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .lead-box h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .lead-box h2 span {
+      color: #dc2626;
+    }
+    .lead-box .zero-obl {
+      display: inline-block;
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .lead-box p {
+      font-size: 16px;
+      color: #475569;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .lead-form {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea {
       width: 100%;
-      background: #dc2626;
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      background: #ffffff;
+      color: #0f172a;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+    .form-hint {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+    .btn-submit {
+      display: block;
+      width: 100%;
+      background: #047857;
       color: #ffffff;
       font-weight: 800;
       font-size: 18px;
-      line-height: 1.3;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
       text-align: center;
-      text-decoration: none;
-      padding: 20px 24px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.2);
       transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.2);
     }
-    .btn-contact:hover, .btn-contact-large:hover { background: #b91c1c; }
-    .cta-subtext { font-size: 14px; color: #64748b; margin: 12px 0 0; font-weight: 600; text-align: center; }
-    .cta-subtext strong { color: #334155; }
+    .btn-submit:hover { background: #065f46; }
 
-    /* REALITY */
+    /* SEPARATE CHAT BUTTONS */
+    .chat-buttons-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (min-width: 640px) {
+      .chat-buttons-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .btn-viber, .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: opacity 0.2s;
+    }
+    .btn-viber { background: #7360f2; color: #ffffff; }
+    .btn-viber:hover { opacity: 0.9; }
+    .btn-whatsapp { background: #25d366; color: #ffffff; }
+    .btn-whatsapp:hover { opacity: 0.9; }
+
+    /* REALITY SECTION (VISUAL 3-SECOND RULE CARDS) */
     .reality {
       background: #ffffff;
       border-top: 1px solid #e2e8f0;
       border-bottom: 1px solid #e2e8f0;
       padding: 48px 0;
     }
-    .reality h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 12px; line-height: 1.3; }
-    .reality > .container > p { font-size: 16px; color: #475569; margin-bottom: 32px; line-height: 1.6; }
-    .reality-grid { display: grid; gap: 16px; }
-    .reality-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: #f8fafc;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
+    .reality h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 12px; line-height: 1.3; text-align: center; }
+    .reality > .container > p { font-size: 16px; color: #475569; margin-bottom: 32px; line-height: 1.6; text-align: center; }
+    .reality-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
-    .reality-item .icon { font-size: 24px; line-height: 1.2; flex-shrink: 0; }
-    .reality-item strong { display: block; font-size: 18px; color: #0f172a; margin-bottom: 4px; line-height: 1.4; }
-    .reality-item span { display: block; font-size: 16px; color: #64748b; line-height: 1.5; }
+    @media (min-width: 768px) {
+      .reality-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .reality-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .reality-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #cbd5e1;
+      background: #e2e8f0;
+    }
+    .reality-card-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .reality-card-content strong {
+      display: block;
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .reality-card-content span {
+      display: block;
+      font-size: 15px;
+      color: #64748b;
+      line-height: 1.5;
+    }
 
     /* HOW IT WORKS */
     .how-it-works { padding: 48px 0; }
     .how-it-works h2 { font-size: 24px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 32px; line-height: 1.3; }
-    .steps-grid { display: grid; gap: 24px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
     .step-card {
       background: #ffffff;
       padding: 20px;
@@ -202,13 +374,15 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
     .step-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 12px 0 6px; line-height: 1.3; }
-    .step-card p { font-size: 16px; color: #475569; line-height: 1.6; margin: 0; }
+    .step-card p { font-size: 15px; color: #475569; line-height: 1.6; margin: 0; }
     .step-img-wrapper {
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #cbd5e1;
       background: #000;
+      height: 160px;
     }
+    .step-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
     /* UGC */
     .ugc-section {
@@ -220,7 +394,7 @@
     .ugc-header { text-align: center; margin-bottom: 32px; }
     .ugc-header .tag {
       display: inline-block;
-      font-size: 14px; font-weight: 700;
+      font-size: 13px; font-weight: 700;
       color: #dc2626;
       background: #fef2f2;
       border: 1px solid #fecaca;
@@ -231,7 +405,17 @@
     }
     .ugc-header h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin: 12px 0 8px; line-height: 1.3; }
     .ugc-header p { font-size: 16px; color: #475569; margin: 0; line-height: 1.6; }
-    .ugc-grid { display: grid; gap: 20px; }
+    .ugc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .ugc-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+    }
     .ugc-media, .ugc-details {
       background: #f8fafc;
       padding: 20px;
@@ -242,15 +426,15 @@
       display: block;
       width: 100%;
       height: auto;
-      max-height: 75vh;
+      max-height: 65vh;
       border-radius: 12px;
       background: #000;
       border: 1px solid #cbd5e1;
     }
-    .muted-note { font-size: 14px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
+    .muted-note { font-size: 13px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
     .ugc-details h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
     .ugc-details ul { padding-left: 20px; margin: 0; }
-    .ugc-details li { font-size: 16px; color: #475569; margin-bottom: 8px; line-height: 1.5; }
+    .ugc-details li { font-size: 15px; color: #475569; margin-bottom: 8px; line-height: 1.5; }
 
     /* PRICING */
     .pricing-section { padding: 48px 0; }
@@ -261,27 +445,47 @@
       background: #ffffff;
       border: 2px solid #dc2626;
       border-radius: 16px;
-      padding: 24px;
+      padding: 28px;
       box-shadow: 0 10px 25px rgba(220, 38, 38, 0.08);
+      max-width: 800px;
+      margin: 0 auto;
     }
     .card-badge {
       background: #dc2626;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 12px;
+      padding: 6px 12px;
+      border-radius: 10px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       line-height: 1.4;
       margin-bottom: 20px;
+      display: inline-block;
     }
-    .package-header h3 { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
-    .price-box { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
-    .old-price { font-size: 20px; color: #94a3b8; text-decoration: line-through; }
-    .current-price { font-size: 36px; font-weight: 800; color: #dc2626; }
-    .term { font-size: 16px; color: #64748b; }
+    .package-header h3 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .price-box { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .old-price { font-size: 18px; color: #94a3b8; text-decoration: line-through; }
+    .current-price { font-size: 34px; font-weight: 800; color: #dc2626; }
+    .term { font-size: 15px; color: #64748b; }
+
+    /* MONEY BACK GUARANTEE BANNER */
+    .guarantee-banner {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #047857;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
     .split-box {
       background: #f8fafc;
@@ -290,27 +494,56 @@
       padding: 16px;
       margin: 20px 0;
     }
-    .split-box h4 { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
+    .split-box h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
     .split-steps { display: grid; gap: 12px; }
-    .split-step strong { display: block; font-size: 16px; color: #dc2626; line-height: 1.4; }
-    .split-step span { display: block; font-size: 16px; color: #475569; margin-top: 2px; line-height: 1.5; }
+    @media (min-width: 640px) {
+      .split-steps { grid-template-columns: repeat(3, 1fr); }
+    }
+    .split-step strong { display: block; font-size: 15px; color: #dc2626; line-height: 1.4; }
+    .split-step span { display: block; font-size: 14px; color: #475569; margin-top: 2px; line-height: 1.4; }
 
     .deliverables-list {
       list-style: none;
       padding: 16px 0 0;
-      margin: 0 0 20px;
+      margin: 0 0 24px;
       border-top: 1px solid #e2e8f0;
     }
-    .deliverables-list li { font-size: 16px; color: #475569; margin-bottom: 14px; line-height: 1.5; }
+    .deliverables-list li { font-size: 15px; color: #475569; margin-bottom: 12px; line-height: 1.5; }
     .deliverables-list li strong { color: #0f172a; }
 
-    .card-cta { margin-top: 24px; }
+    .card-cta { margin-top: 24px; text-align: center; }
+    .btn-contact-large {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: #dc2626;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      padding: 18px 24px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.2);
+      transition: background 0.2s;
+    }
+    .btn-contact-large:hover { background: #b91c1c; }
 
     /* RETAINER */
-    .retainer-wrapper { margin-top: 40px; }
+    .retainer-wrapper { margin-top: 48px; max-width: 800px; margin-left: auto; margin-right: auto; }
     .retainer-wrapper > h3 { font-size: 22px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 8px; line-height: 1.3; }
     .retainer-wrapper > p { font-size: 16px; color: #64748b; text-align: center; margin-bottom: 24px; }
-    .retainer-grid { display: grid; gap: 24px; }
+    .retainer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .retainer-grid { grid-template-columns: 1fr 1fr; }
+    }
     .retainer-card {
       background: #ffffff;
       border: 1px solid #cbd5e1;
@@ -324,21 +557,21 @@
       background: #ecfdf5;
       color: #047857;
       border: 1px solid #a7f3d0;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 4px 10px;
       border-radius: 999px;
       margin-bottom: 12px;
       letter-spacing: 0.05em;
     }
-    .retainer-card h4 { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .retainer-card h4 { font-size: 19px; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
     .retainer-price { display: flex; align-items: baseline; gap: 6px; }
-    .retainer-price .price { font-size: 32px; font-weight: 800; color: #047857; }
+    .retainer-price .price { font-size: 30px; font-weight: 800; color: #047857; }
     .retainer-card:not(.recommended) .retainer-price .price { color: #0f172a; }
-    .retainer-price .unit { font-size: 16px; color: #64748b; }
-    .billing-note { font-size: 16px; color: #475569; margin: 8px 0 16px; }
+    .retainer-price .unit { font-size: 15px; color: #64748b; }
+    .billing-note { font-size: 15px; color: #475569; margin: 8px 0 16px; }
     .retainer-card ul { list-style: none; padding: 16px 0 0; margin: 0; border-top: 1px solid #e2e8f0; }
-    .retainer-card li { font-size: 16px; color: #475569; margin-bottom: 12px; line-height: 1.5; }
+    .retainer-card li { font-size: 15px; color: #475569; margin-bottom: 12px; line-height: 1.5; }
 
     /* FAQ */
     .faq-section {
@@ -347,6 +580,7 @@
       padding: 48px 0;
     }
     .faq-section h2 { font-size: 24px; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 24px; }
+    .faq-accordion { max-width: 800px; margin: 0 auto; }
     .faq-accordion details {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -366,46 +600,33 @@
     .faq-accordion summary::-webkit-details-marker { display: none; }
     .faq-accordion details[open] summary { border-bottom: 1px solid #cbd5e1; }
     .faq-answer { padding: 16px; background: #ffffff; }
-    .faq-answer p { font-size: 16px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
+    .faq-answer p { font-size: 15px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
     .faq-answer p:last-child { margin-bottom: 0; }
     .faq-answer ul { padding-left: 20px; margin: 0; }
-    .faq-answer li { font-size: 16px; color: #475569; line-height: 1.6; margin-bottom: 10px; }
+    .faq-answer li { font-size: 15px; color: #475569; line-height: 1.6; margin-bottom: 10px; }
     .faq-answer code {
       background: #f1f5f9;
       color: #dc2626;
       padding: 2px 6px;
       border-radius: 4px;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     /* FOOTER */
     .footer { padding: 48px 0; text-align: center; border-top: 1px solid #e2e8f0; background: #f8fafc; }
+    .footer-content { max-width: 700px; margin: 0 auto; }
     .footer .btn-contact-large { margin-bottom: 16px; }
     .contact-info { font-size: 16px; font-weight: 600; color: #475569; margin: 0 0 4px; }
     .disclaimer { font-size: 14px; color: #64748b; margin: 0; }
-    .custom-note { font-size: 14px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
+    .custom-note { font-size: 13px; color: #64748b; margin: 12px 0 0; line-height: 1.5; }
 
-    /* LARGER SCREENS */
-    @media (min-width: 640px) {
-      body { font-size: 18px; }
-      .announcement-bar { font-size: 16px; }
-      .hero h1 { font-size: 36px; }
+    /* LARGER SCREENS TYPOGRAPHY ADJUSTMENTS */
+    @media (min-width: 768px) {
+      body { font-size: 17px; }
+      .hero h1 { font-size: 40px; }
       .hero-sub { font-size: 20px; }
-      .btn-contact, .btn-contact-large { font-size: 20px; }
-      .cta-subtext, .muted-note { font-size: 16px; }
+      .lead-box h2 { font-size: 32px; }
       .reality h2, .how-it-works h2, .ugc-header h2, .section-title h2, .faq-section h2 { font-size: 30px; }
-      .reality > .container > p, .ugc-header p, .section-title p, .retainer-wrapper > p { font-size: 18px; }
-      .reality-item strong { font-size: 20px; }
-      .reality-item span, .step-card p, .ugc-details li, .deliverables-list li,
-      .split-step strong, .split-step span, .split-box h4, .retainer-card li, .billing-note,
-      .faq-accordion summary, .faq-answer p, .faq-answer li, .contact-info,
-      .term, .retainer-price .unit { font-size: 18px; }
-      .step-card h3 { font-size: 20px; }
-      .package-header h3 { font-size: 26px; }
-      .card-badge { font-size: 15px; }
-      .retainer-wrapper > h3 { font-size: 26px; }
-      .retainer-card h4 { font-size: 22px; }
-      .disclaimer, .custom-note { font-size: 16px; }
     }
   </style>
 </head>
@@ -416,99 +637,168 @@
     📍 EXCLUSIVE FOR FOOD STALL OPERATORS & FOOD COURT VENDORS IN METRO MANILA
   </div>
 
-  <!-- SITE LOGO HEADER -->
-  <div class="site-logo-container">
-    <div class="container">
+  <!-- SITE HEADER WITH DESKTOP TABS -->
+  <header class="site-header">
+    <div class="header-container">
       <img src="/jpimperial/menu-motion/assets/Menu Motion Food Emblem.png" alt="Menu Motion Logo" class="site-logo" loading="lazy">
-    </div>
-  </div>
-
-  <!-- HERO SECTION -->
-  <header class="hero">
-    <div class="container">
-      
-      <h1>Turn Passersby into Buyers With <span>Dynamic Animated Menu Loops</span></h1>
-      <p class="hero-sub">
-        Upgrade your stall's visual impact with multi-layer motion graphics. 
-        <strong>Plug-and-play using your existing TV monitor and a standard USB drive.</strong>
-      </p>
-
-      <!-- PAIN QUESTION BOX -->
-      <div class="pain-box">
-        <strong>A Quick Question for Franchise Owners and Store Managers:</strong>
-        <em>"How many hungry customers walk past your stall every day because static printed menus fail to capture their attention?"</em>
-      </div>
-
-      <!-- VISUAL SHOWCASE (BEFORE VS AFTER) -->
-      <div class="showcase-container">
-        <div class="showcase-header">
-          <span>Visual Upgrade Showcase</span>
-          <span>HD Output</span>
-        </div>
-
-        <div class="showcase-grid">
-          <!-- BEFORE STATIC -->
-          <div class="showcase-card before">
-            <span class="badge red">❌ BEFORE: Static 2-D Menu Board</span>
-            <div class="media-wrapper">
-              <img src="/jpimperial/menu-motion/assets/2-D Static Menu Board.png" alt="Static Menu Board" loading="lazy">
-            </div>
-          </div>
-
-          <!-- AFTER ANIMATED -->
-          <div class="showcase-card after">
-            <span class="badge green">✨ AFTER: Live Animated Menu Loop</span>
-            <div class="media-wrapper">
-              <video autoplay loop muted playsinline>
-                <source src="/jpimperial/menu-motion/assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
-                Your browser does not support video playback.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRIMARY CTA -->
-      <div class="hero-cta-box">
-        <a href="https://viber.click/639178405877" class="btn-contact">
-          💬 Chat on Viber / WhatsApp to Book Free Demo Preview
-        </a>
-        <p class="cta-subtext">Direct Viber & WhatsApp Line: <strong>+63 917 840 5877</strong> • Zero pressure demo preview.</p>
-      </div>
-
+      <nav>
+        <ul class="nav-tabs">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#preview">Free Preview</a></li>
+          <li><a href="#why-motion">Why Motion?</a></li>
+          <li><a href="#rates">Transparent Rates</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- THE REALITY SECTION -->
-  <section class="reality">
+  <!-- HERO SECTION -->
+  <header id="hero" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- LEFT COLUMN: COPY & HOOK -->
+        <div>
+          <h1>Turn Passersby into Buyers With <span>Dynamic Animated Menu Loops</span></h1>
+          <p class="hero-sub">
+            Upgrade your stall's visual impact with multi-layer motion graphics. 
+            <strong>Plug-and-play using your existing TV monitor and a standard USB drive.</strong> No internet connection required.
+          </p>
+
+          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+            <strong style="display: block; color: #dc2626; font-size: 16px; margin-bottom: 4px;">A Quick Question for Store Managers:</strong>
+            <em style="color: #475569; font-size: 15px;">"How many hungry customers walk past your stall every day because static printed menus fail to capture their attention?"</em>
+          </div>
+
+          <!-- SEPARATE CHAT BUTTONS WITH PRE-CONFIGURED MESSAGES -->
+          <div class="chat-buttons-container">
+            <a href="https://viber.click/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-viber" target="_blank">
+              💬 Chat on Viber (Pre-filled Text)
+            </a>
+            <a href="https://wa.me/639178405877?text=Hi!%20I%20run%20a%20food%20stall%20in%20Metro%20Manila%20and%20want%20to%20chat%20about%20Menu%20Motion." class="btn-whatsapp" target="_blank">
+              🟢 Chat on WhatsApp (Pre-filled Text)
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: VISUAL UPGRADE SHOWCASE -->
+        <div>
+          <div class="showcase-container">
+            <div class="showcase-header">
+              <span>Visual Upgrade Showcase</span>
+              <span>HD Output</span>
+            </div>
+
+            <div class="showcase-grid-inner">
+              <!-- BEFORE STATIC -->
+              <div class="showcase-card before">
+                <span class="badge red">❌ BEFORE: Static 2-D Menu Board</span>
+                <div class="media-wrapper">
+                  <img src="/jpimperial/menu-motion/assets/2-D Static Menu Board.png" alt="Static Menu Board" loading="lazy">
+                </div>
+              </div>
+
+              <!-- AFTER ANIMATED -->
+              <div class="showcase-card after">
+                <span class="badge green">✨ AFTER: Live Animated Menu Loop</span>
+                <div class="media-wrapper">
+                  <video autoplay loop muted playsinline>
+                    <source src="/jpimperial/menu-motion/assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
+                    Your browser does not support video playback.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2: INTERACTIVE PARTICIPATIVE CTA (GOOGLE SITES PREVIEW LEAD CAPTURE) -->
+  <section id="preview" class="lead-section">
+    <div class="container">
+      <div class="lead-box">
+        <span class="zero-obl">Zero Obligation • 100% Free</span>
+        <h2>GET A FREE CUSTOM GOOGLE SITES PREVIEW</h2>
+        <p>
+          Want to see what your bestseller dish looks like in motion? Upload your menu or food photo below. 
+          We will custom-build your menu preview and send a personalized Google Sites link directly to your phone or laptop.
+        </p>
+
+        <form class="lead-form" action="https://formspree.io/f/your-form-id" method="POST" enctype="multipart/form-data">
+          
+          <div class="form-group">
+            <label for="phone">Mobile Number / Viber / WhatsApp ID *</label>
+            <input type="text" id="phone" name="phone" placeholder="e.g. +63 917 123 4567" required>
+            <div class="form-hint">Primary channel where we will send your custom Google Sites preview link.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address (Optional)</label>
+            <input type="email" id="email" name="email" placeholder="e.g. manager@foodstall.com">
+            <div class="form-hint">For non-mobile users or desktop review.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="menu_file">Upload Bestseller Dish Photo or Current Menu *</label>
+            <input type="file" id="menu_file" name="menu_file" required style="padding: 10px; background: #fff;">
+            <div class="form-hint">Accepted formats: JPG, PNG, PDF.</div>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            🚀 GET MY PERSONALIZED GOOGLE SITES PREVIEW
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE REALITY SECTION (VISUAL 3-SECOND RULE CARDS) -->
+  <section id="why-motion" class="reality">
     <div class="container">
       <h2>The 3-Second Rule: Why Static Menus Cost You Daily Sales.</h2>
       <p>During peak lunch and dinner rushes, foot traffic moves fast. High-impact visuals are what pull in hungry buyers.</p>
 
       <div class="reality-grid">
-        <div class="reality-item">
-          <div class="icon">📄</div>
-          <div>
-            <strong>Handwritten paper price tags taped to the TV screen</strong>
-            <span>Signals poor maintenance and reduces customer trust in food hygiene and quality.</span>
+        
+        <!-- CARD 1 -->
+        <div class="reality-card">
+          <img src="/jpimperial/menu-motion/assets/Handwritten paper price tags taped to the TV screen.png" alt="Handwritten paper price tags taped to the TV screen" class="reality-card-img" loading="lazy">
+          <div class="reality-card-content">
+            <div>
+              <strong>Handwritten paper price tags taped to the TV screen</strong>
+              <span>Signals poor maintenance and reduces customer trust in food hygiene and quality.</span>
+            </div>
+            <div style="margin-top: 16px;"><span class="badge red">📄 Visual Trap #1</span></div>
           </div>
         </div>
 
-        <div class="reality-item">
-          <div class="icon">🖼️</div>
-          <div>
-            <strong>Static and faded pictures</strong>
-            <span>Fails to stimulate appetite; easily overshadowed by neighboring stalls running vibrant displays.</span>
+        <!-- CARD 2 -->
+        <div class="reality-card">
+          <img src="/jpimperial/menu-motion/assets/Static and faded pictures.png" alt="Static and faded pictures" class="reality-card-img" loading="lazy">
+          <div class="reality-card-content">
+            <div>
+              <strong>Static and faded pictures</strong>
+              <span>Fails to stimulate appetite; easily overshadowed by neighboring stalls running vibrant displays.</span>
+            </div>
+            <div style="margin-top: 16px;"><span class="badge red">🖼️ Visual Trap #2</span></div>
           </div>
         </div>
 
-        <div class="reality-item">
-          <div class="icon">💸</div>
-          <div>
-            <strong>Expensive Digital Media Agencies</strong>
-            <span>Demands ₱35,000+ upfront for hardware and ongoing monthly software fees just to change a price.</span>
+        <!-- CARD 3 -->
+        <div class="reality-card">
+          <img src="/jpimperial/menu-motion/assets/Expensive Digital Media Agencies.png" alt="Expensive Digital Media Agencies" class="reality-card-img" loading="lazy">
+          <div class="reality-card-content">
+            <div>
+              <strong>Expensive Digital Media Agencies</strong>
+              <span>Demands ₱35,000+ upfront for hardware and ongoing monthly software fees just to change a price.</span>
+            </div>
+            <div style="margin-top: 16px;"><span class="badge red">💸 Visual Trap #3</span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -528,7 +818,7 @@
           <p>We add rising steam, sizzling action, and popping price badges to your actual bestseller dish photos.</p>
         </div>
 
-        <!-- STEP 2 (Fixed Image Encoding Issue) -->
+        <!-- STEP 2 -->
         <div class="step-card">
           <div class="step-img-wrapper">
             <img src="/jpimperial/menu-motion/assets/plug-and-play-usb.png" alt="100% Plug-and-Play USB" loading="lazy">
@@ -580,7 +870,7 @@
   </section>
 
   <!-- PRICING & OFFER SECTION -->
-  <section class="pricing-section">
+  <section id="rates" class="pricing-section">
     <div class="container">
       <div class="section-title">
         <h2>Simple, Transparent Rates</h2>
@@ -588,8 +878,8 @@
       </div>
 
       <!-- MAIN STARTER PACKAGE CARD -->
-      <div class="package-card featured">
-        <div class="card-badge">FOUNDERS LAUNCHPACKAGE • COMPLETE SETUP</div>
+      <div class="package-card">
+        <div class="card-badge">FOUNDERS LAUNCH PACKAGE • COMPLETE SETUP</div>
         
         <div class="package-header">
           <h3>Stall Authority Launchpad</h3>
@@ -600,21 +890,26 @@
           </div>
         </div>
 
+        <!-- 1-SENTENCE GUARANTEE DIRECTLY UNDER PRICING BOX -->
+        <div class="guarantee-banner">
+          🛡️ Zero TV crashes, or 100% money-back during setup.
+        </div>
+
         <!-- 3-SPLIT PAYMENT BREAKDOWN BOX -->
         <div class="split-box">
           <h4>💳 Easy 3-Split Payment Plan (40% - 30% - 30%):</h4>
           <div class="split-steps">
             <div class="split-step">
               <strong>Split 1 (40% Deposit): ₱2,400</strong>
-              <span>Visual Blueprint, Asset Selection & Scripting</span>
+              <span>Visual Blueprint & Scripting</span>
             </div>
             <div class="split-step">
               <strong>Split 2 (30% Mid-point): ₱1,800</strong>
-              <span>Motion Graphics, Steam / Sizzle & SFX Production Preview</span>
+              <span>Motion Graphics & SFX Preview</span>
             </div>
             <div class="split-step">
               <strong>Split 3 (30% Deployment): ₱1,799</strong>
-              <span>On-Site Calibration & Physical USB Installation at stall</span>
+              <span>On-Site Calibration & USB Installation</span>
             </div>
           </div>
         </div>
@@ -630,7 +925,7 @@
         </ul>
 
         <div class="card-cta">
-          <a href="https://viber.click/639178405877" class="btn-contact-large">
+          <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-contact-large" target="_blank">
             Book 1-on-1 Demo (Claim Founders Rate)
           </a>
         </div>
@@ -725,8 +1020,8 @@
 
   <!-- FOOTER & FINAL CTA -->
   <footer class="footer">
-    <div class="container">
-      <a href="https://viber.click/639178405877" class="btn-contact-large">
+    <div class="container footer-content">
+      <a href="https://viber.click/639178405877?text=Hi!%2520I%2520want%2520to%2520book%2520a%2520demo%2520for%2520my%2520food%2520stall." class="btn-contact-large" target="_blank">
         💬 Chat Direct on Viber & WhatsApp to Book Demo
       </a>
 
