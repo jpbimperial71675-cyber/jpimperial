@@ -13,8 +13,8 @@
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-      background: #fcfbfa; /* Warm culinary cream tone to reduce glare */
-      color: #1e1b18; /* Rich charcoal espresso text */
+      background: #fcfbfa;
+      color: #1e1b18;
       font-size: 16px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
@@ -36,7 +36,7 @@
       letter-spacing: 0.02em;
     }
 
-    /* HEADER & RESPONSIVE NAVIGATION (FIXED MOBILE LOGO CENTERING) */
+    /* HEADER & RESPONSIVE NAVIGATION */
     .site-header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -183,12 +183,16 @@
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
 
-    /* CLICK-TO-EXPAND INTERACTIVE STYLES */
+    /* CLICK-TO-EXPAND DIRECT VIDEO BINDING */
     .hero-expandable-video {
+      cursor: pointer;
+      position: relative;
+    }
+    .hero-expandable-video video {
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .hero-expandable-video:hover {
+    .hero-expandable-video video:hover {
       transform: scale(1.01);
       box-shadow: 0 4px 16px rgba(4, 120, 87, 0.2);
     }
@@ -205,6 +209,7 @@
       pointer-events: none;
       letter-spacing: 0.03em;
       backdrop-filter: blur(4px);
+      z-index: 2;
     }
 
     /* FULLSCREEN MODAL OVERLAY */
@@ -980,11 +985,16 @@
       const modalVideo = document.getElementById('modalVideoPlayer');
 
       if (trigger && modal && closeBtn && previewVideo && modalVideo) {
-        trigger.addEventListener('click', function() {
+        // Bind directly to the wrapper and video element to ensure capture on all devices
+        function openModal(e) {
+          e.preventDefault();
           modal.classList.add('active');
           modalVideo.currentTime = previewVideo.currentTime;
           modalVideo.play();
-        });
+        }
+
+        trigger.addEventListener('click', openModal);
+        previewVideo.addEventListener('click', openModal);
 
         function closeModal() {
           modal.classList.remove('active');
