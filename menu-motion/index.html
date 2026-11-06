@@ -179,8 +179,98 @@
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       background: #000;
+      position: relative;
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
+
+    /* CLICK-TO-EXPAND INTERACTIVE STYLES */
+    .hero-expandable-video {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hero-expandable-video:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 16px rgba(4, 120, 87, 0.2);
+    }
+    .expand-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+      letter-spacing: 0.03em;
+      backdrop-filter: blur(4px);
+    }
+
+    /* FULLSCREEN MODAL OVERLAY */
+    .video-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(8px);
+      padding: 20px;
+    }
+    .video-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .video-modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-modal-content video {
+      max-width: 100%;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: #ffffff;
+      color: #1e1b18;
+      border: none;
+      font-size: 18px;
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .video-modal-close:hover {
+      background: #dc2626;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
 
     /* SECTION 2: STREAMLINED PREVIEW SECTION */
     .lead-section {
@@ -498,47 +588,6 @@
 
     .card-cta { margin-top: 24px; text-align: center; }
 
-    /* RETAINER */
-    .retainer-wrapper { margin-top: 48px; max-width: 800px; margin-left: auto; margin-right: auto; }
-    .retainer-wrapper > h3 { font-size: 22px; font-weight: 800; color: #1e1b18; text-align: center; margin-bottom: 8px; line-height: 1.3; }
-    .retainer-wrapper > p { font-size: 16px; color: #64748b; text-align: center; margin-bottom: 24px; }
-    .retainer-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    @media (min-width: 768px) {
-      .retainer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    .retainer-card {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-    .retainer-card.recommended { border-color: #047857; box-shadow: 0 10px 25px rgba(4, 120, 87, 0.08); }
-    .tag-recommended {
-      display: inline-block;
-      background: #ecfdf5;
-      color: #047857;
-      border: 1px solid #a7f3d0;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      letter-spacing: 0.05em;
-    }
-    .retainer-card h4 { font-size: 19px; font-weight: 700; color: #1e1b18; margin-bottom: 8px; line-height: 1.3; }
-    .retainer-price { display: flex; align-items: baseline; gap: 6px; }
-    .retainer-price .price { font-size: 30px; font-weight: 800; color: #047857; }
-    .retainer-card:not(.recommended) .retainer-price .price { color: #1e1b18; }
-    .retainer-price .unit { font-size: 15px; color: #64748b; }
-    .billing-note { font-size: 15px; color: #475569; margin: 8px 0 16px; }
-    .retainer-card ul { list-style: none; padding: 16px 0 0; margin: 0; border-top: 1px solid #e2e8f0; }
-    .retainer-card li { font-size: 15px; color: #475569; margin-bottom: 12px; line-height: 1.5; }
-
     /* FAQ */
     .faq-section {
       background: #ffffff;
@@ -663,14 +712,15 @@
                 </div>
               </div>
 
-              <!-- AFTER ANIMATED -->
+              <!-- AFTER ANIMATED (CLICK TO EXPAND) -->
               <div class="showcase-card after">
                 <span class="badge green">✨ AFTER: Live Animated Menu Loop</span>
-                <div class="media-wrapper">
-                  <video autoplay loop muted playsinline>
+                <div class="media-wrapper hero-expandable-video" id="heroVideoTrigger" title="Tap or click to expand fullscreen HD">
+                  <video autoplay loop muted playsinline id="heroPreviewVideo">
                     <source src="/jpimperial/menu-motion/assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
                     Your browser does not support video playback.
                   </video>
+                  <div class="expand-hint">🔍 Tap to Expand Fullscreen</div>
                 </div>
               </div>
             </div>
@@ -680,6 +730,17 @@
       </div>
     </div>
   </header>
+
+  <!-- FULLSCREEN VIDEO MODAL OVERLAY -->
+  <div class="video-modal-overlay" id="videoModalOverlay">
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="videoModalClose" aria-label="Close fullscreen video">&times;</button>
+      <video autoplay loop controls playsinline id="modalVideoPlayer">
+        <source src="/jpimperial/menu-motion/assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+  </div>
 
   <!-- SECTION 2: STREAMLINED PREVIEW SECTION (ALL 3 CHANNELS) -->
   <section id="preview" class="lead-section">
@@ -889,122 +950,62 @@
             <a href="https://wa.me/639178405877?text=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-whatsapp" target="_blank">
               🟢 WhatsApp
             </a>
-            <a href="mailto:jpbimperial71675@gmail.com?subject=Claiming%20Founders%20Rate%20-%20Menu%20Motion&body=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-email" target="_blank">
+            <a href="mailto:jpbimperial71675@gmail.com?subject=Menu%20Motion%20-%20Founders%20Rate%20Claim&body=Hi!%20I%20want%20to%20claim%20the%20Founders%20Rate%20for%20my%20food%20stall." class="btn-channel btn-email" target="_blank">
               ✉️ Email
             </a>
           </div>
         </div>
-      </div>
-
-      <!-- RETAINER PLANS -->
-      <div class="retainer-wrapper">
-        <h3>Monthly Protection & Maintenance Plans</h3>
-        <p>Keep your pricing and seasonal promotions updated without operational friction.</p>
-
-        <div class="retainer-grid">
-          
-          <!-- OPTION A -->
-          <div class="retainer-card recommended">
-            <span class="tag-recommended">BEST VALUE</span>
-            <h4>Option A: Locked-in Quarterly Plan</h4>
-            <div class="retainer-price">
-              <span class="price">₱799</span>
-              <span class="unit">/ month</span>
-            </div>
-            <p class="billing-note">Billed quarterly at <strong>₱2,397.00</strong> (Save ₱600/qtr)</p>
-            <ul>
-              <li>✅ Unlimited price & item updates</li>
-              <li>✅ <strong>FREE On-Site Physical USB Swap</strong> in selected Metro Manila hubs</li>
-              <li>✅ <strong>Priority 24-48hr emergency replacement</strong> if USB is lost/damaged</li>
-              <li>✅ <strong>FREE Quarterly Seasonal Graphic Refresh</strong> (Holiday/Summer promos)</li>
-            </ul>
-          </div>
-
-          <!-- OPTION B -->
-          <div class="retainer-card">
-            <h4>Option B: Non-Locked Plan</h4>
-            <div class="retainer-price">
-              <span class="price">₱999</span>
-              <span class="unit">/ month</span>
-            </div>
-            <p class="billing-note">Billed quarterly at <strong>₱2,997.00</strong></p>
-            <ul>
-              <li>✅ Unlimited price & item updates</li>
-              <li>❌ Digital File Send Only (On-site swap available at ₱500 per visit)</li>
-              <li>⏳ Standard queue (3-5 business days) for updates</li>
-              <li>❌ Paid add-on per seasonal graphic refresh</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FAQ SECTION -->
-  <section class="faq-section">
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-
-      <div class="faq-accordion">
-        
-        <details>
-          <summary>❓ Why is the menu loop capped at 20 seconds? Isn't that too short?</summary>
-          <div class="faq-answer">
-            <p><strong>It is not too short—it is scientifically proven for high-foot-traffic food courts.</strong></p>
-            <p>According to retail buying behavior, hungry customers walking past a food stall have an attention span of only 3 to 7 seconds. If a video runs for 60 seconds, customers have to wait too long to see what they want, causing them to walk away to a neighboring stall.</p>
-            <p>The 20-second loop (4 Hero Highlights + 6 Menu Items) is the golden ratio to trigger appetite and drive immediate orders at the counter.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>❓ Why do I need a Menu Guard Retainer if I can just copy the file to a USB myself?</summary>
-          <div class="faq-answer">
-            <p>Copying a file sounds simple, but managing it yourself introduces severe operational risks:</p>
-            <ul>
-              <li><strong>TV Codec Errors:</strong> A minor wrong export setting from a phone or editing tool can trigger an <code>Unsupported Format</code> warning or black screen on your TV right during peak lunch rush.</li>
-              <li><strong>Physical USB Loss:</strong> Due to continuous heat and operation in food stalls, USB drives corrupt. Under our retainer, we replace them immediately with zero business disruption.</li>
-              <li><strong>Margin Protection:</strong> Meat or ingredient prices change? Simply message us to update your price badges before profit margins are squeezed.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details>
-          <summary>❓ What if my menu has more than 10 items or I operate multiple branches?</summary>
-          <div class="faq-answer">
-            <p><strong>We offer Custom Setup options!</strong> If you run a multi-screen display setup, feature more than 10 menu items, or operate across multiple food stall branches, we provide flexible arrangements. Simply message our direct messaging lines for a customized quote tailored to your exact setup.</p>
-          </div>
-        </details>
 
       </div>
+
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        
-        <p style="font-weight: 700; color: #1e1b18; margin-bottom: 14px;">Ready to upgrade your stall? Connect with us directly:</p>
-        <div class="multi-channel-grid" style="margin-bottom: 24px;">
-          <a href="https://viber.click/639178405877?text=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-viber" target="_blank">
-            💬 Viber
-          </a>
-          <a href="https://wa.me/639178405877?text=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-whatsapp" target="_blank">
-            🟢 WhatsApp
-          </a>
-          <a href="mailto:jpbimperial71675@gmail.com?subject=Book%20Demo%20-%20Menu%20Motion&body=Hi!%20I%20want%20to%20book%20a%20demo%20for%20my%20food%20stall." class="btn-channel btn-email" target="_blank">
-            ✉️ Email
-          </a>
-        </div>
-
-        <p class="contact-info">Direct Messaging Lines: +63 917 840 5877</p>
-        <p class="disclaimer">Independent Digital Visibility Consulting for Food Stall Operators.</p>
-        <p class="custom-note"><em>*Standard package covers 1 TV display setup up to 20 seconds loop duration. Custom multi-screen or multi-branch setups can be arranged upon request.</em></p>
-      </div>
+    <div class="container footer-content">
+      <p class="contact-info">Menu Motion • Metro Manila, Philippines</p>
+      <p class="disclaimer">Dynamic Animated Menu Boards & Video Marketing for Food Stalls & Food Court Vendors.</p>
+      <p class="custom-note">Built for speed, high conversion, and zero tech hassle.</p>
     </div>
   </footer>
 
+  <!-- FULLSCREEN VIDEO INTERACTIVITY SCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const trigger = document.getElementById('heroVideoTrigger');
+      const modal = document.getElementById('videoModalOverlay');
+      const closeBtn = document.getElementById('videoModalClose');
+      const previewVideo = document.getElementById('heroPreviewVideo');
+      const modalVideo = document.getElementById('modalVideoPlayer');
+
+      if (trigger && modal && closeBtn && previewVideo && modalVideo) {
+        trigger.addEventListener('click', function() {
+          modal.classList.add('active');
+          modalVideo.currentTime = previewVideo.currentTime;
+          modalVideo.play();
+        });
+
+        function closeModal() {
+          modal.classList.remove('active');
+          modalVideo.pause();
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
