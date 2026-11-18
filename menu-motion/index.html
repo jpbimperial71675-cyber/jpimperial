@@ -517,9 +517,93 @@
     .ugc-details ul { padding-left: 20px; margin: 0; }
     .ugc-details li { font-size: 15px; color: #475569; margin-bottom: 8px; line-height: 1.5; }
 
+    /* SAMPLE GALLERY SECTION */
+    .samples-section {
+      background: #fcfbfa;
+      border-top: 1px solid #e2e8f0;
+      padding: 48px 0;
+    }
+    .samples-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .samples-header .tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 999px;
+      padding: 4px 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .samples-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #1e1b18;
+      margin: 0 0 8px;
+      line-height: 1.3;
+    }
+    .samples-header p {
+      font-size: 16px;
+      color: #475569;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .samples-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .samples-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .sample-card {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+    }
+    .sample-video-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sample-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sample-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e1b18;
+      margin: 14px 0 4px;
+      line-height: 1.3;
+    }
+    .sample-card p {
+      font-size: 14px;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.5;
+    }
+
     /* TESTIMONIALS SECTION (FUTURE-PROOF RESPONSIVE GRID) */
     .testimonials-section {
-      background: #fcfbfa;
+      background: #ffffff;
       border-top: 1px solid #e2e8f0;
       border-bottom: 1px solid #e2e8f0;
       padding: 48px 0;
@@ -652,45 +736,6 @@
 
     .card-cta { margin-top: 24px; text-align: center; }
 
-    /* FAQ */
-    .faq-section {
-      background: #ffffff;
-      border-top: 1px solid #e2e8f0;
-      padding: 48px 0;
-    }
-    .faq-section h2 { font-size: 24px; font-weight: 800; color: #1e1b18; text-align: center; margin-bottom: 24px; }
-    .faq-accordion { max-width: 800px; margin: 0 auto; }
-    .faq-accordion details {
-      background: #fcfbfa;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      overflow: hidden;
-    }
-    .faq-accordion summary {
-      padding: 16px;
-      cursor: pointer;
-      font-size: 16px;
-      color: #1e1b18;
-      line-height: 1.5;
-      list-style: none;
-      font-weight: 700;
-    }
-    .faq-accordion summary::-webkit-details-marker { display: none; }
-    .faq-accordion details[open] summary { border-bottom: 1px solid #cbd5e1; }
-    .faq-answer { padding: 16px; background: #ffffff; }
-    .faq-answer p { font-size: 15px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
-    .faq-answer p:last-child { margin-bottom: 0; }
-    .faq-answer ul { padding-left: 20px; margin: 0; }
-    .faq-answer li { font-size: 15px; color: #475569; line-height: 1.6; margin-bottom: 10px; }
-    .faq-answer code {
-      background: #f1f5f9;
-      color: #dc2626;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
     /* FOOTER */
     .footer { padding: 48px 0; text-align: center; border-top: 1px solid #e2e8f0; background: #fcfbfa; }
     .footer-content { max-width: 700px; margin: 0 auto; }
@@ -704,7 +749,7 @@
       .hero h1 { font-size: 40px; }
       .hero-sub { font-size: 20px; }
       .lead-box h2 { font-size: 32px; }
-      .reality h2, .how-it-works h2, .ugc-header h2, .section-title h2, .faq-section h2 { font-size: 30px; }
+      .reality h2, .how-it-works h2, .ugc-header h2, .samples-header h2, .section-title h2 { font-size: 30px; }
     }
   </style>
 </head>
@@ -724,6 +769,7 @@
           <li><a href="#hero">Home</a></li>
           <li><a href="#preview">Free Preview</a></li>
           <li><a href="#why-motion">Why Motion?</a></li>
+          <li><a href="#samples">Samples</a></li>
           <li><a href="#rates">Transparent Rates</a></li>
         </ul>
       </nav>
@@ -881,7 +927,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS SECTION (ALL 3 STEP IMAGES NOW CLICK-TO-EXPAND) -->
+  <!-- HOW IT WORKS SECTION -->
   <section class="how-it-works">
     <div class="container">
       <h2>How It Works At Your Stall</h2>
@@ -951,7 +997,59 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS SECTION (FUTURE-PROOF RESPONSIVE GRID) -->
+  <!-- SAMPLE GALLERY SECTION (NEW 3-VIDEO LIGHTBOX GALLERY) -->
+  <section id="samples" class="samples-section">
+    <div class="container">
+      <div class="samples-header">
+        <span class="tag">Motion Portfolio & Demos</span>
+        <h2>Recent Motion Loops & Client Samples</h2>
+        <p>Tap any video below to expand to fullscreen HD and preview how different food styles come alive.</p>
+      </div>
+
+      <div class="samples-grid">
+        <!-- SAMPLE 1 -->
+        <div class="sample-card">
+          <div class="sample-video-wrapper expandable-media" data-media-type="video" data-media-src="assets/4%20Bestsellers_under_25MB.mp4" title="Tap to expand fullscreen">
+            <video autoplay loop muted playsinline>
+              <source src="assets/4%20Bestsellers_under_25MB.mp4" type="video/mp4">
+              Your browser does not support video playback.
+            </video>
+            <div class="expand-hint">🔍 Tap to Expand</div>
+          </div>
+          <h3>4-Bestseller Multi-Dish Loop</h3>
+          <p>High-contrast showcase highlighting top-selling dishes with dynamic price pops.</p>
+        </div>
+
+        <!-- SAMPLE 2 -->
+        <div class="sample-card">
+          <div class="sample-video-wrapper expandable-media" data-media-type="video" data-media-src="assets/Concept%202.mp4" title="Tap to expand fullscreen">
+            <video autoplay loop muted playsinline>
+              <source src="assets/Concept%202.mp4" type="video/mp4">
+              Your browser does not support video playback.
+            </video>
+            <div class="expand-hint">🔍 Tap to Expand</div>
+          </div>
+          <h3>Specialty Food & Pastry Feature</h3>
+          <p>Client-approved visual motion sequence built to stop foot traffic in seconds.</p>
+        </div>
+
+        <!-- SAMPLE 3 -->
+        <div class="sample-card">
+          <div class="sample-video-wrapper expandable-media" data-media-type="video" data-media-src="assets/Menu%20Motion%20Story%20%23%203.mp4" title="Tap to expand fullscreen">
+            <video autoplay loop muted playsinline>
+              <source src="assets/Menu%20Motion%20Story%20%23%203.mp4" type="video/mp4">
+              Your browser does not support video playback.
+            </video>
+            <div class="expand-hint">🔍 Tap to Expand</div>
+          </div>
+          <h3>Menu Motion Story Showcase</h3>
+          <p>Engaging food storytelling reel engineered for stall screens and social feeds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
   <section class="testimonials-section">
     <div class="container">
       <div class="testimonials-header">
