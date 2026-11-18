@@ -183,16 +183,16 @@
     }
     .media-wrapper img, .media-wrapper video { display: block; width: 100%; height: auto; }
 
-    /* CLICK-TO-EXPAND DIRECT VIDEO BINDING */
-    .hero-expandable-video {
+    /* CLICK-TO-EXPAND DIRECT MEDIA BINDING */
+    .expandable-media {
       cursor: pointer;
       position: relative;
     }
-    .hero-expandable-video video {
+    .expandable-media img, .expandable-media video {
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .hero-expandable-video video:hover {
+    .expandable-media img:hover, .expandable-media video:hover {
       transform: scale(1.01);
       box-shadow: 0 4px 16px rgba(4, 120, 87, 0.2);
     }
@@ -213,7 +213,7 @@
     }
 
     /* FULLSCREEN MODAL OVERLAY */
-    .video-modal-overlay {
+    .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -230,11 +230,11 @@
       backdrop-filter: blur(8px);
       padding: 20px;
     }
-    .video-modal-overlay.active {
+    .modal-overlay.active {
       opacity: 1;
       visibility: visible;
     }
-    .video-modal-content {
+    .modal-content {
       position: relative;
       max-width: 90vw;
       max-height: 90vh;
@@ -243,7 +243,7 @@
       justify-content: center;
       align-items: center;
     }
-    .video-modal-content video {
+    .modal-content video, .modal-content img {
       max-width: 100%;
       max-height: 85vh;
       width: auto;
@@ -251,8 +251,9 @@
       border-radius: 12px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.1);
+      object-fit: contain;
     }
-    .video-modal-close {
+    .modal-close {
       position: absolute;
       top: -45px;
       right: 0;
@@ -271,7 +272,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: background 0.2s, transform 0.2s;
     }
-    .video-modal-close:hover {
+    .modal-close:hover {
       background: #dc2626;
       color: #ffffff;
       transform: scale(1.05);
@@ -770,15 +771,16 @@
               <!-- BEFORE STATIC -->
               <div class="showcase-card before">
                 <span class="badge red">❌ BEFORE: Static 2-D Menu Board</span>
-                <div class="media-wrapper">
+                <div class="media-wrapper expandable-media" data-media-type="image" data-media-src="assets/2-D Static Menu Board.png">
                   <img src="assets/2-D Static Menu Board.png" alt="Static Menu Board" loading="lazy">
+                  <div class="expand-hint">🔍 Tap to Expand</div>
                 </div>
               </div>
 
               <!-- AFTER ANIMATED (CLICK TO EXPAND) -->
               <div class="showcase-card after">
                 <span class="badge green">✨ AFTER: Live Animated Menu Loop</span>
-                <div class="media-wrapper hero-expandable-video" id="heroVideoTrigger" title="Tap or click to expand fullscreen HD">
+                <div class="media-wrapper expandable-media" data-media-type="video" data-media-src="assets/Pork Adobo Food Commercial.mp4" id="heroVideoTrigger">
                   <video autoplay loop muted playsinline id="heroPreviewVideo">
                     <source src="assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
                     Your browser does not support video playback.
@@ -794,14 +796,11 @@
     </div>
   </header>
 
-  <!-- FULLSCREEN VIDEO MODAL OVERLAY -->
-  <div class="video-modal-overlay" id="videoModalOverlay">
-    <div class="video-modal-content">
-      <button class="video-modal-close" id="videoModalClose" aria-label="Close fullscreen video">&times;</button>
-      <video autoplay loop controls playsinline id="modalVideoPlayer">
-        <source src="assets/Pork Adobo Food Commercial.mp4" type="video/mp4">
-        Your browser does not support video playback.
-      </video>
+  <!-- UNIVERSAL FULLSCREEN MEDIA MODAL OVERLAY -->
+  <div class="modal-overlay" id="globalModalOverlay">
+    <div class="modal-content" id="modalContentContainer">
+      <button class="modal-close" id="globalModalClose" aria-label="Close fullscreen view">&times;</button>
+      <!-- Dynamic content inserted here by JS -->
     </div>
   </div>
 
@@ -882,16 +881,17 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS SECTION -->
+  <!-- HOW IT WORKS SECTION (ALL 3 STEP IMAGES NOW CLICK-TO-EXPAND) -->
   <section class="how-it-works">
     <div class="container">
       <h2>How It Works At Your Stall</h2>
 
       <div class="steps-grid">
-        <!-- STEP 1: RESTORED ORIGINAL STATIC IMAGE -->
+        <!-- STEP 1 -->
         <div class="step-card">
-          <div class="step-img-wrapper">
+          <div class="step-img-wrapper expandable-media" data-media-type="image" data-media-src="assets/Enhanced Food Motion Feast.png" title="Tap to enlarge Step 1">
             <img src="assets/Enhanced Food Motion Feast.png" alt="Enhanced Food Motion" loading="lazy">
+            <div class="expand-hint">🔍 Tap to Expand</div>
           </div>
           <h3>1. Enhanced Food Motion</h3>
           <p>We add rising steam, sizzling action, and popping price badges to your actual bestseller dish photos.</p>
@@ -899,8 +899,9 @@
 
         <!-- STEP 2 -->
         <div class="step-card">
-          <div class="step-img-wrapper">
+          <div class="step-img-wrapper expandable-media" data-media-type="image" data-media-src="assets/plug-and-play-usb.png" title="Tap to enlarge Step 2">
             <img src="assets/plug-and-play-usb.png" alt="100% Plug-and-Play USB" loading="lazy">
+            <div class="expand-hint">🔍 Tap to Expand</div>
           </div>
           <h3>2. 100% Plug-and-Play USB</h3>
           <p>Your custom video plays directly from a USB stick plugged into your TV monitor. No internet connection required, and zero risk of crashing.</p>
@@ -908,8 +909,9 @@
 
         <!-- STEP 3 -->
         <div class="step-card">
-          <div class="step-img-wrapper">
+          <div class="step-img-wrapper expandable-media" data-media-type="image" data-media-src="assets/On-Site USB Installation and Calibration.png" title="Tap to enlarge Step 3">
             <img src="assets/On-Site USB Installation and Calibration.png" alt="On-Site USB Installation and Calibration" loading="lazy">
+            <div class="expand-hint">🔍 Tap to Expand</div>
           </div>
           <h3>3. On-Site Physical USB Swap</h3>
           <p>Need a price update or menu change? We handle the physical USB swap on-site at selected Metro Manila hubs.</p>
@@ -928,12 +930,13 @@
       </div>
 
       <div class="ugc-grid">
-        <div class="ugc-media">
+        <div class="ugc-media expandable-media" data-media-type="video" data-media-src="assets/ugc-sample.mp4" title="Tap to enlarge UGC video">
           <video autoplay loop muted playsinline>
             <source src="assets/ugc-sample.mp4" type="video/mp4">
             Your browser does not support video playback.
           </video>
-          <p class="muted-note"><i>🔊</i> Video muted for preview. Request full samples on Viber or WhatsApp.</p>
+          <div class="expand-hint">🔍 Tap to Expand</div>
+          <p class="muted-note" style="margin-top: 8px;"><i>🔊</i> Video muted for preview. Request full samples on Viber or WhatsApp.</p>
         </div>
 
         <div class="ugc-details">
@@ -958,11 +961,11 @@
 
       <div class="testimonials-grid">
         <!-- TESTIMONIAL 1: BELLISSIMO -->
-        <div class="testimonial-card">
+        <div class="testimonial-card expandable-media" data-media-type="image" data-media-src="assets/Belilissimo Testimonial.jpeg" title="Tap to enlarge testimonial">
           <img src="assets/Belilissimo Testimonial.jpeg" alt="Bellissimo Boulangerie & Patisserie Testimonial" loading="lazy">
         </div>
         <!-- TESTIMONIAL 2: TABITHA'S DELIGHTS -->
-        <div class="testimonial-card">
+        <div class="testimonial-card expandable-media" data-media-type="image" data-media-src="assets/Tabitha's Testimonial.jpeg" title="Tap to enlarge testimonial">
           <img src="assets/Tabitha's Testimonial.jpeg" alt="Tabitha's Delights Testimonial" loading="lazy">
         </div>
       </div>
@@ -1054,29 +1057,51 @@
     </div>
   </footer>
 
-  <!-- FULLSCREEN VIDEO INTERACTIVITY SCRIPT -->
+  <!-- UNIVERSAL LIGHTBOX INTERACTIVITY SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const trigger = document.getElementById('heroVideoTrigger');
-      const modal = document.getElementById('videoModalOverlay');
-      const closeBtn = document.getElementById('videoModalClose');
-      const previewVideo = document.getElementById('heroPreviewVideo');
-      const modalVideo = document.getElementById('modalVideoPlayer');
+      const modal = document.getElementById('globalModalOverlay');
+      const modalContentContainer = document.getElementById('modalContentContainer');
+      const closeBtn = document.getElementById('globalModalClose');
+      const triggers = document.querySelectorAll('.expandable-media');
 
-      if (trigger && modal && closeBtn && previewVideo && modalVideo) {
-        function openModal(e) {
-          e.preventDefault();
-          modal.classList.add('active');
-          modalVideo.currentTime = previewVideo.currentTime;
-          modalVideo.play();
-        }
+      if (modal && modalContentContainer && closeBtn && triggers.length > 0) {
+        triggers.forEach(trigger => {
+          trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            const mediaType = this.getAttribute('data-media-type');
+            const mediaSrc = this.getAttribute('data-media-src');
 
-        trigger.addEventListener('click', openModal);
-        previewVideo.addEventListener('click', openModal);
+            // Clear previous modal content (keeping close button)
+            modalContentContainer.innerHTML = '';
+            modalContentContainer.appendChild(closeBtn);
+
+            if (mediaType === 'video') {
+              const video = document.createElement('video');
+              video.src = mediaSrc;
+              video.autoplay = true;
+              video.loop = true;
+              video.controls = true;
+              video.playsInline = true;
+              modalContentContainer.appendChild(video);
+            } else if (mediaType === 'image') {
+              const img = document.createElement('img');
+              img.src = mediaSrc;
+              img.alt = "Enlarged Preview";
+              modalContentContainer.appendChild(img);
+            }
+
+            modal.classList.add('active');
+          });
+        });
 
         function closeModal() {
           modal.classList.remove('active');
-          modalVideo.pause();
+          // Stop any playing videos inside modal
+          const playingVideo = modalContentContainer.querySelector('video');
+          if (playingVideo) {
+            playingVideo.pause();
+          }
         }
 
         closeBtn.addEventListener('click', closeModal);
