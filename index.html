@@ -1,712 +1,391 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Authority OS — Jp Imperial</title>
-<meta name="description" content="Done-for-you omni-channel authority infrastructure. One coherent presence. Compounding referrals. No complexity added.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+```
 
-  :root {
-    --ink: #0a0a0a;
-    --ink-lift: #111111;
-    --ink-panel: #0e0e0c;
-    --paper: #f5f0e8;
-    --paper-dim: #ede8de;
-    --gold: #c9a84c;
-    --gold-dim: #7a6232;
-    --gold-line: rgba(201,168,76,0.3);
-    --cream: #f5f0e8;
-    --cream-70: rgba(245,240,232,0.7);
-    --cream-50: rgba(245,240,232,0.5);
-    --cream-30: rgba(245,240,232,0.3);
-    --cream-12: rgba(245,240,232,0.12);
-    --cream-06: rgba(245,240,232,0.06);
-    --cream-03: rgba(245,240,232,0.03);
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
+  
+  
+  
+  
+  
+  
 
-  html {
-    background: var(--ink);
-    color: var(--cream);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.65;
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
+  
+  <nav>
+    <a href="#brief" title="01 - Executive Brief">01</a>
+    <a href="#matrix" title="02 - Recruiter Fit">02</a>
+    <a href="#diagnostic" title="03 - Problems Solved">03</a>
+    <a href="#playbooks" title="04 - Playbooks">04</a>
+    <a href="#governance" title="05 - AI Governance">05</a>
+    <a href="#proof" title="06 - Case Study">06</a>
+    <a href="#experience" title="07 - Experience">07</a>
+    <a href="#contact" title="08 - Next Steps">08</a>
+  </nav>
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.25rem 5rem;
-    background: rgba(10,10,10,0.93);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-  }
-  .nav-logo { font-family: var(--serif); font-size: 1.05rem; letter-spacing: 0.05em; color: var(--gold); }
-  .nav-right { display: flex; align-items: center; gap: 2.5rem; }
-  .nav-link { font-size: 0.74rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-30); transition: color 0.2s; }
-  .nav-link:hover { color: var(--cream); }
-  .nav-cta { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 0.65rem 1.6rem; border: 1px solid var(--gold); transition: background 0.2s; }
-  .nav-cta:hover { background: var(--cream); border-color: var(--cream); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 10rem 5rem 6rem;
-    position: relative; overflow: hidden; gap: 6rem;
-  }
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background: linear-gradient(105deg, #0a0a0a 45%, #0f0e0b 100%);
-  }
-  .hero-rule {
-    position: absolute; top: 0; bottom: 0; left: calc(50% - 0.5px);
-    width: 1px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.15) 20%, rgba(201,168,76,0.28) 50%, rgba(201,168,76,0.15) 80%, transparent 100%);
-    z-index: 1; pointer-events: none;
-  }
-  .hero-grain {
-    position: absolute; inset: 0; z-index: 1; opacity: 0.022;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px; pointer-events: none;
-  }
-  .hero-left { position: relative; z-index: 2; }
-  .hero-right { position: relative; z-index: 2; }
-
-  .eyebrow {
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 2.5rem;
-    display: flex; align-items: center; gap: 1rem;
-    opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
-  }
-  .eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); flex-shrink: 0; }
-
-  .hero-h1 {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 6vw, 5.6rem);
-    font-weight: 900; line-height: 1.0; letter-spacing: -0.02em; color: var(--cream);
-    opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
-  }
-  .hero-h1 em { font-style: italic; color: var(--gold); }
-  .hero-h1 .line { display: block; }
-
-  .hero-body {
-    font-size: 1.05rem; font-weight: 300; color: var(--cream-50);
-    max-width: 460px; margin: 3rem 0 3.5rem; line-height: 1.82;
-    opacity: 0; animation: fadeUp 0.7s 0.32s ease forwards;
-  }
-  .hero-body strong { color: var(--cream); font-weight: 500; }
-
-  .hero-actions {
-    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
-    opacity: 0; animation: fadeUp 0.7s 0.44s ease forwards;
-  }
-  .hero-btn-group {
-    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  }
-  .btn-primary {
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink); background: var(--gold); padding: 1.1rem 2.4rem;
-    border: 1px solid var(--gold); display: inline-block; transition: background 0.2s, border-color 0.2s;
-  }
-  .btn-primary:hover { background: var(--cream); border-color: var(--cream); }
-
-  .btn-video {
-    font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--cream); background: rgba(201,168,76,0.08); padding: 1.1rem 2rem;
-    border: 1px solid var(--gold-line); display: inline-flex; align-items: center; gap: 0.75rem;
-    cursor: pointer; transition: all 0.25s ease;
-  }
-  .btn-video:hover {
-    background: rgba(201,168,76,0.18);
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  .btn-video-icon {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 1.1rem; height: 1.1rem; border-radius: 50%;
-    background: var(--gold); color: var(--ink); font-size: 0.55rem; padding-left: 1px;
-  }
-
-  .btn-sub { font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.6rem; }
-  .btn-sub::before { content: ''; width: 1.2rem; height: 1px; background: var(--cream-30); }
-
-  /* FULLSCREEN VIDEO MODAL */
-  .video-modal {
-    position: fixed; inset: 0; z-index: 9999;
-    background: rgba(5, 5, 5, 0.96);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    padding: 1.5rem;
-  }
-  .video-modal.active {
-    opacity: 1; visibility: visible;
-  }
-  .video-modal-close {
-    position: fixed; top: 1.75rem; right: 2.25rem; z-index: 10001;
-    background: rgba(255,255,255,0.06); border: 1px solid var(--cream-12);
-    color: var(--cream); font-family: var(--sans); font-size: 0.75rem;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 0.75rem 1.25rem; cursor: pointer;
-    display: flex; align-items: center; gap: 0.6rem;
-    transition: all 0.2s ease;
-  }
-  .video-modal-close:hover {
-    background: var(--gold); color: var(--ink); border-color: var(--gold);
-  }
-  .video-modal-stage {
-    position: relative;
-    height: min(88vh, 860px);
-    aspect-ratio: 9 / 16;
-    max-width: 92vw;
-    background: #000;
-    border: 1px solid var(--gold-line);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.85);
-    transform: scale(0.96);
-    transition: transform 0.3s ease;
-  }
-  .video-modal.active .video-modal-stage {
-    transform: scale(1);
-  }
-  .video-modal-stage iframe {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; border: 0;
-  }
-
-  /* HERO STAT TOWER */
-  .stat-tower { border: 1px solid var(--cream-06); background: rgba(201,168,76,0.025); opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
-  .stat-tower-header { padding: 1.8rem 2.5rem; border-bottom: 1px solid var(--cream-06); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); }
-  .stat-cell { background: var(--ink); padding: 2.5rem; transition: background 0.2s; }
-  .stat-cell:hover { background: var(--ink-lift); }
-  .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-  .stat-label { font-size: 0.72rem; color: var(--cream-30); letter-spacing: 0.06em; line-height: 1.4; }
-  .stat-tower-footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--cream-06); font-size: 0.75rem; color: var(--cream-30); font-style: italic; font-family: var(--serif); line-height: 1.5; }
-
-  /* SECTION SYSTEM */
-  .s { padding: 8rem 5rem; max-width: 1100px; margin: 0 auto; }
-  .s-full { padding: 8rem 0; }
-  .s-full .inner { max-width: 1100px; margin: 0 auto; padding: 0 5rem; }
-  .s-paper { background: var(--paper); color: var(--ink); }
-  .s-panel { background: var(--ink-panel); }
-
-  .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-  .label::before { content: ''; width: 2rem; height: 1px; background: var(--gold); flex-shrink: 0; }
-  .label-dark { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
-  .label-dark::before { content: ''; width: 2rem; height: 1px; background: var(--gold-dim); flex-shrink: 0; }
-
-  .h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 700; color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
-  .h2 em { font-style: italic; color: var(--gold); }
-  .h2-dark { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 1rem; }
-  .h2-dark em { font-style: italic; color: var(--gold-dim); }
-
-  .intro { font-size: 0.97rem; color: var(--cream-50); max-width: 480px; margin-bottom: 4.5rem; line-height: 1.78; }
-  .intro-dark { font-size: 0.97rem; color: rgba(10,10,10,0.55); max-width: 520px; margin-bottom: 4.5rem; line-height: 1.78; }
-
-  /* PROBLEM COLUMNS */
-  .problem-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cream-06); }
-  .problem-col { background: var(--ink); padding: 3rem; border-top: 2px solid transparent; transition: border-color 0.3s, background 0.2s; }
-  .problem-col:hover { border-top-color: var(--gold); background: var(--ink-lift); }
-  .pc-num { font-family: var(--serif); font-size: 3rem; font-weight: 900; color: var(--cream-12); line-height: 1; margin-bottom: 1.8rem; }
-  .pc-title { font-size: 0.95rem; font-weight: 500; color: var(--cream); margin-bottom: 1rem; line-height: 1.4; }
-  .pc-body { font-size: 0.86rem; line-height: 1.75; color: rgba(245,240,232,0.42); }
-
-  /* SYSTEM GRID */
-  .system-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--cream-06); margin-bottom: 4rem; }
-  .system-cell { background: var(--ink-panel); padding: 2.8rem 2.2rem; border-bottom: 2px solid transparent; transition: border-color 0.3s, background 0.2s; }
-  .system-cell:hover { border-bottom-color: var(--gold); background: var(--ink); }
-  .sc-icon { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cream-06); }
-  .sc-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 1.2rem; line-height: 1.2; }
-  .sc-list { list-style: none; }
-  .sc-list li { font-size: 0.82rem; color: rgba(245,240,232,0.42); padding: 0.45rem 0; border-bottom: 1px solid var(--cream-06); line-height: 1.45; }
-  .sc-list li:last-child { border-bottom: none; }
-
-  /* HARD NO'S */
-  .nopes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(0,0,0,0.08); margin-top: 3rem; }
-  .nope-cell { background: var(--paper-dim); padding: 2rem 1.8rem; display: flex; align-items: center; gap: 1rem; }
-  .nope-x { width: 1.6rem; height: 1.6rem; flex-shrink: 0; border: 1px solid rgba(192,57,43,0.4); color: rgba(192,57,43,0.6); font-size: 0.75rem; display: flex; align-items: center; justify-content: center; }
-  .nope-label { font-size: 0.86rem; color: rgba(10,10,10,0.55); }
-  .nopes-why { margin-top: 3rem; padding: 2.5rem; border: 1px solid rgba(0,0,0,0.08); background: var(--paper); font-size: 0.9rem; color: rgba(10,10,10,0.5); line-height: 1.75; font-style: italic; font-family: var(--serif); }
-
-  /* OUTCOMES */
-  .outcomes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); }
-  .outcome-cell { background: var(--ink); padding: 3rem; border-left: 2px solid transparent; transition: border-color 0.3s; }
-  .outcome-cell:hover { border-left-color: var(--gold); }
-  .oc-tag { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
-  .oc-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--cream); margin-bottom: 0.9rem; }
-  .oc-body { font-size: 0.88rem; line-height: 1.75; color: rgba(245,240,232,0.45); }
-
-  /* PROCESS */
-  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,0,0,0.08); }
-  .process-step { background: var(--paper-dim); padding: 3.5rem 3rem; }
-  .ps-num { font-family: var(--serif); font-size: 5rem; font-weight: 900; color: rgba(122,98,50,0.15); line-height: 1; margin-bottom: 1.5rem; }
-  .ps-title { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 1rem; }
-  .ps-body { font-size: 0.88rem; line-height: 1.75; color: rgba(10,10,10,0.52); }
-
-  /* PROOF */
-  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-  .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); height: fit-content; }
-  .proof-stat { background: var(--ink-panel); padding: 2.5rem; transition: background 0.2s; }
-  .proof-stat:hover { background: var(--ink); }
-  .ps-big { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-  .ps-desc { font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.04em; line-height: 1.5; text-transform: uppercase; }
-  .pn-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
-  .pn-body { font-size: 0.95rem; line-height: 1.82; color: var(--cream-50); margin-bottom: 2rem; }
-  .pn-body strong { color: var(--cream); font-weight: 500; }
-  .pn-attr { padding-top: 1.8rem; border-top: 1px solid var(--cream-06); font-size: 0.76rem; color: var(--cream-30); letter-spacing: 0.08em; font-style: italic; font-family: var(--serif); }
-
-  /* PRICING */
-  .pricing-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--cream-06); align-items: start; }
-  .price-main { background: var(--ink); padding: 4rem; border-top: 2px solid var(--gold); }
-  .price-sidebar { background: var(--ink); padding: 4rem; }
-  .price-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
-  .price-number-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.5rem; }
-  .price-cur { font-family: var(--serif); font-size: 1.6rem; color: var(--gold); align-self: flex-start; margin-top: 0.8rem; }
-  .price-big { font-family: var(--serif); font-size: 5.5rem; font-weight: 900; color: var(--cream); line-height: 1; }
-  .price-cadence { font-size: 0.85rem; color: var(--cream-30); align-self: flex-end; margin-bottom: 0.8rem; }
-  .price-divider { height: 1px; background: var(--cream-06); margin: 2rem 0; }
-  .price-includes { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-30); margin-bottom: 1.5rem; }
-  .includes-list { list-style: none; margin-bottom: 3rem; }
-  .includes-list li { font-size: 0.88rem; color: var(--cream-50); padding: 0.6rem 0; border-bottom: 1px solid var(--cream-06); display: flex; align-items: baseline; gap: 0.8rem; line-height: 1.5; }
-  .includes-list li:last-child { border-bottom: none; }
-  .includes-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
-  .btn-block { display: block; width: 100%; text-align: center; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 1.3rem; border: 1px solid var(--gold); transition: background 0.2s, border-color 0.2s; margin-bottom: 1rem; }
-  .btn-block:hover { background: var(--cream); border-color: var(--cream); }
-  .btn-block-ghost { display: block; width: 100%; text-align: center; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-50); background: transparent; padding: 1.1rem; border: 1px solid var(--cream-12); transition: border-color 0.2s, color 0.2s; margin-bottom: 2rem; }
-  .btn-block-ghost:hover { border-color: var(--cream-30); color: var(--cream); }
-  .price-fine { font-size: 0.76rem; color: var(--cream-30); line-height: 1.65; }
-  .price-fine p { margin-bottom: 0.4rem; }
-  .sidebar-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-30); margin-bottom: 1.5rem; }
-  .spec-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--cream-06); gap: 1rem; }
-  .spec-row:first-child { border-top: 1px solid var(--cream-06); }
-  .spec-key { font-size: 0.8rem; color: var(--cream-30); }
-  .spec-val { font-size: 0.82rem; font-weight: 500; color: var(--cream-70); text-align: right; }
-  .sidebar-audit-card { border: 1px solid var(--gold-line); padding: 2rem; background: rgba(201,168,76,0.03); margin: 2.5rem 0; }
-  .sac-eyebrow { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-  .sac-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.8rem; }
-  .sac-body { font-size: 0.85rem; color: var(--cream-50); line-height: 1.68; margin-bottom: 1.5rem; }
-  .sac-price { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--gold); margin-bottom: 0.3rem; }
-  .sac-note { font-size: 0.74rem; color: var(--cream-30); }
-
-  /* FOOTER */
-  footer { background: #050505; color: var(--cream-30); padding: 3.5rem 5rem; border-top: 1px solid rgba(245,240,232,0.04); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
-  .footer-logo { font-family: var(--serif); font-size: 1rem; color: rgba(245,240,232,0.35); }
-  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-  .footer-links a { font-size: 0.77rem; color: var(--cream-30); letter-spacing: 0.06em; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-copy { width: 100%; font-size: 0.7rem; color: rgba(245,240,232,0.16); letter-spacing: 0.06em; border-top: 1px solid rgba(245,240,232,0.04); padding-top: 1.5rem; margin-top: 0.5rem; }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-right .nav-link { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
-    .hero-rule { display: none; }
-    .s { padding: 5rem 1.5rem; }
-    .s-full .inner { padding: 0 1.5rem; }
-    .problem-cols { grid-template-columns: 1fr; }
-    .system-grid { grid-template-columns: 1fr 1fr; }
-    .nopes-grid { grid-template-columns: 1fr 1fr; }
-    .outcomes-grid { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr; }
-    .proof-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .pricing-layout { grid-template-columns: 1fr; }
-    footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
-  }
-  @media (max-width: 560px) {
-    .system-grid { grid-template-columns: 1fr; }
-    .proof-stats { grid-template-columns: 1fr 1fr; }
-    .video-modal-close { top: 1rem; right: 1rem; padding: 0.6rem 1rem; }
-  }
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <span class="nav-logo">Jp Imperial</span>
-  <div class="nav-right">
-    <a href="ghost-town-audit.html" class="nav-link">Ghost Town Audit</a>
-    <a href="ghost-town-audit.html" class="nav-cta">Test the Diagnostic</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-rule"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-left">
-    <div class="eyebrow">Authority OS — Digital Visibility Architecture</div>
-    <h1 class="hero-h1">
-      <span class="line">Your referrals</span>
-      <span class="line">arrive <em>already</em></span>
-      <span class="line">convinced.</span>
-    </h1>
-    <p class="hero-body">
-      You've built real-world credibility. Now your digital presence needs to say the same thing —
-      in every place a buyer or AI engine looks, at exactly the moment they're deciding
-      whether to choose you or someone else.<br><br>
-      <strong>Authority OS closes that gap. Every month. Without adding complexity to your week.</strong>
-    </p>
-    <div class="hero-actions">
-      <div class="hero-btn-group">
-        <a href="ghost-town-audit.html" class="btn-primary">See &amp; Test the Ghost Town Audit</a>
-        <button type="button" class="btn-video" id="openVideoModal" aria-label="Watch 60-second portfolio summary">
-          <span class="btn-video-icon">▶</span>
-          <span>60-Sec Executive Brief</span>
-        </button>
-      </div>
-      <span class="btn-sub">Watch what I bring to the table or test the live diagnostic engine</span>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="stat-tower">
-      <div class="stat-tower-header">Authority OS — Proof of Work</div>
-      <div class="stat-row">
-        <div class="stat-cell">
-          <div class="stat-num">4→38</div>
-          <div class="stat-label">Transactions in 12 months<br>Year one benchmark</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">66</div>
-          <div class="stat-label">Total closed transactions<br>Across 24 months</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">2–3×</div>
-          <div class="stat-label">Growth in referral-driven inbound<br>Zero paid ads</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-num">$500K+</div>
-          <div class="stat-label">Average commission at risk per silent referral loss</div>
-        </div>
-      </div>
-      <div class="stat-tower-footer">"The authority gap closes. What they find online finally matches who you are."</div>
-    </div>
-  </div>
-</section>
-
-<!-- FULLSCREEN VIDEO MODAL -->
-<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="60-Second Executive Brief">
-  <button type="button" class="video-modal-close" id="closeVideoModal" aria-label="Close video">
-    <span>✕</span>
-    <span>Close</span>
-  </button>
-  <div class="video-modal-stage" id="videoStage">
-    <!-- Iframe injected dynamically on click so it never autoplays in background -->
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<div class="s">
-  <div class="label reveal">The real problem</div>
-  <h2 class="h2 reveal">You're not <em>invisible.</em><br>You're incoherent.</h2>
-  <p class="intro reveal">High-tier production. Fragmented presence. Three ways this gap is costing you — none of them show up in your CRM.</p>
-  <div class="problem-cols reveal">
-    <div class="problem-col">
-      <div class="pc-num">01</div>
-      <div class="pc-title">You're producing at top tier. Your digital presence signals mid-tier.</div>
-      <p class="pc-body">The gap between your real-world credibility and what a referred lead finds online is costing you pre-selection. They don't tell you why they went elsewhere. They just do.</p>
-    </div>
-    <div class="problem-col">
-      <div class="pc-num">02</div>
-      <div class="pc-title">Five platforms. Five different stories. Zero coherent authority signal.</div>
-      <p class="pc-body">Your LinkedIn says one thing. Your GBP says another. Instagram is dormant. AI search returns a competitor. A referred lead cross-checks all of it — and sees noise, not trust.</p>
-    </div>
-    <div class="problem-col">
-      <div class="pc-num">03</div>
-      <div class="pc-title">AI is pre-selecting your competition before the conversation starts.</div>
-      <p class="pc-body">Search Generative Experience now synthesizes trusted sources into instant answers. If your content isn't structured as an answer, you don't exist in the results that influence where buyers begin.</p>
-    </div>
-  </div>
-</div>
-
-<!-- SYSTEM -->
-<div class="s-full s-panel">
-  <div class="inner">
-    <div class="label reveal">The solution</div>
-    <h2 class="h2 reveal">Four pillars. <em>One coherent<br>authority signal.</em></h2>
-    <p class="intro reveal">Done-for-you, every month. Every platform a referred lead or AI engine touches — unified under one voice.</p>
-    <div class="system-grid reveal">
-      <div class="system-cell">
-        <div class="sc-icon">LinkedIn</div>
-        <div class="sc-title">Authority Presence &amp; Content Cadence</div>
-        <ul class="sc-list">
-          <li>Profile optimization and headline rewrite</li>
-          <li>2 authority-formatted posts per week</li>
-          <li>Monthly Visibility Brief newsletter</li>
-          <li>Comment positioning on ICP content</li>
-        </ul>
-      </div>
-      <div class="system-cell">
-        <div class="sc-icon">Google Business</div>
-        <div class="sc-title">Local Search &amp; Trust Signal Momentum</div>
-        <ul class="sc-list">
-          <li>GBP optimization and category alignment</li>
-          <li>Weekly post cadence</li>
-          <li>Review velocity strategy</li>
-          <li>High-intent local search positioning</li>
-        </ul>
-      </div>
-      <div class="system-cell">
-        <div class="sc-icon">Omni-channel</div>
-        <div class="sc-title">Cross-Platform Identity Coherence</div>
-        <ul class="sc-list">
-          <li>Unified bio and messaging across all handles</li>
-          <li>Instagram, Facebook, YouTube alignment</li>
-          <li>Cross-referencing signal architecture</li>
-          <li>One voice, every platform</li>
-        </ul>
-      </div>
-      <div class="system-cell">
-        <div class="sc-icon">AI Search</div>
-        <div class="sc-title">SGE &amp; AI-Search Visibility System</div>
-        <ul class="sc-list">
-          <li>Answer-formatted content seeded monthly</li>
-          <li>AI-source positioning strategy</li>
-          <li>SGE discovery loop optimization</li>
-          <li>Monthly authority signal report</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HARD NO'S -->
-<div class="s-full s-paper">
-  <div class="inner">
-    <div class="label-dark reveal">Hard No's</div>
-    <h2 class="h2-dark reveal">What this system<br><em>will never do.</em></h2>
-    <p class="intro-dark reveal">Authority compounds through consistency and coherence — not volume, noise, or trend-chasing. These aren't limitations. They are the strategy.</p>
-    <div class="nopes-grid reveal">
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Paid ads</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Cold DM automation</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Daily posting</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">CRM setup</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Email marketing</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Trend chasing</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Vanity metrics</span></div>
-      <div class="nope-cell"><div class="nope-x">✕</div><span class="nope-label">Weekend work</span></div>
-    </div>
-    <p class="nopes-why reveal">"I don't build campaigns. I build the infrastructure that makes your referral network work harder than it already does — quietly, coherently, without asking for your weekends."</p>
-  </div>
-</div>
-
-<!-- OUTCOMES -->
-<div class="s">
-  <div class="label reveal">What you gain</div>
-  <h2 class="h2 reveal">Not just visibility.<br>A presence that <em>works while you close.</em></h2>
-  <p class="intro reveal">Three business outcomes — and one identity shift that makes all of them possible.</p>
-  <div class="outcomes-grid reveal">
-    <div class="outcome-cell">
-      <div class="oc-tag">Business Outcome</div>
-      <div class="oc-title">Referrals convert before the first call</div>
-      <p class="oc-body">When a referred lead searches your name and finds a coherent, credible, authority-signaling presence across every platform — the decision is made before you pick up the phone. You spend the call closing, not proving.</p>
-    </div>
-    <div class="outcome-cell">
-      <div class="oc-tag">Business Outcome</div>
-      <div class="oc-title">AI surfaces you as the trusted choice</div>
-      <p class="oc-body">Answer-formatted content and cross-platform coherence trains AI search engines to synthesize you as the go-to authority in your market. When a buyer asks AI who to call, your name comes up. Not your competitor's.</p>
-    </div>
-    <div class="outcome-cell">
-      <div class="oc-tag">Business Outcome</div>
-      <div class="oc-title">Your production finally matches your presence</div>
-      <p class="oc-body">The authority gap closes. What a high-value lead finds online now reflects the operator you already are. No more silent damage from a profile that undersells your credibility.</p>
-    </div>
-    <div class="outcome-cell">
-      <div class="oc-tag">Identity Shift</div>
-      <div class="oc-title">Chosen, not chased</div>
-      <p class="oc-body">High-level production deserves high-level presence. When both align, you stop competing for attention and start being the obvious choice — in every room, on every screen, at every moment a referred lead decides who to call.</p>
-    </div>
-  </div>
-</div>
-
-<!-- PROCESS -->
-<div class="s-full s-paper">
-  <div class="inner">
-    <div class="label-dark reveal">How it works</div>
-    <h2 class="h2-dark reveal">A monthly workflow that compounds<br><em>— without adding complexity.</em></h2>
-    <p class="intro-dark reveal">Three phases. You focus on production. I handle the authority infrastructure.</p>
-    <div class="process-steps reveal">
-      <div class="process-step">
-        <div class="ps-num">01</div>
-        <div class="ps-title">Ghost Town Audit — The Diagnostic</div>
-        <p class="ps-body">Before anything is built, I run a fixed-scope diagnostic of your entire digital footprint. LinkedIn, GBP, AI-search visibility, cross-platform coherence — all mapped. Every deliverable in Authority OS is executed against this map, not a generic template.</p>
-      </div>
-      <div class="process-step">
-        <div class="ps-num">02</div>
-        <div class="ps-title">Identity Infrastructure Build — Month One</div>
-        <p class="ps-body">Month one is foundation. Every platform unified under one voice and one authority signal. Cross-referenced across every surface a referred lead or AI engine encounters. This is the infrastructure that everything else compounds on top of.</p>
-      </div>
-      <div class="process-step">
-        <div class="ps-num">03</div>
-        <div class="ps-title">Compound &amp; Refine — Month Two Onward</div>
-        <p class="ps-body">Content, GBP, AI-search signals, and cross-platform coherence — maintained and compounded every month. Authority isn't a one-time project. It's a signal that grows with consistent, coherent pressure. You close. I compound.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PROOF -->
-<div class="s">
-  <div class="label reveal">Proof of work</div>
-  <h2 class="h2 reveal">Ghost town to<br><em>chosen — in 12 months.</em></h2>
-  <div class="proof-grid reveal" style="margin-top: 4rem;">
-    <div class="proof-stats">
-      <div class="proof-stat">
-        <div class="ps-big">4→38</div>
-        <div class="ps-desc">Transactions in 12 months.<br>Year one benchmark.</div>
-      </div>
-      <div class="proof-stat">
-        <div class="ps-big">28</div>
-        <div class="ps-desc">Transactions year two.<br>66 total closed deals.</div>
-      </div>
-      <div class="proof-stat">
-        <div class="ps-big">40–60%</div>
-        <div class="ps-desc">Increase in profile visibility &amp; local search discovery.</div>
-      </div>
-      <div class="proof-stat">
-        <div class="ps-big">2–3×</div>
-        <div class="ps-desc">Growth in referral-driven inbound.<br>Zero paid ads.</div>
-      </div>
-    </div>
+  
+  <header>
     <div>
-      <div class="pn-eyebrow">The case study</div>
-      <p class="pn-body">A high-production operator with a near-invisible digital footprint. Strong referral network offline. Weak trust signals everywhere a referred lead actually looked — LinkedIn untouched, GBP thin, no coherent cross-platform signal.</p>
-      <p class="pn-body">We rebuilt the entire identity infrastructure from the audit up — LinkedIn, GBP, cross-platform coherence, AI-search positioning — and let it compound. <strong>Within 12 months, the authority gap was closed and production followed.</strong> 66 closed transactions over two years.</p>
-      <p class="pn-body">No paid ads. No cold outreach campaign. Just a presence that finally matched the operator behind it.</p>
-      <div class="pn-attr">Alpine Legacy · 66 Closed Transactions · Verified Production Track Record</div>
-    </div>
-  </div>
-</div>
-
-<!-- PRICING -->
-<div class="s-full s-panel" id="pricing">
-  <div class="inner">
-    <div class="label reveal">Architecture &amp; Scope</div>
-    <h2 class="h2 reveal">One system. One outcome.<br><em>Predictable authority that compounds.</em></h2>
-    <p class="intro reveal" style="margin-bottom: 3.5rem;">Built for precision execution. Zero fluff, zero agency bloat.</p>
-    <div class="pricing-layout reveal">
-      <div class="price-main">
-        <div class="price-eyebrow">Authority OS — Core Infrastructure</div>
-        <div class="price-number-row">
-          <span class="price-cur">$</span>
-          <span class="price-big">2,500</span>
-          <span class="price-cadence">CAD / month</span>
-        </div>
-        <div class="price-divider"></div>
-        <div class="price-includes">Core deliverables &amp; monthly cadence</div>
-        <ul class="includes-list">
-          <li>LinkedIn profile architecture + 2 authority posts per week</li>
-          <li>Monthly Visibility Brief newsletter</li>
-          <li>Google Business Profile optimization + weekly post cadence</li>
-          <li>Cross-platform bio and messaging alignment</li>
-          <li>AI-search answer-formatted content seeded monthly</li>
-          <li>Monthly Authority Signal Report</li>
-          <li>Ghost Town Audit as intake diagnostic baseline</li>
-        </ul>
-        <a href="ghost-town-audit.html" class="btn-block">Explore &amp; Test the Ghost Town Audit</a>
-        <a href="mailto:jpbimperial71675@gmail.com" class="btn-block-ghost">Connect Directly</a>
-        <div class="price-fine">
-          <p>Diagnostic-first methodology — zero guesswork</p>
-          <p>Built for B2B &amp; high-trust service teams across AU, NZ, UK, IE &amp; Canada.</p>
-        </div>
+      <div>
+        <span>JP IMPERIAL</span>
+        <span>
+          <span></span>
+          Available for Embedded &amp; Full-Time Deployment
+        </span>
       </div>
-      <div class="price-sidebar">
-        <div class="sidebar-label">Operational parameters</div>
-        <div style="margin-bottom: 3rem;">
-          <div class="spec-row"><span class="spec-key">Cadence</span><span class="spec-val">Async &amp; compounding</span></div>
-          <div class="spec-row"><span class="spec-key">Primary Focus</span><span class="spec-val">AEO, GEO &amp; Organic Authority</span></div>
-          <div class="spec-row"><span class="spec-key">Diagnostic Tool</span><span class="spec-val">Ghost Town Audit Engine</span></div>
-          <div class="spec-row"><span class="spec-key">Paid Ad Spend</span><span class="spec-val">$0 (100% Organic)</span></div>
-          <div class="spec-row"><span class="spec-key">Onboarding</span><span class="spec-val">Begins with diagnostic map</span></div>
-        </div>
-        <div class="sidebar-audit-card">
-          <div class="sac-eyebrow">Interactive Proof of Work</div>
-          <div class="sac-title">Ghost Town Audit &amp; Live Diagnostic</div>
-          <p class="sac-body">See the exact framework used to uncover invisible pipeline leaks, AEO blind spots, and cross-platform authority gaps—and test the live diagnostic assessment engine yourself.</p>
-          <div class="sac-price">Live Sandbox</div>
-          <div class="sac-note">No sign-up gate required to inspect the diagnostic flow</div>
-        </div>
-        <a href="ghost-town-audit.html" class="btn-block">Inspect &amp; Test the Audit →</a>
-        <div class="price-fine" style="text-align:center;">
-          <p>Direct contact: <a href="mailto:jpbimperial71675@gmail.com" style="color:var(--gold);">jpbimperial71675@gmail.com</a></p>
-        </div>
+      <div>
+        <a href="https://calendly.com/joseph-paul-imperial/30min" target="_blank" rel="noopener noreferrer">
+          <i></i>
+          Schedule 30-Min Call
+        </a>
       </div>
     </div>
-  </div>
-</div>
+  </header>
 
-<!-- FOOTER -->
-<footer>
-  <span class="footer-logo">Jp Imperial</span>
-  <div class="footer-links">
-    <a href="mailto:jpbimperial71675@gmail.com">jpbimperial71675@gmail.com</a>
-    <a href="tel:+639178405877">+63 917 840 5877</a>
-    <a href="https://linkedin.com/in/jpimperial" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="ghost-town-audit.html">Ghost Town Audit →</a>
-  </div>
-  <p class="footer-copy">© 2026 Jp Imperial &nbsp;·&nbsp; All rights reserved</p>
-</footer>
+  <main>
 
-<script>
-  // Scroll Reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => io.observe(el));
+    
+    <section>
+      <div>
+        <span>
+          B2B Growth Operations · Content Infrastructure · AI Governance
+        </span>
+        <h1>
+          Replacing Scattered Marketing with Scalable Distribution &amp; Governed AI Execution.
+        </h1>
+        <p>
+          I bridge the gap between creative content, search discoverability, and sales pipeline velocity. I don't give theoretical advice; I build documented, repeatable systems that your organization permanently owns.
+        </p>
 
-  // Fullscreen Video Modal Logic
-  const openBtn = document.getElementById('openVideoModal');
-  const closeBtn = document.getElementById('closeVideoModal');
-  const modal = document.getElementById('videoModal');
-  const stage = document.getElementById('videoStage');
-  const VIDEO_ID = 'erK8O-D_EYI';
+        
+        <div>
+          "Strategy that never gets implemented is just expensive advice."
+        </div>
 
-  function openModal() {
-    stage.innerHTML = `<iframe src="https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Jp Imperial — 60-Second Executive Brief" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+        
+        <div>
+          <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=jpbimperial71675@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i></i>
+            Open in Gmail
+          </a>
+          
+          <a href="about:invalid#zClosurez">
+            <i></i>
+            +63 917 840 5877
+          </a>
+        </div>
+      </div>
 
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    setTimeout(() => {
-      stage.innerHTML = '';
-    }, 300);
-  }
+      
+      <div>
+        <span>60-Sec Executive Brief</span>
+        <div>
+          <div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
 
-  openBtn.addEventListener('click', openModal);
-  closeBtn.addEventListener('click', closeModal);
+    
+    <section>
+      <div>
+        <div>
+          <h2>Executive Fit &amp; Placement Summary</h2>
+          <p>De-risking the hire: alignment, pace, and collaboration standards</p>
+        </div>
+        <span>Zero Onboarding Drag</span>
+      </div>
+      <div>
+        <div>
+          <span>Target Roles</span>
+          <p>Growth Operations Lead · Content Infrastructure Lead · Marketing Operations Director</p>
+          <p>Built for cross-functional alignment across marketing, sales, and executive leadership.</p>
+        </div>
+        <div>
+          <span>Work Style &amp; Collaboration</span>
+          <p>Embedded, Hands-On Operator (Zero Flight Risk)</p>
+          <p>First 30 days are forensic listening, diagnostic mapping, and leadership alignment. No rogue disruption.</p>
+        </div>
+        <div>
+          <span>Core Advantage</span>
+          <p>Day 1 Deployable Frameworks</p>
+          <p>Eliminates 90-day onboarding lag by installing pre-built SOPs and governed AI workflows immediately.</p>
+        </div>
+      </div>
+    </section>
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
+    
+    <section>
+      <div>
+        <span>Diagnostic Assessment</span>
+        <h2>Failure Modes I Eliminate</h2>
+        <p>Select any failure mode below to inspect the operational fix.</p>
+      </div>
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-  });
-</script>
-</body>
-</html>
+      <div>
+        <div>
+          <span>Failure 01</span>
+          <h3>Disconnected Marketing</h3>
+          <p>Organic reach isolated from pipeline velocity and discoverability.</p>
+        </div>
+        <div>
+          <span>Failure 02</span>
+          <h3>Ungoverned AI Rework</h3>
+          <p>Unvetted drafts creating brand drift and factual/legal risk.</p>
+        </div>
+        <div>
+          <span>Failure 03</span>
+          <h3>Knowledge Fragility</h3>
+          <p>Critical execution trapped in individual heads (The Bus Factor).</p>
+        </div>
+      </div>
+
+      <div>
+        
+      </div>
+    </section>
+
+    
+    <section>
+      <div>
+        <span>Modular Playbooks</span>
+        <h2>Pre-Engineered Systems</h2>
+        <p>I bring two deployable architectures ready for Day 1 installation.</p>
+      </div>
+
+      <div>
+        
+        <div>
+          <div>
+            <div>
+              <span>System 01</span>
+              <h3>The Ghost Town Audit</h3>
+            </div>
+            <span>30-Day Diagnostic</span>
+          </div>
+          <p>
+            A forensic review across internal and external corporate communications. It surfaces dormant digital assets, maps communication breakdowns, and identifies immediate pipeline leaks without disrupting the team.
+          </p>
+          <a href="https://jpbimperial71675-cyber.github.io/jpimperial/ghost-town-audit" target="_blank" rel="noopener noreferrer">
+            Inspect Ghost Town Audit Asset <i></i>
+          </a>
+        </div>
+
+        
+        <div>
+          <div>
+            <div>
+              <span>System 02</span>
+              <h3>Authority OS</h3>
+            </div>
+            <span>Distribution Engine</span>
+          </div>
+          <p>
+            A turnkey content-to-pipeline infrastructure connecting short-form video pipelines directly to Google search discovery, lead capture, and CRM velocity.
+          </p>
+          <a href="https://jpbimperial71675-cyber.github.io/jpimperial/" target="_blank" rel="noopener noreferrer">
+            Inspect Authority OS Architecture <i></i>
+          </a>
+        </div>
+      </div>
+
+      
+      <div>
+        <div>
+          <h4>The 6-Step Operating Loop</h4>
+          <span>Click any stage to inspect the process</span>
+        </div>
+        <div>
+          
+          
+          
+          
+          
+          
+        </div>
+        <div>
+          Stage 01: Forensic audit of bottlenecks, dormant assets, and workflow drag.
+        </div>
+      </div>
+    </section>
+
+    
+    <section>
+      <div>
+        <span>Risk Mitigation &amp; QA</span>
+        <h2>AI Governance Architecture</h2>
+        <p>I do not use AI for raw shortcuts. I engineer governed, persistent infrastructure.</p>
+      </div>
+
+      <div>
+        <div>
+          <div>L1</div>
+          <h4>System Prompts &amp; Rules</h4>
+          <p>
+            Persistent system instructions in Claude and custom Gemini engines to enforce strict brand tone, voice anchors, and structure before generation starts.
+          </p>
+        </div>
+        <div>
+          <div>L2</div>
+          <h4>Evidentiary Anchors</h4>
+          <p>
+            Anti-hallucination guardrails requiring every statistical claim to cite specific source passages. Unverified claims are flagged and discarded.
+          </p>
+        </div>
+        <div>
+          <div>L3</div>
+          <h4>Gemini Notebook RAG</h4>
+          <p>
+            Structured knowledge indexing replacing scattered company drives. Protects institutional memory from the "bus factor."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section>
+      <div>
+        <div>
+          <span>Track Record &amp; Case Study</span>
+          <h2>Production Velocity &amp; Resilience</h2>
+        </div>
+        <div>
+          
+          
+        </div>
+      </div>
+
+      
+      <div>
+        <div>
+          
+          <div>
+            <span>4 Deals</span>
+            <div></div>
+            <span>2022 Baseline</span>
+          </div>
+
+          
+          <div>
+            <span>38 Deals (+850%)</span>
+            <div></div>
+            <span>2023 (1st ICON)</span>
+          </div>
+
+          
+          <div>
+            <span>28 Deals</span>
+            <div></div>
+            <span>2024 (2nd ICON)</span>
+          </div>
+        </div>
+
+        <p>
+          *Context:* Transparent data reporting. When the 2024 real estate market contracted, the documented distribution SOPs protected production, securing back-to-back national ICON Awards.
+        </p>
+      </div>
+
+      
+      <div>
+        <div>
+          <span>Organic LinkedIn Reach</span>
+          <p>512 → 5,595</p>
+          <span>+992% Growth</span>
+        </div>
+        <div>
+          <span>Google Business Profile</span>
+          <p>3,398 Views</p>
+          <span>472 Direct Lead Inquiries</span>
+        </div>
+      </div>
+    </section>
+
+    
+    <section>
+      <div>
+        <div>
+          <span>Career History</span>
+          <h2>Operational Experience</h2>
+        </div>
+        <a href="https://jpbimperial71675-cyber.github.io/B2B/assets/documents/jp-imperial-resume.pdf" target="_blank" rel="noopener noreferrer" download="">
+          <i></i>
+          View Full Resume (PDF)
+        </a>
+      </div>
+
+      <div>
+        
+        <div>
+          <div>
+            <div>
+              <h3>Visibility Strategist</h3>
+              <p>Rubicon X Media</p>
+            </div>
+            <span>August 2020 – Present</span>
+          </div>
+          <ul>
+            <li>Programmed persistent Claude system instructions and custom Gemini engines to automate brief creation, content mapping, and draft execution with strict quality control.</li>
+            <li>Built the 6-step loop and centralized digital asset directories, reducing managerial overhead and boosting delivery speed by 35%.</li>
+          </ul>
+        </div>
+
+        
+        <div>
+          <div>
+            <div>
+              <h3>Marketing Director</h3>
+              <p>Alpine Legacy / eXp Realty</p>
+            </div>
+            <span>December 2022 – November 2025</span>
+          </div>
+          <ul>
+            <li>Directed multi-channel distribution pipelines across short-form video and newsletters, connecting organic reach directly to local Google search discovery.</li>
+            <li>Influenced 66 closed transactions across back-to-back award years (38 in Y1; 28 in Y2 during market contraction) to secure consecutive national ICON Awards.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    
+    <section>
+      <h2>Technical Infrastructure &amp; Remote Reliability</h2>
+      <div>
+        <div>
+          <h4>Hardware &amp; Redundancy</h4>
+          <p><strong>Hardware:</strong> Windows 11 · Intel Core i5-11400H · 16GB RAM</p>
+          <p><strong>Dual-Redundancy Connection:</strong> Primary High-Speed Fiber + Secondary DSL backup (Zero-downtime reliability).</p>
+        </div>
+        <div>
+          <h4>Creative &amp; Workflow Stack</h4>
+          <p>Google Flow · Google AI Studio · Google Vids · Gemini Notebook · Claude · CapCut · Tailwind CSS · GitHub</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section>
+      <div>
+        <h2>Ready to Eliminate Operational Friction?</h2>
+        <p>
+          Whether you need an embedded growth operator or want to review my playbooks for your team, let's connect.
+        </p>
+      </div>
+      <div>
+        <a href="https://calendly.com/joseph-paul-imperial/30min" target="_blank" rel="noopener noreferrer">
+          Schedule 30-Min Call
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=jpbimperial71675@gmail.com" target="_blank" rel="noopener noreferrer">
+          Open in Gmail
+        </a>
+        <a href="about:invalid#zClosurez">
+          +63 917 840 5877
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    JP Imperial · B2B Growth Operations &amp; AI Governance · Built for institutional ownership.
+  </footer>
+
+  
+
+```
